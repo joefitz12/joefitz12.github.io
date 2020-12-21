@@ -115,15 +115,50 @@ body {
 }
 
 .card {
-  height: 300px;
-  width: 210px;
+  height: 403px;
+  width: 240px;
   border-radius: 5px;
-  flex-direction: column;
   background: #f9ebc8;
+  background-color: transparent;
+  perspective: 1000px;
+}
+.card:hover .container_inner {
+  transform: rotateY(180deg);
+}
+
+.container_inner {
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  /* Safari */
+  backface-visibility: hidden;
+  border-radius: 5px;
+}
+
+.front {
+  background: #f9ebc8;
+}
+
+.back {
+  transform: rotateY(180deg);
 }
 
 .card .title {
   font-size: 20px;
+  position: absolute;
+  top: 12px;
+  left: 15px;
 }
 
 .card .polygon {
@@ -135,10 +170,20 @@ body {
   border-radius: 0 0 5px 5px;
 }
 
-.card .background {
+.card .front .background {
   background: #353450;
   clip-path: polygon(0% 14%, 0% 100%, 0% 100%, 100% 100%, 100% 7%);
   -webkit-clip-path: polygon(0% 14%, 0% 100%, 0% 100%, 100% 100%, 100% 7%);
+}
+
+.card .back .background {
+  background: #353450;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
 }
 
 .card .angle {
@@ -154,16 +199,21 @@ body {
 }
 
 .card ul {
-  width: 98%;
-  margin: auto 1% 20px;
+  width: 206px;
+  margin: 0 auto;
   background: #f9ebc8;
   z-index: 10;
   border-radius: 3px;
   box-shadow: 0px 0px 0px 2px #f06339;
+  position: absolute;
+  text-align: left;
+  /* padding-left: 15px; */
+  bottom: 15px;
+  left: 17px;
 }
 
 .card ul li {
-  padding: 2px 5px;
+  padding: 2px 5px 2px 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
