@@ -32,84 +32,6 @@ ul {
   font-family: "ichiban_slim";
   src: url("../assets/fonts/ichiban/Ichiban-Stamp.otf");
 }
-.container {
-  display: flex;
-  padding: 10px 15px 7px;
-  position: relative;
-}
-
-.align-items_center {
-  align-items: center;
-}
-
-.align-items_bottom {
-  align-items: flex-end;
-}
-
-.display_inline {
-  display: inline;
-}
-
-.children-display_inline-block > * {
-  display: inline-block;
-}
-
-.width_full {
-  width: 100%;
-}
-
-.width_half {
-  width: 50%;
-}
-
-.text-align_right {
-  text-align: right;
-}
-
-.flex-break {
-  flex-basis: 100%;
-  height: 0;
-}
-
-/* Specifics */
-body {
-  font-family: "ichiban_slim";
-  color: #353450;
-}
-
-.header {
-  background: #a6d6b8;
-}
-
-/* .code {
-    font-family: 'Courier';
-} */
-.header .title {
-  font-size: 32px;
-}
-
-.header .title-path {
-  margin-bottom: 4px;
-}
-
-.main {
-  background: #6a9a8a;
-  height: 100vh;
-}
-
-.main .code span:first-child,
-.main .code span:last-child {
-  margin-left: 0;
-}
-
-.main .code span {
-  margin-left: 15px;
-}
-
-.code.container {
-  flex-direction: column;
-}
-
 .container.cards {
   justify-content: space-evenly;
 }
@@ -121,6 +43,7 @@ body {
   background: #f9ebc8;
   background-color: transparent;
   perspective: 1000px;
+  z-index: 10;
 }
 .card:hover .container_inner {
   transform: rotateY(180deg);
@@ -202,7 +125,6 @@ body {
   width: 206px;
   margin: 0 auto;
   background: #f9ebc8;
-  z-index: 10;
   border-radius: 3px;
   box-shadow: 0px 0px 0px 2px #f06339;
   position: absolute;
@@ -214,6 +136,207 @@ body {
 
 .card ul li {
   padding: 2px 5px 2px 15px;
+}
+
+.color_blast {
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 300ms ease-in-out;
+}
+
+.color_blast {
+  background: #fac557;
+}
+.color_blast.yellow-vibrant {
+  background: #ffb400;
+}
+.color_blast.red {
+  background: #f06339;
+}
+.color_blast.purple {
+  background: #353450;
+}
+.color_blast.purple-dark {
+  background: #2C0E37;
+}
+.color_blast.pink {
+  background: #F6A6A4;
+}
+
+.container {
+  display: flex;
+  padding: 10px 15px 7px;
+  position: relative;
+}
+
+.align-items_center {
+  align-items: center;
+}
+
+.align-items_bottom {
+  align-items: flex-end;
+}
+
+.justify-content_flex-end {
+  justify-content: flex-end;
+}
+
+.display_inline {
+  display: inline;
+}
+
+.children-display_inline-block > * {
+  display: inline-block;
+}
+
+.width_full {
+  width: 100%;
+}
+
+.width_half {
+  width: 50%;
+}
+
+.text-align_right {
+  text-align: right;
+}
+
+.flex-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+/* Specifics */
+body {
+  font-family: "ichiban_slim";
+  color: #353450;
+  position: relative;
+}
+
+.header {
+  background: #a6d6b8;
+  box-shadow: 0px 5px 4px 1px #5f8c7d;
+  z-index: 10;
+}
+
+/* .code {
+    font-family: 'Courier';
+} */
+.header .title {
+  font-size: 38px;
+}
+
+.header .title-path {
+  margin-bottom: 4px;
+}
+
+.header li {
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #88afa2, inset 0px -6px 1px #79a496;
+  border: 1px solid #95ceaa;
+  width: 59px;
+  text-align: right;
+  border-radius: 5px;
+  padding: 15px 5px 15px 15px;
+  cursor: pointer;
+}
+.header li div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+}
+.header li:hover, .header li.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #88afa2, inset 3px -4px 1px #79a496;
+  padding-top: 13px;
+}
+.header li:hover div, .header li.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.header li.yellow {
+  background: #fac557;
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #e49c07, inset 0px -6px 1px #f8ab0d;
+}
+.header li.yellow div {
+  visibility: hidden;
+}
+.header li.yellow:hover, .header li.yellow.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #e49c07, inset 3px -4px 1px #f8ab0d;
+  padding-top: 13px;
+}
+.header li.yellow:hover div, .header li.yellow.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.header li.yellow-vibrant {
+  background: #ffb400;
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #996c00, inset 0px -6px 1px #b37e00;
+}
+.header li.yellow-vibrant div {
+  visibility: hidden;
+}
+.header li.yellow-vibrant:hover, .header li.yellow-vibrant.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #996c00, inset 3px -4px 1px #b37e00;
+  padding-top: 13px;
+}
+.header li.yellow-vibrant:hover div, .header li.yellow-vibrant.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.header li.red {
+  background: #f06339;
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #b5340e, inset 0px -6px 1px #cd3b10;
+}
+.header li.red div {
+  visibility: hidden;
+}
+.header li.red:hover, .header li.red.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #b5340e, inset 3px -4px 1px #cd3b10;
+  padding-top: 13px;
+}
+.header li.red:hover div, .header li.red.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.header li.purple-dark {
+  background: #2C0E37;
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px black, inset 0px -6px 1px black;
+}
+.header li.purple-dark div {
+  visibility: hidden;
+}
+.header li.purple-dark:hover, .header li.purple-dark.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px black, inset 3px -4px 1px black;
+  padding-top: 13px;
+}
+.header li.purple-dark:hover div, .header li.purple-dark.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.header li.pink {
+  background: #F6A6A4;
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #ed4b47, inset 0px -6px 1px #ef625e;
+}
+.header li.pink div {
+  visibility: hidden;
+}
+.header li.pink:hover, .header li.pink.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #ed4b47, inset 3px -4px 1px #ef625e;
+  padding-top: 13px;
+}
+.header li.pink:hover div, .header li.pink.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+
+.main {
+  background: #6a9a8a;
+  height: 100vh;
+}
+
+.main .code span:first-child,
+.main .code span:last-child {
+  margin-left: 0;
+}
+
+.main .code span {
+  margin-left: 15px;
+}
+
+.code.container {
+  flex-direction: column;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,6 +1,8 @@
 @import '_reset.scss';
 @import '_fonts.scss';
 @import '_colors.scss';
+@import '_cards.scss';
+@import '_color-blasts.scss';
 
 .container {
     display: flex;
@@ -13,6 +15,10 @@
 }
 .align-items_bottom {
     align-items: flex-end;
+}
+
+.justify-content_flex-end {
+    justify-content: flex-end;
 }
 
 .display_inline {
@@ -44,10 +50,13 @@
 body {
     font-family: 'ichiban_slim';
     color: $purple;
+    position: relative;
 }
 
 .header {
     background: $green-light;
+    box-shadow: 0px 5px 4px 1px darken($green-dark, 5%);
+    z-index: 10;
 }
 
 /* .code {
@@ -55,11 +64,168 @@ body {
 } */
 
 .header .title {
-    font-size: 32px;
+    font-size: 38px;
 }
 
 .header .title-path {
     margin-bottom: 4px;
+}
+
+.header li {
+    box-shadow: 
+        3px 1px 4px 1px darken($green-light, 10%),
+        inset 5px 0px 1px lighten($green-dark, 10%),
+        inset 0px -6px 1px lighten($green-dark, 5%);;
+    border: 1px solid darken($green-light, 5%);
+    width: 59px;
+    text-align: right;
+    border-radius: 5px;
+    padding: 15px 5px 15px 15px;
+    cursor: pointer;
+    div {
+        transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+        line-height: 16px;
+    }
+    &:hover,
+    &.hover {
+        box-shadow: 
+            1px 1px 4px 1px darken($green-light, 10%),
+            inset 4px 0px 1px lighten($green-dark, 10%),
+            inset 3px -4px 1px lighten($green-dark, 5%);
+        padding-top: 13px;
+        div {
+            transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+        }
+    }
+    // &:first-child {
+    //     width: 69px;
+    // }
+    // &:nth-child(2) {
+    //     padding: 15px 5px 15px 0;
+    //     &:hover,
+    //     &.hover {
+    //         padding-top: 13px;
+    //         div {
+    //             transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+    //         }
+    //     }
+    // }
+    // &:nth-child(3) {
+    //     &:hover {
+    //         div {
+    //             // transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, 1px, 0px)
+    //         }
+    //     }
+    // }
+    // &:nth-child(4),
+    &.yellow{
+        background:$yellow;
+        box-shadow: 
+        3px 1px 4px 1px darken($green-light, 10%),
+        inset 5px 0px 1px darken($yellow, 20%),
+        inset 0px -6px 1px darken($yellow, 15%);;
+        div {
+            visibility: hidden;
+        }
+        &:hover,
+        &.hover {
+            box-shadow: 
+                1px 1px 4px 1px darken($green-light, 10%),
+                inset 4px 0px 1px darken($yellow, 20%),
+                inset 3px -4px 1px darken($yellow, 15%);
+            padding-top: 13px;
+            div {
+                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+            }
+        }
+    }
+    // &:nth-child(5),
+    &.yellow-vibrant {
+        background: $yellow-vibrant;
+        box-shadow: 
+        3px 1px 4px 1px darken($green-light, 10%),
+        inset 5px 0px 1px darken($yellow-vibrant, 20%),
+        inset 0px -6px 1px darken($yellow-vibrant, 15%);;
+        div {
+            visibility: hidden;
+        }
+        &:hover,
+        &.hover {
+            box-shadow: 
+                1px 1px 4px 1px darken($green-light, 10%),
+                inset 4px 0px 1px darken($yellow-vibrant, 20%),
+                inset 3px -4px 1px darken($yellow-vibrant, 15%);
+            padding-top: 13px;
+            div {
+                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+            }
+        }
+    }
+    // &:nth-child(6),
+    &.red{
+        background: $red;
+        box-shadow: 
+        3px 1px 4px 1px darken($green-light, 10%),
+        inset 5px 0px 1px darken($red, 20%),
+        inset 0px -6px 1px darken($red, 15%);;
+        div {
+            visibility: hidden;
+        }
+        &:hover,
+        &.hover {
+            box-shadow: 
+                1px 1px 4px 1px darken($green-light, 10%),
+                inset 4px 0px 1px darken($red, 20%),
+                inset 3px -4px 1px darken($red, 15%);
+            padding-top: 13px;
+            div {
+                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+            }
+        }
+    }
+    // &:nth-child(7),
+    &.purple-dark{
+        background: $purple-dark;
+        box-shadow: 
+        3px 1px 4px 1px darken($green-light, 10%),
+        inset 5px 0px 1px darken($purple-dark, 20%),
+        inset 0px -6px 1px darken($purple-dark, 15%);;
+        div {
+            visibility: hidden;
+        }
+        &:hover,
+        &.hover {
+            box-shadow: 
+                1px 1px 4px 1px darken($green-light, 10%),
+                inset 4px 0px 1px darken($purple-dark, 20%),
+                inset 3px -4px 1px darken($purple-dark, 15%);
+            padding-top: 13px;
+            div {
+                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+            }
+        }
+    }
+    &.pink{
+        background: $pink;
+        box-shadow: 
+        3px 1px 4px 1px darken($green-light, 10%),
+        inset 5px 0px 1px darken($pink, 20%),
+        inset 0px -6px 1px darken($pink, 15%);;
+        div {
+            visibility: hidden;
+        }
+        &:hover,
+        &.hover {
+            box-shadow: 
+                1px 1px 4px 1px darken($green-light, 10%),
+                inset 4px 0px 1px darken($pink, 20%),
+                inset 3px -4px 1px darken($pink, 15%);
+            padding-top: 13px;
+            div {
+                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+            }
+        }
+    }
 }
 
 .main {
@@ -78,115 +244,4 @@ body {
 
 .code.container {
     flex-direction: column;
-}
-
-.container.cards {
-    justify-content: space-evenly;
-}
-
-.card {
-    height: 403px;
-    width: 240px;
-    border-radius: 5px;
-    background: $cream;
-    background-color: transparent;
-    // width: 300px;
-    // height: 200px;
-    // border: 1px solid #f1f1f1;
-    perspective: 1000px;
-    &:hover {
-        .container_inner {
-            transform: rotateY(180deg);
-        }
-    }
-}
-
-.container_inner {
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
-
-.front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-    border-radius: 5px;
-}
-
-.front {
-    background: $cream;
-}
-
-.back {
-    transform: rotateY(180deg);
-
-}
-
-.card .title {
-    font-size: 20px;
-    position: absolute;
-    top: 12px;
-    left: 15px;
-}
-
-.card .polygon {
-    width:100%;
-    height:100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 0 0 5px 5px;
-}
-
-.card .front .background {
-    background: $purple;
-    clip-path: polygon(0% 14%, 0% 100%, 0% 100%, 100% 100%, 100% 7%);
-    -webkit-clip-path: polygon(0% 14%, 0% 100%, 0% 100%, 100% 100%, 100% 7%);
-}
-
-.card .back .background {
-    background: $purple;
-    width:100%;
-    height:100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 5px;
-}
-
-.card .angle {
-    background: $red;
-    clip-path: polygon(0% 13%, 0% 100%, 0% 14%, 100% 8%, 100% 7%);
-    -webkit-clip-path: polygon(0% 13%, 0% 100%, 0% 14%, 100% 8%, 100% 7%);
-}
-
-.card .angle2 {
-    background: $yellow;
-    clip-path: polygon(0% 12%, 0% 100%, 0% 13%, 100% 7%, 100% 6%);
-    -webkit-clip-path: polygon(0% 12%, 0% 100%, 0% 13%, 100% 7%, 100% 6%);
-}
-
-.card ul {
-    width: 206px;
-    margin: 0 auto;
-    background: $cream;
-    z-index: 10;
-    border-radius: 3px;
-    box-shadow: 0px 0px 0px 2px $red;
-    position: absolute;
-    text-align: left;
-    /* padding-left: 15px; */
-    bottom: 15px;
-    left: 17px;
-}
-
-.card ul li {
-    padding: 2px 5px 2px 15px;
 }

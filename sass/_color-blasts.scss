@@ -1,0 +1,32 @@
+.color_blast {
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 300ms ease-in-out;
+    // height:7px;
+    // width:7px;
+}
+
+.color_blast {
+    background: $yellow;
+    // box-shadow: 0 0 5px 5px $yellow;   
+    &.yellow-vibrant {
+        background: $yellow-vibrant;
+        // box-shadow: 0 0 2px 5px $yellow-vibrant; 
+    }
+    &.red {
+        background: $red;
+        // box-shadow: 0 0 4px 5px $red; 
+    }
+    &.purple {
+        background: $purple;
+        // box-shadow: 0 0 5px 5px $purple; 
+    }
+    &.purple-dark {
+        background: $purple-dark;
+        // box-shadow: 0 0 4px 5px $purple-dark; 
+    }
+    &.pink {
+        background: $pink;
+        // box-shadow: 0 0 2px 5px $pink; 
+    }
+}
