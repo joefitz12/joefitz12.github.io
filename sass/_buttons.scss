@@ -1,0 +1,80 @@
+@mixin button($button-color, $background-color) {
+    max-height: 40px;
+    padding: 40px 5px 15px 15px;
+    width: 59px;
+    background:$button-color;
+    box-shadow: 
+        3px 1px 4px 1px darken($background-color, 10%),
+        inset 4px 0px 1px darken($button-color, 20%),
+        inset 0px -4px 1px darken($button-color, 15%);
+    border-radius: 5px;
+    cursor: pointer;
+    div {
+        transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+        line-height: 16px;
+        visibility: hidden;
+    }
+    &:hover,
+    &.hover {
+        box-shadow: 
+            1px 1px 4px 1px darken($background-color, 10%),
+            inset 4px 0px 1px darken($button-color, 20%),
+            inset 3px -4px 1px darken($button-color, 15%);
+        padding-top: 39px;
+        padding-left: 14px;
+        div {
+            transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
+        }
+        margin-top:6px;
+    }
+}
+
+.button {
+    @include button($green-light, $green-light);
+    &.yellow {
+        @include button($yellow, $green-dark);
+    }
+    // &:nth-child(5),
+    &.yellow-vibrant {
+        @include button($yellow-vibrant, $green-dark);
+    }
+    // &:nth-child(6),
+    &.red{
+        @include button($red, $green-dark);
+    }
+    &.purple {
+        @include button($purple, $green-dark)
+    }
+    // &:nth-child(7),
+    &.purple-dark{
+        @include button($purple-dark, $green-dark);
+    }
+    &.pink{
+        @include button($pink, $green-dark);
+    }
+}
+
+.controller .button {
+    margin: 5px;
+    &.yellow {
+        @include button($yellow, $cream);
+    }
+    // &:nth-child(5),
+    &.yellow-vibrant {
+        @include button($yellow-vibrant, $cream);
+    }
+    // &:nth-child(6),
+    &.red{
+        @include button($red, $cream);
+    }
+    &.purple {
+        @include button($purple, $cream)
+    }
+    // &:nth-child(7),
+    &.purple-dark{
+        @include button($purple-dark, $cream);
+    }
+    &.pink{
+        @include button($pink, $cream);
+    }
+}

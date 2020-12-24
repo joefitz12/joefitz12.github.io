@@ -1,6 +1,7 @@
 @import '_reset.scss';
 @import '_fonts.scss';
 @import '_colors.scss';
+@import '_buttons.scss';
 @import '_cards.scss';
 @import '_color-blasts.scss';
 
@@ -37,6 +38,10 @@
     width: 50%;
 }
 
+.width_quarter {
+    width: 25%;
+}
+
 .text-align_right {
     text-align: right;
 }
@@ -63,169 +68,40 @@ body {
     font-family: 'Courier';
 } */
 
+// This is where we use the custom properties
+
+@supports (background: paint(something)) {
+    .header .title {
+      /* 
+        Optionally set property values. 
+        This can be done at root or local scope 
+      */
+      --extra-underlineNumber: 4; /* default: 3 */
+      --extra-underlineColor: #F6A6A4; /* default: black */
+      --extra-underlineSpread: 13; /* default: 20 */
+      --extra-underlineWidth: 2; /* default: 2 */
+  
+      background: paint(extra-superUnderline);
+      line-height: 1.5;
+    }
+    // below is the template to add clouds via extra library
+    // .header .title {
+    //     /* 
+    //       Optionally set property values. 
+    //       This can be done at root or local scope 
+    //     */
+    //     --extra-scallopRadius: 15; /* default: 10 */
+    //     --extra-scallopColor: #F6A6A4; /* default: black */
+    //     --extra-scallopWeight: 3; /* default: 2 */
+    
+    //     background: paint(extra-scallopedBorder);
+    //     line-height: 1.5;
+    // }
+}
+
 .header .title {
     font-size: 38px;
-}
-
-.header .title-path {
-    margin-bottom: 4px;
-}
-
-.header li {
-    box-shadow: 
-        3px 1px 4px 1px darken($green-light, 10%),
-        inset 5px 0px 1px lighten($green-dark, 10%),
-        inset 0px -6px 1px lighten($green-dark, 5%);;
-    border: 1px solid darken($green-light, 5%);
-    width: 59px;
-    text-align: right;
-    border-radius: 5px;
-    padding: 15px 5px 15px 15px;
-    cursor: pointer;
-    div {
-        transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
-        line-height: 16px;
-    }
-    &:hover,
-    &.hover {
-        box-shadow: 
-            1px 1px 4px 1px darken($green-light, 10%),
-            inset 4px 0px 1px lighten($green-dark, 10%),
-            inset 3px -4px 1px lighten($green-dark, 5%);
-        padding-top: 13px;
-        div {
-            transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
-        }
-    }
-    // &:first-child {
-    //     width: 69px;
-    // }
-    // &:nth-child(2) {
-    //     padding: 15px 5px 15px 0;
-    //     &:hover,
-    //     &.hover {
-    //         padding-top: 13px;
-    //         div {
-    //             transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
-    //         }
-    //     }
-    // }
-    // &:nth-child(3) {
-    //     &:hover {
-    //         div {
-    //             // transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, 1px, 0px)
-    //         }
-    //     }
-    // }
-    // &:nth-child(4),
-    &.yellow{
-        background:$yellow;
-        box-shadow: 
-        3px 1px 4px 1px darken($green-light, 10%),
-        inset 5px 0px 1px darken($yellow, 20%),
-        inset 0px -6px 1px darken($yellow, 15%);;
-        div {
-            visibility: hidden;
-        }
-        &:hover,
-        &.hover {
-            box-shadow: 
-                1px 1px 4px 1px darken($green-light, 10%),
-                inset 4px 0px 1px darken($yellow, 20%),
-                inset 3px -4px 1px darken($yellow, 15%);
-            padding-top: 13px;
-            div {
-                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
-            }
-        }
-    }
-    // &:nth-child(5),
-    &.yellow-vibrant {
-        background: $yellow-vibrant;
-        box-shadow: 
-        3px 1px 4px 1px darken($green-light, 10%),
-        inset 5px 0px 1px darken($yellow-vibrant, 20%),
-        inset 0px -6px 1px darken($yellow-vibrant, 15%);;
-        div {
-            visibility: hidden;
-        }
-        &:hover,
-        &.hover {
-            box-shadow: 
-                1px 1px 4px 1px darken($green-light, 10%),
-                inset 4px 0px 1px darken($yellow-vibrant, 20%),
-                inset 3px -4px 1px darken($yellow-vibrant, 15%);
-            padding-top: 13px;
-            div {
-                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
-            }
-        }
-    }
-    // &:nth-child(6),
-    &.red{
-        background: $red;
-        box-shadow: 
-        3px 1px 4px 1px darken($green-light, 10%),
-        inset 5px 0px 1px darken($red, 20%),
-        inset 0px -6px 1px darken($red, 15%);;
-        div {
-            visibility: hidden;
-        }
-        &:hover,
-        &.hover {
-            box-shadow: 
-                1px 1px 4px 1px darken($green-light, 10%),
-                inset 4px 0px 1px darken($red, 20%),
-                inset 3px -4px 1px darken($red, 15%);
-            padding-top: 13px;
-            div {
-                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
-            }
-        }
-    }
-    // &:nth-child(7),
-    &.purple-dark{
-        background: $purple-dark;
-        box-shadow: 
-        3px 1px 4px 1px darken($green-light, 10%),
-        inset 5px 0px 1px darken($purple-dark, 20%),
-        inset 0px -6px 1px darken($purple-dark, 15%);;
-        div {
-            visibility: hidden;
-        }
-        &:hover,
-        &.hover {
-            box-shadow: 
-                1px 1px 4px 1px darken($green-light, 10%),
-                inset 4px 0px 1px darken($purple-dark, 20%),
-                inset 3px -4px 1px darken($purple-dark, 15%);
-            padding-top: 13px;
-            div {
-                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
-            }
-        }
-    }
-    &.pink{
-        background: $pink;
-        box-shadow: 
-        3px 1px 4px 1px darken($green-light, 10%),
-        inset 5px 0px 1px darken($pink, 20%),
-        inset 0px -6px 1px darken($pink, 15%);;
-        div {
-            visibility: hidden;
-        }
-        &:hover,
-        &.hover {
-            box-shadow: 
-                1px 1px 4px 1px darken($green-light, 10%),
-                inset 4px 0px 1px darken($pink, 20%),
-                inset 3px -4px 1px darken($pink, 15%);
-            padding-top: 13px;
-            div {
-                transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px)
-            }
-        }
-    }
+    position: relative;
 }
 
 .main {
@@ -240,6 +116,31 @@ body {
 
 .main .code span {
     margin-left: 15px;
+}
+
+.controller {
+    background: $cream;
+    height: 300px;
+    width: 300px;
+    box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%),
+        inset 2px 0px 1px darken($cream, 20%),
+        inset 17px -6px 1px darken($cream, 15%);
+    border-radius: 35px;
+    z-index: 10;
+}
+
+.controller ul {
+    flex-wrap: wrap;
+    height: 160px;
+    // align-items: flex-end;
+    div {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    li {
+        margin: 0 auto;
+    }
 }
 
 .code.container {

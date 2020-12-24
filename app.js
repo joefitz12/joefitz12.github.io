@@ -12,7 +12,7 @@ let colorPalette = {
     'cream':         '#f9ebc8',
     'purple':        '#353450',
     'purple-dark':   '#2C0E37',
-}
+};
 
 let mouseDown = 0;
 let runCount = 0;
@@ -109,7 +109,7 @@ let createBlast = (event) => {
     // console.log('all info', `top:${positionY}px;left:${positionX}px;${boxShadow}`);
     colorBlast.setAttribute('style',`top:${positionY}px;left:${positionX}px;${boxShadow}`);
     // debugger;
-    document.body.appendChild(colorBlast);
+    document.body.append(colorBlast);
 
     let blastData = {
         runCount,
@@ -206,7 +206,7 @@ document.body.addEventListener('keyup', e => {
     }
 });
 
-document.querySelectorAll('.navigation')[0].addEventListener('click', e => {
+document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
     if (e.target.children[0] && e.target.children[0].dataset.color){
         selectedColor = e.target.children[0].dataset.color;
     } 

@@ -2,11 +2,6 @@
     border-radius: 50%;
     position: absolute;
     transition: transform 300ms ease-in-out;
-    // height:7px;
-    // width:7px;
-}
-
-.color_blast {
     background: $yellow;
     // box-shadow: 0 0 5px 5px $yellow;   
     &.yellow-vibrant {

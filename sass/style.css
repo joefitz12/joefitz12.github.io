@@ -32,6 +32,310 @@ ul {
   font-family: "ichiban_slim";
   src: url("../assets/fonts/ichiban/Ichiban-Stamp.otf");
 }
+.button {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #a6d6b8;
+  box-shadow: 3px 1px 4px 1px #83c69c, inset 4px 0px 1px #60b680, inset 0px -4px 1px #72be8e;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button:hover, .button.hover {
+  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #60b680, inset 3px -4px 1px #72be8e;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button:hover div, .button.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.yellow {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #fac557;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 4px 0px 1px #e49c07, inset 0px -4px 1px #f8ab0d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button.yellow div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button.yellow:hover, .button.yellow.hover {
+  box-shadow: 1px 1px 4px 1px #547d6f, inset 4px 0px 1px #e49c07, inset 3px -4px 1px #f8ab0d;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button.yellow:hover div, .button.yellow.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.yellow-vibrant {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #ffb400;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 4px 0px 1px #996c00, inset 0px -4px 1px #b37e00;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button.yellow-vibrant div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button.yellow-vibrant:hover, .button.yellow-vibrant.hover {
+  box-shadow: 1px 1px 4px 1px #547d6f, inset 4px 0px 1px #996c00, inset 3px -4px 1px #b37e00;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button.yellow-vibrant:hover div, .button.yellow-vibrant.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.red {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #f06339;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 4px 0px 1px #b5340e, inset 0px -4px 1px #cd3b10;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button.red div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button.red:hover, .button.red.hover {
+  box-shadow: 1px 1px 4px 1px #547d6f, inset 4px 0px 1px #b5340e, inset 3px -4px 1px #cd3b10;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button.red:hover div, .button.red.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.purple {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #353450;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 4px 0px 1px #0c0c12, inset 0px -4px 1px #161622;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button.purple div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button.purple:hover, .button.purple.hover {
+  box-shadow: 1px 1px 4px 1px #547d6f, inset 4px 0px 1px #0c0c12, inset 3px -4px 1px #161622;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button.purple:hover div, .button.purple.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.purple-dark {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #2C0E37;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 4px 0px 1px black, inset 0px -4px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button.purple-dark div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button.purple-dark:hover, .button.purple-dark.hover {
+  box-shadow: 1px 1px 4px 1px #547d6f, inset 4px 0px 1px black, inset 3px -4px 1px black;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button.purple-dark:hover div, .button.purple-dark.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.pink {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #F6A6A4;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 4px 0px 1px #ed4b47, inset 0px -4px 1px #ef625e;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button.pink div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.button.pink:hover, .button.pink.hover {
+  box-shadow: 1px 1px 4px 1px #547d6f, inset 4px 0px 1px #ed4b47, inset 3px -4px 1px #ef625e;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.button.pink:hover div, .button.pink.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+
+.controller .button {
+  margin: 5px;
+}
+.controller .button.yellow {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #fac557;
+  box-shadow: 3px 1px 4px 1px #f4da9a, inset 4px 0px 1px #e49c07, inset 0px -4px 1px #f8ab0d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.controller .button.yellow div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.controller .button.yellow:hover, .controller .button.yellow.hover {
+  box-shadow: 1px 1px 4px 1px #f4da9a, inset 4px 0px 1px #e49c07, inset 3px -4px 1px #f8ab0d;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.controller .button.yellow:hover div, .controller .button.yellow.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.yellow-vibrant {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #ffb400;
+  box-shadow: 3px 1px 4px 1px #f4da9a, inset 4px 0px 1px #996c00, inset 0px -4px 1px #b37e00;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.controller .button.yellow-vibrant div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.controller .button.yellow-vibrant:hover, .controller .button.yellow-vibrant.hover {
+  box-shadow: 1px 1px 4px 1px #f4da9a, inset 4px 0px 1px #996c00, inset 3px -4px 1px #b37e00;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.controller .button.yellow-vibrant:hover div, .controller .button.yellow-vibrant.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.red {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #f06339;
+  box-shadow: 3px 1px 4px 1px #f4da9a, inset 4px 0px 1px #b5340e, inset 0px -4px 1px #cd3b10;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.controller .button.red div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.controller .button.red:hover, .controller .button.red.hover {
+  box-shadow: 1px 1px 4px 1px #f4da9a, inset 4px 0px 1px #b5340e, inset 3px -4px 1px #cd3b10;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.controller .button.red:hover div, .controller .button.red.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.purple {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #353450;
+  box-shadow: 3px 1px 4px 1px #f4da9a, inset 4px 0px 1px #0c0c12, inset 0px -4px 1px #161622;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.controller .button.purple div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.controller .button.purple:hover, .controller .button.purple.hover {
+  box-shadow: 1px 1px 4px 1px #f4da9a, inset 4px 0px 1px #0c0c12, inset 3px -4px 1px #161622;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.controller .button.purple:hover div, .controller .button.purple.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.purple-dark {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #2C0E37;
+  box-shadow: 3px 1px 4px 1px #f4da9a, inset 4px 0px 1px black, inset 0px -4px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.controller .button.purple-dark div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.controller .button.purple-dark:hover, .controller .button.purple-dark.hover {
+  box-shadow: 1px 1px 4px 1px #f4da9a, inset 4px 0px 1px black, inset 3px -4px 1px black;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.controller .button.purple-dark:hover div, .controller .button.purple-dark.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.pink {
+  max-height: 40px;
+  padding: 40px 5px 15px 15px;
+  width: 59px;
+  background: #F6A6A4;
+  box-shadow: 3px 1px 4px 1px #f4da9a, inset 4px 0px 1px #ed4b47, inset 0px -4px 1px #ef625e;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.controller .button.pink div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
+  line-height: 16px;
+  visibility: hidden;
+}
+.controller .button.pink:hover, .controller .button.pink.hover {
+  box-shadow: 1px 1px 4px 1px #f4da9a, inset 4px 0px 1px #ed4b47, inset 3px -4px 1px #ef625e;
+  padding-top: 39px;
+  padding-left: 14px;
+  margin-top: 6px;
+}
+.controller .button.pink:hover div, .controller .button.pink.hover div {
+  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+
 .container.cards {
   justify-content: space-evenly;
 }
@@ -142,9 +446,6 @@ ul {
   border-radius: 50%;
   position: absolute;
   transition: transform 300ms ease-in-out;
-}
-
-.color_blast {
   background: #fac557;
 }
 .color_blast.yellow-vibrant {
@@ -197,6 +498,10 @@ ul {
   width: 50%;
 }
 
+.width_quarter {
+  width: 25%;
+}
+
 .text-align_right {
   text-align: right;
 }
@@ -222,103 +527,27 @@ body {
 /* .code {
     font-family: 'Courier';
 } */
+@supports (background: paint(something)) {
+  .header .title {
+    /* 
+      Optionally set property values. 
+      This can be done at root or local scope 
+    */
+    --extra-underlineNumber: 4;
+    /* default: 3 */
+    --extra-underlineColor: #F6A6A4;
+    /* default: black */
+    --extra-underlineSpread: 13;
+    /* default: 20 */
+    --extra-underlineWidth: 2;
+    /* default: 2 */
+    background: paint(extra-superUnderline);
+    line-height: 1.5;
+  }
+}
 .header .title {
   font-size: 38px;
-}
-
-.header .title-path {
-  margin-bottom: 4px;
-}
-
-.header li {
-  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #88afa2, inset 0px -6px 1px #79a496;
-  border: 1px solid #95ceaa;
-  width: 59px;
-  text-align: right;
-  border-radius: 5px;
-  padding: 15px 5px 15px 15px;
-  cursor: pointer;
-}
-.header li div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-2px, -1px, 0px);
-  line-height: 16px;
-}
-.header li:hover, .header li.hover {
-  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #88afa2, inset 3px -4px 1px #79a496;
-  padding-top: 13px;
-}
-.header li:hover div, .header li.hover div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
-}
-.header li.yellow {
-  background: #fac557;
-  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #e49c07, inset 0px -6px 1px #f8ab0d;
-}
-.header li.yellow div {
-  visibility: hidden;
-}
-.header li.yellow:hover, .header li.yellow.hover {
-  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #e49c07, inset 3px -4px 1px #f8ab0d;
-  padding-top: 13px;
-}
-.header li.yellow:hover div, .header li.yellow.hover div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
-}
-.header li.yellow-vibrant {
-  background: #ffb400;
-  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #996c00, inset 0px -6px 1px #b37e00;
-}
-.header li.yellow-vibrant div {
-  visibility: hidden;
-}
-.header li.yellow-vibrant:hover, .header li.yellow-vibrant.hover {
-  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #996c00, inset 3px -4px 1px #b37e00;
-  padding-top: 13px;
-}
-.header li.yellow-vibrant:hover div, .header li.yellow-vibrant.hover div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
-}
-.header li.red {
-  background: #f06339;
-  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #b5340e, inset 0px -6px 1px #cd3b10;
-}
-.header li.red div {
-  visibility: hidden;
-}
-.header li.red:hover, .header li.red.hover {
-  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #b5340e, inset 3px -4px 1px #cd3b10;
-  padding-top: 13px;
-}
-.header li.red:hover div, .header li.red.hover div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
-}
-.header li.purple-dark {
-  background: #2C0E37;
-  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px black, inset 0px -6px 1px black;
-}
-.header li.purple-dark div {
-  visibility: hidden;
-}
-.header li.purple-dark:hover, .header li.purple-dark.hover {
-  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px black, inset 3px -4px 1px black;
-  padding-top: 13px;
-}
-.header li.purple-dark:hover div, .header li.purple-dark.hover div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
-}
-.header li.pink {
-  background: #F6A6A4;
-  box-shadow: 3px 1px 4px 1px #83c69c, inset 5px 0px 1px #ed4b47, inset 0px -6px 1px #ef625e;
-}
-.header li.pink div {
-  visibility: hidden;
-}
-.header li.pink:hover, .header li.pink.hover {
-  box-shadow: 1px 1px 4px 1px #83c69c, inset 4px 0px 1px #ed4b47, inset 3px -4px 1px #ef625e;
-  padding-top: 13px;
-}
-.header li.pink:hover div, .header li.pink.hover div {
-  transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+  position: relative;
 }
 
 .main {
@@ -333,6 +562,27 @@ body {
 
 .main .code span {
   margin-left: 15px;
+}
+
+.controller {
+  background: #f9ebc8;
+  height: 300px;
+  width: 300px;
+  box-shadow: 3px 1px 4px 1px #547d6f, inset 2px 0px 1px #efca6c, inset 17px -6px 1px #f1d283;
+  border-radius: 35px;
+  z-index: 10;
+}
+
+.controller ul {
+  flex-wrap: wrap;
+  height: 160px;
+}
+.controller ul div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.controller ul li {
+  margin: 0 auto;
 }
 
 .code.container {

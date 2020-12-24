@@ -3,24 +3,29 @@
 <html>
     <head>
         <title>joe fitzpatrick</title>
+
         <link rel="stylesheet" href='./sass/style.css' />
+
     </head>
     <body>
         <div class='header container'>
             <div class='container width_half align-items_bottom'>
-                <span class='title'>joe fitzpatrick</span>
-                <span class='title-path'></span>
+                <div class='container title-container'>
+                    <span class='title'>joe fitzpatrick</span>
+                    <!-- <span class='title-path'>joe fitzpatrick</span> -->
+                </div>
             </div>
             <div class='container width_half text-align_right justify-content_flex-end'>
                 <ul class='navigation children-display_inline-block'>
                     <!--li><div>comedy</div></li>
                     <li><div>code</div></li>
                     <li><div>games</div></li-->
-                    <li class='yellow'><div class='color_key' data-color='yellow'>yellow</div></li>
-                    <li class='yellow-vibrant'><div class='color_key' data-color='yellow-vibrant'>yellow2</div></li>
-                    <li class='red'><div class='color_key' data-color='red'>red</div></li>
-                    <li class='purple-dark'><div class='color_key' data-color='purple-dark'>purps</div></li>
-                    <li class='pink'><div class='color_key' data-color='pink'>pink</div></li>
+                    <!--li class='button yellow'><div class='color_key' data-color='yellow'>btn</div></li>
+                    <li class='button yellow-vibrant'><div class='color_key' data-color='yellow-vibrant'>btn</div></li>
+                    <li class='button red'><div class='color_key' data-color='red'>btn</div></li>
+                    <li class='button purple'><div class='color_key' data-color='purple'>btn</div></li>
+                    <li class='button purple-dark'><div class='color_key' data-color='purple-dark'>btn</div></li>
+                    <li class='button pink'><div class='color_key' data-color='pink'>btn</div></li-->
                 </ul>
             </div>
         </div>
@@ -74,8 +79,29 @@
                 <span>games: {..}</span>
                 <span>}</span>
             </div> -->
+            <div class='controller container width_quarter'>
+                <ul class='button-container container'>
+                    <!--li><div>comedy</div></li>
+                    <li><div>code</div></li>
+                    <li><div>games</div></li-->
+                    <div>
+                        <li class='button yellow'><div class='color_key' data-color='yellow'>btn</div></li>
+                        <li class='button purple'><div class='color_key' data-color='purple'>btn</div></li>
+                    </div>
+                    <div>
+                        <li class='button yellow-vibrant'><div class='color_key' data-color='yellow-vibrant'>btn</div></li>
+                        <li class='button purple-dark'><div class='color_key' data-color='purple-dark'>btn</div></li>
+                    </div>
+                    <div>
+                        <li class='button red'><div class='color_key' data-color='red'>btn</div></li>
+                        <li class='button pink'><div class='color_key' data-color='pink'>btn</div></li>
+                    </div>
+                </ul>
+            </div>
         </div>
 
         <script src="./app.js"></script>
+        <script src="https://unpkg.com/extra.css/superUnderline.js"></script>
+        <script src="https://unpkg.com/extra.css/scallopedBorder.js"></script>
     </body>
 </html>
