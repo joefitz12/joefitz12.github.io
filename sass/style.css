@@ -349,9 +349,6 @@ ul {
   perspective: 1000px;
   z-index: 10;
 }
-.card:hover .container_inner {
-  transform: rotateY(180deg);
-}
 
 .container_inner {
   flex-direction: column;
@@ -442,6 +439,23 @@ ul {
   padding: 2px 5px 2px 15px;
 }
 
+.card:hover {
+  animation-duration: 1.7s;
+  animation-name: drawCard;
+}
+
+@keyframes drawCard {
+  from {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-130%, 5%);
+  }
+  to {
+    transform: translate(-120%, 2%);
+  }
+}
+@keyframes flipCard {}
 .color_blast {
   border-radius: 50%;
   position: absolute;

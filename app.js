@@ -129,6 +129,8 @@ let createBlast = (event) => {
     !rendering && startQueue();
 };
 
+
+
 document.body.addEventListener('mousedown', e => {
     // console.log(e.target);
     if (e.target.classList.contains('main')){
@@ -163,23 +165,30 @@ document.body.addEventListener('mouseup', e => {
     }
 });
 
+document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
+    if (e.target.children[0] && e.target.children[0].dataset.color){
+        selectedColor = e.target.children[0].dataset.color;
+    } 
+});
 
-
+//////////////////////////
+/// keyboard listeners ///
+//////////////////////////
 document.body.addEventListener('keydown', e => {
     if (e.key == '1'){
-        document.querySelectorAll('.navigation')[0].children[0].classList.add('hover');
-        selectedColor = document.querySelectorAll('.navigation')[0].children[0].children[0].dataset.color;
+        document.querySelectorAll('.button-container')[0].children[0].children[1].classList.add('hover');
+        selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[1].dataset.color;
     }
     if (e.key == '2'){
-        document.querySelectorAll('.navigation')[0].children[1].classList.add('hover');
-        selectedColor = document.querySelectorAll('.navigation')[0].children[1].children[0].dataset.color;
+        document.querySelectorAll('.button-container')[0].children[1].children[1].classList.add('hover');
+        selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[1].dataset.color;
     }
     if (e.key == '3'){
-        document.querySelectorAll('.navigation')[0].children[2].classList.add('hover');
-        selectedColor = document.querySelectorAll('.navigation')[0].children[2].children[0].dataset.color;
+        document.querySelectorAll('.button-container')[0].children[2].children[1].classList.add('hover');
+        selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[1].dataset.color;
     }
     if (e.key == '4'){
-        document.querySelectorAll('.navigation')[0].children[3].classList.add('hover');
+        document.querySelectorAll('.navigation')[0].children[2].classList.add('hover');
         selectedColor = document.querySelectorAll('.navigation')[0].children[3].children[0].dataset.color;
     }
     if (e.key == '5'){
@@ -190,24 +199,21 @@ document.body.addEventListener('keydown', e => {
 
 document.body.addEventListener('keyup', e => {
     if (e.key == '1'){
-        document.querySelectorAll('.navigation')[0].children[0].classList.remove('hover');
+        document.querySelectorAll('.button-container')[0].children[0].classList.remove('hover');
     }
     if (e.key == '2'){
-        document.querySelectorAll('.navigation')[0].children[1].classList.remove('hover');
+        document.querySelectorAll('.button-container')[1].children[0].classList.remove('hover');
     }
     if (e.key == '3'){
-        document.querySelectorAll('.navigation')[0].children[2].classList.remove('hover');
+        document.querySelectorAll('.button-container')[2].children[0].classList.remove('hover');
     }
     if (e.key == '4'){
-        document.querySelectorAll('.navigation')[0].children[3].classList.remove('hover');
+        document.querySelectorAll('.button-container')[0].children[1].classList.remove('hover');
     }
     if (e.key == '5'){
-        document.querySelectorAll('.navigation')[0].children[4].classList.remove('hover');
+        document.querySelectorAll('.button-container')[1].children[1].classList.remove('hover');
     }
-});
-
-document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
-    if (e.target.children[0] && e.target.children[0].dataset.color){
-        selectedColor = e.target.children[0].dataset.color;
-    } 
+    if (e.key == '6'){
+        document.querySelectorAll('.button-container')[2].children[1].classList.remove('hover');
+    }
 });
