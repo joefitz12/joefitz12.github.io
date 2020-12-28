@@ -1,3 +1,29 @@
+.controller {
+    background: $cream;
+    height: 300px;
+    width: 300px;
+    min-width: 300px;
+    box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%),
+        inset 2px 0px 1px darken($cream, 20%),
+        inset 17px -6px 1px darken($cream, 15%);
+    border-radius: 35px;
+    z-index: 10;
+}
+
+.controller ul {
+    flex-wrap: wrap;
+    height: 160px;
+    // align-items: flex-end;
+    div {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    li {
+        margin: 0 auto;
+    }
+}
+
 @mixin button($button-color, $background-color) {
     max-height: 40px;
     padding: 40px 5px 15px 15px;

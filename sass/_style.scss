@@ -4,6 +4,8 @@
 @import '_buttons.scss';
 @import '_cards.scss';
 @import '_color-blasts.scss';
+@import '_television.scss';
+@import '_lightbulbs.scss';
 
 .container {
     display: flex;
@@ -12,7 +14,7 @@
 }
 
 .align-items_center {
-    align-items: center;;
+    align-items: center;
 }
 .align-items_bottom {
     align-items: flex-end;
@@ -26,6 +28,10 @@
     display: inline;
 }
 
+.display_none {
+    display: none !important;
+}
+
 .children-display_inline-block > * {
     display: inline-block;
 }
@@ -35,11 +41,13 @@
 }
 
 .width_half {
-    width: 50%;
+    width: calc(50% - 30px);
+    min-width: calc(50% - 30px);
 }
 
 .width_quarter {
-    width: 25%;
+    width: calc(25% - 30px);
+    min-width: calc(25% - 30px);
 }
 
 .text-align_right {
@@ -56,6 +64,7 @@ body {
     font-family: 'ichiban_slim';
     color: $purple;
     position: relative;
+    overflow-x: hidden;
 }
 
 .header {
@@ -63,10 +72,6 @@ body {
     box-shadow: 0px 5px 4px 1px darken($green-dark, 5%);
     z-index: 10;
 }
-
-/* .code {
-    font-family: 'Courier';
-} */
 
 // This is where we use the custom properties
 
@@ -97,6 +102,24 @@ body {
     //     background: paint(extra-scallopedBorder);
     //     line-height: 1.5;
     // }
+    // .card .front,
+    .card .back,
+    .draw-deck .back {
+        .title {
+            --extra-scallopRadius: 8;
+            --extra-scallopColor: #F6A6A4;
+            --extra-scallopWeight: 3;
+            background: paint(extra-scallopedBorder);
+            line-height: 2.3;
+            padding: 0 19px;
+    
+            // --extra-crossColor: #F6A6A4; /* default: black */
+            // --extra-crossWidth: 2; /* default: 1 */
+        
+            // background: paint(extra-crossOut);
+            // line-height: 1.5;
+        }
+    }
 }
 
 .header .title {
@@ -106,42 +129,21 @@ body {
 
 .main {
     background: $green-dark;
-    height: 100vh;
+    // height: calc(100vh - 125px);
+    justify-content: flex-start;
+    align-content: space-around;
+
+    flex-flow: row wrap;
 }
 
-.main .code span:first-child,
-.main .code span:last-child {
-    margin-left: 0;
-}
+// .main .code span:first-child,
+// .main .code span:last-child {
+//     margin-left: 0;
+// }
 
-.main .code span {
-    margin-left: 15px;
-}
-
-.controller {
-    background: $cream;
-    height: 300px;
-    width: 300px;
-    box-shadow: 
-        3px 1px 4px 1px darken($green-dark, 10%),
-        inset 2px 0px 1px darken($cream, 20%),
-        inset 17px -6px 1px darken($cream, 15%);
-    border-radius: 35px;
-    z-index: 10;
-}
-
-.controller ul {
-    flex-wrap: wrap;
-    height: 160px;
-    // align-items: flex-end;
-    div {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-    li {
-        margin: 0 auto;
-    }
-}
+// .main .code span {
+//     margin-left: 15px;
+// }
 
 .code.container {
     flex-direction: column;

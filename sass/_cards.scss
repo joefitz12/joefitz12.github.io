@@ -1,16 +1,85 @@
 .container.cards {
-    justify-content: space-evenly;
+    justify-content: flex-end;
+}
+
+.draw-deck {
+    height: 230px;
+    width: 136px;
+    background: $purple;
+    border-radius: 5px;
+    box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%),
+        2px 0px 1px darken($purple, 20%),
+        2px 1px 1px darken($purple, 15%);
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index:10;
 }
 
 .card {
-    height: 403px;
-    width: 240px;
+    --defaultRotation: -10deg;
+    --defaultTranslateY: 2%;
+    height: 230px;
+    width: 136px;
     border-radius: 5px;
     background: $cream;
     background-color: transparent;
     perspective: 1000px;
     z-index: 10;
+    &.flipping {
+        animation-duration: 0.6s;
+        animation-name: drawCard;
+        .container_inner {
+            animation-duration: 0.6s;
+            animation-name: flipCard;
+            -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+            animation-timing-function: linear;
+        }
+    }
+    &.flipped {
+        transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
+        position: absolute;
+        opacity: .9;
+        .container_inner {
+            transform: rotateY(180deg);
+        }
+        .back {
+            visibility: hidden;;
+        }
+        &.top_card {
+            opacity: 1;
+        }
+    }
 }
+
+// sets default/final rotation for cards
+// original values 
+// --defaultRotation: -10deg;
+// --defaultTranslateY: 2%;
+.card {
+    &:nth-child(3n){
+        --defaultRotation: -9deg;
+        --defaultTranslateY: 0%;
+    }
+    &:nth-child(4n){
+        --defaultRotation: -11deg;
+        --defaultTranslateY: 1%;
+    }
+    &:nth-child(5n){
+        --defaultRotation: -9deg;
+        --defaultTranslateY: 1%;
+    }
+    &:nth-child(6n){
+        --defaultRotation: -12deg;
+        --defaultTranslateY: 2%;
+    }
+    &:nth-child(7n){
+        --defaultRotation: -8deg;
+        --defaultTranslateY: 3%;
+    }
+}
+
 
 .container_inner {
     flex-direction: column;
@@ -18,9 +87,9 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.8s;
     transform-style: preserve-3d;
 }
+
 
 .front, .back {
     position: absolute;
@@ -33,17 +102,33 @@
 
 .front {
     background: $cream;
-}
-
-.back {
+    overflow: hidden;
     transform: rotateY(180deg);
-}
-
-.card .title {
-    font-size: 20px;
-    position: absolute;
-    top: 12px;
-    left: 15px;
+    .title {
+        font-size: 20px;
+        position: absolute;
+        top: 14px;
+        left: 3px;
+    }
+    .content-title {
+        font-size: 18px;
+        color: $pink;
+        top: 70px;
+        left: 10px;
+    }
+    .text-container {
+        background: $cream;
+        overflow: hidden;
+        border-radius: 3px;
+        position: absolute;
+        text-align: left;
+        top: 90px;
+        left: 7%;
+        width: 86%;
+        box-sizing: border-box;
+        border: 2px solid $red;
+        padding: 4px 0;
+    }
 }
 
 .card .polygon {
@@ -55,13 +140,8 @@
     border-radius: 0 0 5px 5px;
 }
 
-.card .front .background {
-    background: $purple;
-    clip-path: polygon(0% 14%, 0% 100%, 0% 100%, 100% 100%, 100% 7%);
-    -webkit-clip-path: polygon(0% 14%, 0% 100%, 0% 100%, 100% 100%, 100% 7%);
-}
-
-.card .back .background {
+.card .back .background,
+.draw-deck .back .background {
     background: $purple;
     width:100%;
     height:100%;
@@ -69,42 +149,46 @@
     top: 0;
     left: 0;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .title {
+        color: $red;
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 30px;
+    }
+    &.background_transparent {
+        background-color: transparent;
+        box-sizing: border-box;
+        border: 2px solid $yellow-vibrant;
+    }
+}
+
+.card .front .background {
+    background: $purple;
+    // 8% difference
+    clip-path: polygon(0% 22%, 0% 100%, 0% 100%, 100% 100%, 100% 15%);
+    -webkit-clip-path: polygon(0% 22%, 0% 100%, 0% 100%, 100% 100%, 100% 15%);
+    box-sizing: border-box;
+    border: 2px solid $yellow-vibrant;
+}
+
+.card .angle2 {
+    background: $yellow-vibrant;
+    clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
+    -webkit-clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
 }
 
 .card .angle {
     background: $red;
-    clip-path: polygon(0% 13%, 0% 100%, 0% 14%, 100% 8%, 100% 7%);
-    -webkit-clip-path: polygon(0% 13%, 0% 100%, 0% 14%, 100% 8%, 100% 7%);
-}
-
-.card .angle2 {
-    background: $yellow;
-    clip-path: polygon(0% 12%, 0% 100%, 0% 13%, 100% 7%, 100% 6%);
-    -webkit-clip-path: polygon(0% 12%, 0% 100%, 0% 13%, 100% 7%, 100% 6%);
-}
-
-.card ul {
-    width: 206px;
-    margin: 0 auto;
-    background: $cream;
-    border-radius: 3px;
-    box-shadow: 0px 0px 0px 2px $red;
-    position: absolute;
-    text-align: left;
-    /* padding-left: 15px; */
-    bottom: 15px;
-    left: 17px;
-}
+    clip-path: polygon(0% 15%, 0% 100%, 0% 21%, 100% 15%, 100% 14%);
+    -webkit-clip-path: polygon(0% 15%, 0% 100%, 0% 21%, 100% 15%, 100% 14%);
+} 
 
 .card ul li {
-    padding: 2px 5px 2px 15px;
-}
-
-.card {
-    &:hover {
-        animation-duration: 1.7s;
-        animation-name: drawCard;
-    }
+    padding: 3px 14px 2px 3px;
 }
 
 @keyframes drawCard {
@@ -112,13 +196,54 @@
         transform: translate(0,0);
     }
     10% {
-        transform: translate(-130%,5%);
+        transform: translate(-30%,5%) rotateZ(-15deg);
+    }
+    20% {
+        transform: translate(-50%,6%) rotateZ(-35deg);
+    }
+    30% {
+        transform: translate(-100%,7%) rotateZ(-55deg);
+    }
+    40% {
+        transform: translate(-130%,7%) rotateZ(-45deg);
+    }
+    50% {
+        transform: translate(-140%,6%) rotateZ(-30deg);
+    }
+    60% {
+        transform: translate(-138%,6%) rotateZ(-22deg);
+    }
+    70% {
+        transform: translate(-130%,5%) rotateZ(-18deg);
+    }
+    80% {
+        transform: translate(-127%,4%) rotateZ(-15deg);
+    }
+    90% {
+        transform: translate(-123%,3%) rotateZ(-12deg);
     }
     to {
-        transform: translate(-120%,2%);
+        transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
     }
 }
 
 @keyframes flipCard {
-    
+    from {
+        transform: rotateY(0);
+    }
+    30% {
+        transform: rotateY(15deg);
+        box-shadow: 3px 1px 4px 1px darken($green-dark, 10%),
+    }
+    70% {
+        transform: rotateY(180deg);
+        box-shadow: 5px 2px 4px 3px darken($green-dark, 10%)
+    }
+    90% {
+        transform: rotateY(182deg);
+        box-shadow: 1px 1px 2px 1px darken($green-dark, 10%)
+    }
+    to {
+        transform: rotateY(180deg);
+    }
 }

@@ -21,6 +21,7 @@ let spread = 0;
 let increaseSpread = true;
 let blastQueue = [];
 let rendering = false;
+let flipping = false;
 
 let emergency_shutdown = 0;
 
@@ -129,11 +130,13 @@ let createBlast = (event) => {
     !rendering && startQueue();
 };
 
-
+//////////////////////////
+//// click listeners /////
+//////////////////////////
 
 document.body.addEventListener('mousedown', e => {
     // console.log(e.target);
-    if (e.target.classList.contains('main')){
+    if (e.target.classList.contains('main') || e.target.parentElement.classList.contains('main') || e.target.classList.contains('color_blast')){
         ++mouseDown;
         let createBlastShower = function (){
             // console.log('addEventLister mouseDown',mouseDown);
@@ -169,6 +172,157 @@ document.querySelectorAll('.button-container')[0].addEventListener('click', e =>
     if (e.target.children[0] && e.target.children[0].dataset.color){
         selectedColor = e.target.children[0].dataset.color;
     } 
+});
+
+document.querySelectorAll('.lightbulb-container')[0].addEventListener('click', e => {
+    let isLightbulb = e.target.classList.contains('bulb') || e.target.classList.contains('bulb-inner') || e.target.classList.contains('bulb-base');
+    let lightbulbContainerClassList;
+
+    if (isLightbulb){
+        // console.log('is lightbulb');
+        console.log(e);
+        // debugger;
+        if (e.target.parentElement.classList.contains('lightbulb')){
+            lightbulbContainerClassList = e.target.parentElement.classList;
+        }
+        else if (e.target.parentElement.parentElement.classList.contains('lightbulb')){
+            lightbulbContainerClassList = e.target.parentElement.parentElement.classList;
+        }
+        else if (e.target.parentElement.parentElement.parentElement.classList.contains('lightbulb')){
+            lightbulbContainerClassList = e.target.parentElement.parentElement.parentElement.classList;
+        }
+        
+        for (let i = 0; i < Object.keys(colorPalette).length; i++){
+            if (lightbulbContainerClassList.contains(Object.keys(colorPalette)[i])){
+                lightbulbContainerClassList.remove(Object.keys(colorPalette)[i]);
+                lightbulbContainerClassList.add(selectedColor);
+                break;
+            }
+        }
+
+
+    } 
+});
+
+////////
+//////// tv
+////////
+
+var canvas = document.createElement('canvas');
+c = canvas.getContext('2d');
+
+var imageData = c.createImageData(canvas.width, canvas.height);
+document.querySelectorAll('.television .inner-container')[0].appendChild(canvas);
+
+(function loop() {
+    
+    for (var i = 0, a = imageData.data.length; i < a; i++) {
+        imageData.data[i] = (Math.random() * 255)|0;
+    }
+
+    // canvas.width = innerWidth;
+    // canvas.height = innerHeight;
+    
+    c.putImageData(imageData, 0, 0);
+    requestAnimationFrame(loop);
+    
+})();
+
+document.querySelectorAll('.television .dial')[0].addEventListener('click', e => {
+    document.querySelectorAll('.television')[0].classList.add('display_on');
+
+    setTimeout(function(){
+        document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
+    }, 1500);
+});
+
+// document.querySelectorAll('.card:not(flipped)')[0].addEventListener('click',e => {
+//     document.querySelectorAll('.card')[0].classList.add('flipping');
+//     setTimeout(function(){
+//         document.querySelectorAll('.card')[0].classList.remove('flipping');
+//         document.querySelectorAll('.card')[0].classList.add('flipped');
+//     }, 600);
+// });
+
+//////////////////////////
+/////// card flip ////////
+//////////////////////////
+let cards = [
+    {
+        type:'comedy',
+        title:'LSI',
+        contentTitle: 'comedy',
+        content: '<ul><li>+Charisma</li><li>+Wisdom</li><li>+Intelligence</li></ul>'
+    },
+    {
+        type:'code',
+        title:'code',
+        contentTitle: 'code',
+        content: '<div class="link"><a href="github.com/joefitz12">Github</a><div>'
+    },
+    {
+        type:'games',
+        title: 'games',
+        contentTitle: 'games',
+        content: '<div class="link"><a href="boardgamegeek.com">BoardGameGeek</a></div>'
+    }
+];
+
+document.querySelectorAll('.draw-deck')[0].addEventListener('click', e => {
+    if (!flipping){
+        let cardIndex = document.querySelectorAll('.card').length;
+        let title = cards[cardIndex].title;
+        let content = cards[cardIndex].content;
+        let contentTitle = cards[cardIndex].contentTitle;
+        var cardType = cards[cardIndex].type;
+        
+        var newCard = document.createElement('div');
+        newCard.classList.add(cardType,'card');
+        var cardHtml = 
+            `<div class='container_inner'>
+                <div class='back'>
+                    <div class='background'>
+                        <div class='container title-container'>
+                            <span class='title'>card</span>
+                        </div>
+                    </div>
+                    <div class='background background_transparent'>
+
+                    </div>
+                </div>
+                <div class='front'>
+                    <span class='title'>${title}</span>
+                    <div class='polygon background'></div>
+                    <div class='polygon angle'></div>
+                    <div class='polygon angle2'></div>
+                    <span class='title content-title'>${contentTitle}</span>
+                    <div class='container text-container'>
+                        ${content}
+                    </div>
+                </div>
+            </div>`;
+
+        newCard.innerHTML = cardHtml;
+
+        
+
+        newCard.classList.add('flipping');
+        console.log(cardIndex, cards.length);
+        if (cardIndex == cards.length - 1){
+            document.querySelectorAll('.draw-deck')[0].classList.add('display_none');
+        }
+        setTimeout(function(){
+            newCard.classList.remove('flipping');
+            if (document.querySelectorAll('.top_card').length) {document.querySelectorAll('.top_card')[0].classList.remove('top_card');}
+            newCard.classList.add('flipped','top_card');
+
+        }, 600);
+
+        document.querySelectorAll('.cards.container')[0].append(newCard);
+
+        flipping = false;
+    }
+   
 });
 
 //////////////////////////

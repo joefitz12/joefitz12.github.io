@@ -1,0 +1,130 @@
+@keyframes fadeStatic {
+    from {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    65% {
+        opacity:.8
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeTvIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.television {
+    &-container {
+        justify-content: center;
+    }
+    &.outer-container {
+        height: 300px;
+        width: 300px;
+        min-width: 300px;
+        background: $rose;
+        box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%),
+        inset 2px 0px 1px darken($rose, 20%),
+        inset 17px -6px 1px darken($rose, 15%);
+        border-radius: 35px;
+        z-index: 10;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 17px;
+        position: relative;
+        flex-direction: column;
+    }
+    &.inner-container {
+        height: 200px;
+        width: 230px;
+        background: $pink;
+        position: absolute;
+        top: 10%;
+        border-radius: 25%;
+        box-shadow: 5px -2px 1px 1px darken($rose,10%), -1px 2px 1px 1px darken($rose,10%);
+        overflow: hidden;
+    }
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%,0);
+        opacity: 0;
+        .ytp-title-text {
+            visibility: hidden;
+        }
+    }
+    &.button-panel {
+        height: 45px;
+        width: 45px;
+        background: $yellow-vibrant;
+        position: absolute;
+        bottom: 7%;
+        left: 10%;
+    }
+    &.dial {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        background: $purple;
+        position: absolute;
+        bottom: 7%;
+        right: 10%;
+        box-shadow: 
+        1px 1px 3px 1px darken($rose, 10%),
+        inset 2px 0px 1px darken($purple, 20%),
+        inset 3px -2px 1px darken($purple, 15%);
+        &:active {
+            box-shadow: 
+            0px 1px 2px 0px darken($rose, 10%),
+            inset 0px 0px 1px darken($purple, 20%),
+            inset 0px 0px 1px darken($purple, 15%);
+        }
+    }
+
+    canvas {
+        width: 385px;
+        height: 217px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+
+    &.display_on {
+        iframe {
+            animation-name: fadeTvIn;
+            animation-duration: 1.5s;
+            -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+            animation-timing-function: linear;
+        }
+        canvas {
+            opacity: 1;
+            animation-duration: 1.5s;
+            animation-name: fadeStatic;
+            -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+            animation-timing-function: linear;
+        }
+        &.static_none {
+            iframe {
+                opacity: 1;
+            }
+            canvas {
+                opacity: 0;
+            }
+        }
+    }
+}
