@@ -1,0 +1,93 @@
+@mixin lightbulb($color) {
+    &.container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cord {
+        width: calc(100% + 30px);
+        height: 30px;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        border: 2px solid $pink;
+        border-top: none;
+        margin-bottom: -10px;
+    }
+    .base {
+        background: darken($purple, 5%);
+        width: 20px;
+        height: 15px;
+        margin: 0 auto;
+        border-radius: 50% 50% 0 0;
+    }
+    .bulb-base {
+        background: $color;
+        width: 20px;
+        height: 15px;
+        margin: 0px auto -10px;
+    }
+    .bulb {
+        z-index: -1;
+        background: $color;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 0px 5px 20px 0px lighten($color, 15%);
+    }
+    .bulb-inner {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        box-shadow: 1px -1px 0px -8px lighten($color,10%) inset, 4px -3px 0px 0px lighten($color,10%) inset;
+        background: radial-gradient($color 25%, transparent 80%);
+    }
+}
+
+.lightbulb-container {
+    &.container {
+        position: absolute;
+        top: -40px;
+    }
+    .lightbulb {
+        &:nth-child(1) .rotate-container {
+            transform: rotateZ(2deg);
+        }
+        &:nth-child(2) .rotate-container {
+            transform: rotateZ(-2deg);    
+        }
+        &:nth-child(3) .rotate-container {
+            transform: rotateZ(1deg);    
+        }
+        &:nth-child(4) .rotate-container {
+            transform: rotateZ(-1deg);
+        }
+        &:nth-child(5) .rotate-container {
+            transform: rotateZ(-2deg);
+        }
+    }
+}
+
+.lightbulb {
+    &.yellow {
+        @include lightbulb($yellow);
+    }
+    &.yellow-vibrant {
+        @include lightbulb($yellow-vibrant);
+    }
+    &.purple {
+        @include lightbulb($purple);
+    }
+    &.purple-dark {
+        @include lightbulb($purple-dark);
+    }
+    &.pink {
+        @include lightbulb($pink);
+    }
+    &.red {
+        @include lightbulb($red);
+    }
+}
