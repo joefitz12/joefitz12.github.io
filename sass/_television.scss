@@ -117,6 +117,7 @@
             animation-name: fadeStatic;
             -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
             animation-timing-function: linear;
+            pointer-events: none;
         }
         &.static_none {
             iframe {
