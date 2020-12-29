@@ -311,7 +311,7 @@ $(document).ready(function(){
     
             if (!verticalVineGrowth){
                 if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-                    finalAngle += ( Math.PI / 32);
+                    finalAngle += ( Math.PI / 16);
                 }
                 else if (!invertThisVine) {
                     invertVineGrowth = true;
@@ -320,7 +320,7 @@ $(document).ready(function(){
                     animateLeaf();
                 }
                 else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-                    finalAngle -= ( Math.PI / 32);
+                    finalAngle -= ( Math.PI / 16);
                 }
                 else if (invertThisVine){
                     invertVineGrowth = false;
@@ -354,25 +354,6 @@ $(document).ready(function(){
                 }
             }
     
-            // if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-            //     finalAngle += ( Math.PI / 64);
-            // }
-            // else if (!invertThisVine){
-            //     invertVineGrowth = true;
-            //     startingX += 30;
-            //     finalAngle = startingAngle;
-            //     animateLeaf();
-            // }
-            // else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-            //     finalAngle -= ( Math.PI / 64);
-            // }
-            // else if (invertThisVine){
-            //     invertVineGrowth = false;
-            //     startingX += 30;
-            //     finalAngle = startingAngle;
-            //     animateLeaf();
-            // }
-    
             vineCreator = requestAnimationFrame(createVine);
         };
     
@@ -380,7 +361,7 @@ $(document).ready(function(){
         vineCreator = requestAnimationFrame(createVine);
     });
     
-    document.getElementById('canvas-main').addEventListener('mouseup', e => {   
+    document.body.addEventListener('mouseup', e => {   
         // console.log('addEventLister mouseUp',mouseDown);
         if (jf.mouseDown){
             jf.mouseDown--;
@@ -423,9 +404,9 @@ $(document).ready(function(){
         } 
     });
     
-    ////////
-    //////// tv
-    ////////
+    /////////////////////
+    //////// tv /////////
+    /////////////////////
     
     let createStatic = () => {
         let canvas = document.createElement('canvas');
