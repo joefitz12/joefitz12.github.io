@@ -11,6 +11,7 @@
         border: 2px solid $pink;
         border-top: none;
         margin-bottom: -10px;
+        box-shadow: 0px 0px 4px 1px darken($green-light, 10%),
     }
     .base {
         background: darken($purple, 5%);
