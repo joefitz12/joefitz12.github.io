@@ -1,31 +1,13 @@
 $(document).ready(function(){
-    if (!window.jf){
-        window.jf = {};
-    }
     const $main = document.querySelectorAll('.main')[0];
 
-    jf.selectedColor = 'yellow';
-    
-    jf.colorPalette = {
-        'green-light':   '#a6d6b8',
-        'green-dark':    '#6a9a8a',
-        'yellow':        '#fac557',
-        'yellow-vibrant':'#ffb400',
-        'red':           '#f06339',
-        'pink':          '#F6A6A4',
-        'cream':         '#f9ebc8',
-        'purple':        '#353450',
-        'purple-dark':   '#2C0E37',
-    };
-    
-    jf.mouseDown = 0;
+
     let runCount = 0;
     let showerCounter = 0;
     let spread = 0;
     let increaseSpread = true;
     let blastQueue = [];
     let rendering = false;
-    let flipping = false;
     
     let emergency_shutdown = 0;
     
@@ -170,9 +152,9 @@ $(document).ready(function(){
         window.webkitRequestAnimationFrame || 
         window.msRequestAnimationFrame;
     
-    let cancelAnimations = () => {
-        while(jf.logs.animations.leaves.length){
-            let animationToCancel = jf.logs.animations.leaves.shift();
+    let cancelAnimations = (key) => {
+        while(jf.logs.animations[key].length){
+            let animationToCancel = jf.logs.animations[key].shift();
             cancelAnimationFrame(animationToCancel);
         }
     };
@@ -197,61 +179,53 @@ $(document).ready(function(){
         let startingY = e.layerY;
         // createLeaf(startingX, startingY);
     
-        let invertVineGrowth = false;
+        let invertVineGrowth = jf.logs.vines.invertVineGrowth;
         let verticalVineGrowth = true;
         let startingAngle = verticalVineGrowth ? -3 * Math.PI / 2 : Math.PI;
         let finalAngle = startingAngle;
     
         let leafCreator;
-        if (!window.jf.logs){
-            window.jf.logs = {};
-        }
-    
-        jf.logs.animations = {
-            leaves: []
-        };
     
         let animateLeaf = (cancel) => {
             let percentage = 0;
             let leafStartingX = startingX;
             let leafStartingY = startingY;
-            let switchSide = invertVineGrowth;
+            let switchSide = jf.logs.vines.invertVineGrowth;
     
             let createLeaf = () => {
-                let c = document.getElementById("canvas-main");
-                let ctx = c.getContext("2d");
+                let leaf = mainCanvas.getContext("2d");
                 let leafColor = jf.colorPalette[jf.selectedColor];
                 
-                ctx.beginPath();
+                leaf.beginPath();
                 console.log(jf.colorPalette);
-                ctx.fillStyle = leafColor;
+                leaf.fillStyle = leafColor;
                 console.log(leafColor);
     
                 if (switchSide){
-                    ctx.moveTo(leafStartingX, leafStartingY);
-                    ctx.quadraticCurveTo(leafStartingX, leafStartingY + (percentage * 20), leafStartingX + (percentage * 30), leafStartingY);
-                    ctx.stroke();
-                    ctx.moveTo(leafStartingX, leafStartingY);
-                    ctx.quadraticCurveTo(leafStartingX + (percentage * 10), leafStartingY - (percentage * 10), leafStartingX + (percentage * 30), leafStartingY);
+                    leaf.moveTo(leafStartingX, leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX, leafStartingY + (percentage * 20), leafStartingX + (percentage * 30), leafStartingY);
+                    leaf.stroke();
+                    leaf.moveTo(leafStartingX, leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX + (percentage * 10), leafStartingY - (percentage * 10), leafStartingX + (percentage * 30), leafStartingY);
                 }
                 else {
-                    ctx.moveTo(leafStartingX, leafStartingY);
-                    ctx.quadraticCurveTo(leafStartingX, leafStartingY - (percentage * 20), leafStartingX - (percentage * 30), leafStartingY);
-                    ctx.stroke();
-                    ctx.moveTo(leafStartingX, leafStartingY);
-                    ctx.quadraticCurveTo(leafStartingX - (percentage * 10), leafStartingY + (percentage * 10), leafStartingX - (percentage * 30), leafStartingY);
+                    leaf.moveTo(leafStartingX, leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX, leafStartingY - (percentage * 20), leafStartingX - (percentage * 30), leafStartingY);
+                    leaf.stroke();
+                    leaf.moveTo(leafStartingX, leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX - (percentage * 10), leafStartingY + (percentage * 10), leafStartingX - (percentage * 30), leafStartingY);
                 }
                 
-                ctx.stroke();
-                ctx.fill();
-                ctx.closePath();
+                leaf.stroke();
+                leaf.fill();
+                leaf.closePath();
             
                 if (percentage < 1){
                     percentage += 0.01;
                     switchSide = switchSide ? switchSide : switchSide;
                 }
                 else if (!jf.mouseDown) {
-                    cancelAnimations();
+                    cancelAnimations('leaves');
                 }
             
                 leafCreator = requestAnimationFrame(createLeaf);
@@ -267,7 +241,7 @@ $(document).ready(function(){
         let vineCreator;
     
         let createVine = () => {
-            let invertThisVine = invertVineGrowth;
+            let invertThisVine = jf.logs.vines.invertVineGrowth;
             let vine = mainCanvas.getContext("2d");
             let vineColor = jf.colorPalette["green-light"];
     
@@ -305,7 +279,7 @@ $(document).ready(function(){
                 // console.log(vine);
                 vine.closePath();
                 cancelAnimationFrame(vineCreator);
-                cancelAnimations();
+                cancelAnimations('leaves');
                 return;
             }
     
@@ -314,7 +288,7 @@ $(document).ready(function(){
                     finalAngle += ( Math.PI / 16);
                 }
                 else if (!invertThisVine) {
-                    invertVineGrowth = true;
+                    jf.logs.vines.invertVineGrowth = true;
                     startingX += 30;
                     finalAngle = startingAngle;
                     animateLeaf();
@@ -323,7 +297,7 @@ $(document).ready(function(){
                     finalAngle -= ( Math.PI / 16);
                 }
                 else if (invertThisVine){
-                    invertVineGrowth = false;
+                    jf.logs.vines.invertVineGrowth = false;
                     startingX += 30;
                     finalAngle = startingAngle;
                     animateLeaf();
@@ -335,7 +309,7 @@ $(document).ready(function(){
                     console.log('if');
                 }
                 else if (!invertThisVine) {
-                    invertVineGrowth = true;
+                    jf.logs.vines.invertVineGrowth  = true;
                     startingY -= 30;
                     finalAngle = startingAngle;
                     animateLeaf();
@@ -346,7 +320,7 @@ $(document).ready(function(){
                     console.log('if3');
                 }
                 else if (invertThisVine){
-                    invertVineGrowth = false;
+                    jf.logs.vines.invertVineGrowth = false;
                     startingY -= 30;
                     finalAngle = startingAngle;
                     animateLeaf();
@@ -408,35 +382,50 @@ $(document).ready(function(){
     //////// tv /////////
     /////////////////////
     
-    let createStatic = () => {
+    let createStatic = (cb) => {
         let canvas = document.createElement('canvas');
         c = canvas.getContext('2d');
         
         let imageData = c.createImageData(canvas.width, canvas.height);
         document.querySelectorAll('.television .inner-container')[0].appendChild(canvas);
+
+        let staticAnimation;
         
-        (function loop() {
-            
+        let loop = () => {
             for (var i = 0, a = imageData.data.length; i < a; i++) {
                 imageData.data[i] = (Math.random() * 255)|0;
             }
-        
-            // canvas.width = innerWidth;
-            // canvas.height = innerHeight;
             
             c.putImageData(imageData, 0, 0);
-            requestAnimationFrame(loop);
+            staticAnimation = requestAnimationFrame(loop);
             
-        })();
+            if (!jf.logs.animations.static) {jf.logs.animations.static = [];}
+            jf.logs.animations.static.push(staticAnimation);
+        };
+
+        staticAnimation = requestAnimationFrame(loop);
+        if (!jf.logs.animations.static) {jf.logs.animations.static = [];}
+        jf.logs.animations.static.push(staticAnimation);
+
+        if (cb){
+            cb();
+        }
     };
     
     
     document.querySelectorAll('.television .dial')[0].addEventListener('click', e => {
-        document.querySelectorAll('.television')[0].classList.add('display_on');
+        try {
+            createStatic( () => {
+                document.querySelectorAll('.television')[0].classList.add('display_on');
     
-        setTimeout(function(){
-            document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
-        }, 1500);
+            setTimeout(function(){
+                document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
+                // cancelAnimations('static');
+            }, 1500);
+            });
+        } catch (error) {
+            throw error;
+        }
     });
     
     // document.querySelectorAll('.card:not(flipped)')[0].addEventListener('click',e => {
@@ -450,43 +439,28 @@ $(document).ready(function(){
     //////////////////////////
     /////// card flip ////////
     //////////////////////////
-    let cards = [
-        {
-            type:'comedy',
-            title:'LSI',
-            contentTitle: 'comedy',
-            content: '<ul><li>+Charisma</li><li>+Wisdom</li><li>+Intelligence</li></ul>'
-        },
-        {
-            type:'code',
-            title:'code',
-            contentTitle: 'code',
-            content: '<div class="link"><a href="github.com/joefitz12">Github</a><div>'
-        },
-        {
-            type:'games',
-            title: 'games',
-            contentTitle: 'games',
-            content: '<div class="link"><a href="boardgamegeek.com">BoardGameGeek</a></div>'
-        }
-    ];
-    
     document.querySelectorAll('.draw-deck')[0].addEventListener('click', e => {
-        if (!flipping){
+        if (!jf.cards.flipping){
             let cardIndex = document.querySelectorAll('.card').length;
-            let title = cards[cardIndex].title;
-            let content = cards[cardIndex].content;
-            let contentTitle = cards[cardIndex].contentTitle;
-            var cardType = cards[cardIndex].type;
+            let card = jf.cards.data[cardIndex];
+            let title = card.title;
+            let content = card.content;
+            var type = card.type;
+            var link = card.link;
             
             var newCard = document.createElement('div');
-            newCard.classList.add(cardType,'card');
+            newCard.classList.add(type,'card');
+
+            if (title.length > 10){
+                newCard.classList.add('title_long');
+            }
+
             var cardHtml = 
                 `<div class='container_inner'>
                     <div class='back'>
                         <div class='background'>
                             <div class='container title-container'>
-                                <span class='title'>card</span>
+                                <span class='title'>flip</span>
                             </div>
                         </div>
                         <div class='background background_transparent'>
@@ -498,10 +472,10 @@ $(document).ready(function(){
                         <div class='polygon background'></div>
                         <div class='polygon angle'></div>
                         <div class='polygon angle2'></div>
-                        <span class='title content-title'>${contentTitle}</span>
                         <div class='container text-container'>
                             ${content}
                         </div>
+                        <a class='card-link' target="_blank" href="${link}">go to</a>
                     </div>
                 </div>`;
     
@@ -511,7 +485,7 @@ $(document).ready(function(){
     
             newCard.classList.add('flipping');
             // console.log(cardIndex, cards.length);
-            if (cardIndex == cards.length - 1){
+            if (cardIndex == jf.cards.data.length - 1){
                 document.querySelectorAll('.draw-deck')[0].classList.add('display_none');
             }
             setTimeout(function(){
@@ -523,7 +497,7 @@ $(document).ready(function(){
     
             document.querySelectorAll('.cards.container')[0].append(newCard);
     
-            flipping = false;
+            jf.cards.flipping = false;
         }
        
     });
@@ -534,54 +508,48 @@ $(document).ready(function(){
     document.body.addEventListener('keydown', e => {
         if (e.key == '1'){
             document.querySelectorAll('.button-container')[0].children[0].children[1].classList.add('hover');
-            selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[1].dataset.color;
+            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[1].children[0].dataset.color;
         }
         if (e.key == '2'){
             document.querySelectorAll('.button-container')[0].children[1].children[1].classList.add('hover');
-            selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[1].dataset.color;
+            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[1].children[0].dataset.color;
         }
         if (e.key == '3'){
             document.querySelectorAll('.button-container')[0].children[2].children[1].classList.add('hover');
-            selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[1].dataset.color;
+            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[1].children[0].dataset.color;
         }
         if (e.key == '4'){
-            document.querySelectorAll('.navigation')[0].children[2].classList.add('hover');
-            selectedColor = document.querySelectorAll('.navigation')[0].children[3].children[0].dataset.color;
+            document.querySelectorAll('.button-container')[0].children[0].children[0].classList.add('hover');
+            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[0].children[0].dataset.color;
         }
         if (e.key == '5'){
-            document.querySelectorAll('.navigation')[0].children[4].classList.add('hover');
-            selectedColor = document.querySelectorAll('.navigation')[0].children[4].children[0].dataset.color;
+            document.querySelectorAll('.button-container')[0].children[1].children[0].classList.add('hover');
+            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[0].children[0].dataset.color;
+        }
+        if (e.key == '6'){
+            document.querySelectorAll('.button-container')[0].children[2].children[0].classList.add('hover');
+            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[0].children[0].dataset.color;
         }
     });
     
     document.body.addEventListener('keyup', e => {
         if (e.key == '1'){
-            document.querySelectorAll('.button-container')[0].children[0].classList.remove('hover');
+            document.querySelectorAll('.button-container')[0].children[0].children[1].classList.remove('hover');
         }
         if (e.key == '2'){
-            document.querySelectorAll('.button-container')[1].children[0].classList.remove('hover');
+            document.querySelectorAll('.button-container')[0].children[1].children[1].classList.remove('hover');
         }
         if (e.key == '3'){
-            document.querySelectorAll('.button-container')[2].children[0].classList.remove('hover');
+            document.querySelectorAll('.button-container')[0].children[2].children[1].classList.remove('hover');
         }
         if (e.key == '4'){
-            document.querySelectorAll('.button-container')[0].children[1].classList.remove('hover');
+            document.querySelectorAll('.button-container')[0].children[0].children[0].classList.remove('hover');
         }
         if (e.key == '5'){
-            document.querySelectorAll('.button-container')[1].children[1].classList.remove('hover');
+            document.querySelectorAll('.button-container')[0].children[1].children[0].classList.remove('hover');
         }
         if (e.key == '6'){
-            document.querySelectorAll('.button-container')[2].children[1].classList.remove('hover');
+            document.querySelectorAll('.button-container')[0].children[2].children[0].classList.remove('hover');
         }
     });
-
-
-
-    /////// function calls ////////
-    try {
-        createStatic();
-    } catch (error) {
-        throw error;
-    }
-    
 });
