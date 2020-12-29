@@ -105,7 +105,7 @@
     overflow: hidden;
     transform: rotateY(180deg);
     .title {
-        font-size: 20px;
+        font-size: 18px;
         position: absolute;
         top: 14px;
         left: 3px;
@@ -122,12 +122,35 @@
         border-radius: 3px;
         position: absolute;
         text-align: left;
-        top: 90px;
+        top: 60px;
         left: 7%;
         width: 86%;
         box-sizing: border-box;
         border: 2px solid $red;
         padding: 4px 0;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        min-height: 90px;
+        a {
+            color: $purple;
+        }
+    }
+    .card-link {
+        position: absolute;
+        font-size: 15px;
+        color: $pink;
+        bottom: 10px;
+        right: 10px;
+        text-decoration: none;
+    }
+}
+
+.card.title_long {
+    .front {
+        .title {
+            font-size: 16px;
+        }
     }
 }
 
@@ -152,6 +175,9 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    .title-container {
+        padding: 10px 30px 7px;
+    }
     .title {
         color: $red;
         position: relative;

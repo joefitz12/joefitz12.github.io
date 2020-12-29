@@ -457,7 +457,7 @@ ul {
   transform: rotateY(180deg);
 }
 .front .title {
-  font-size: 20px;
+  font-size: 18px;
   position: absolute;
   top: 14px;
   left: 3px;
@@ -474,12 +474,31 @@ ul {
   border-radius: 3px;
   position: absolute;
   text-align: left;
-  top: 90px;
+  top: 60px;
   left: 7%;
   width: 86%;
   box-sizing: border-box;
   border: 2px solid #f06339;
   padding: 4px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  min-height: 90px;
+}
+.front .text-container a {
+  color: #353450;
+}
+.front .card-link {
+  position: absolute;
+  font-size: 15px;
+  color: #F6A6A4;
+  bottom: 10px;
+  right: 10px;
+  text-decoration: none;
+}
+
+.card.title_long .front .title {
+  font-size: 16px;
 }
 
 .card .polygon {
@@ -503,6 +522,10 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+.card .back .background .title-container,
+.draw-deck .back .background .title-container {
+  padding: 10px 30px 7px;
 }
 .card .back .background .title,
 .draw-deck .back .background .title {
