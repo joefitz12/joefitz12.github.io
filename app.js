@@ -160,7 +160,7 @@ $(document).ready(function(){
     };
     
     document.getElementById('canvas-main').addEventListener('mousedown', e => {
-        if (!jf.mouseDown) { jf.mouseDown++; }
+        if ( !jf.mouseDown ) { jf.mouseDown++; }
         let mainCanvas = document.getElementById('canvas-main');
         mainCanvas.getContext("2d").imageSmoothingQuality = 'high';
     
@@ -179,14 +179,64 @@ $(document).ready(function(){
         let startingY = e.layerY;
         // createLeaf(startingX, startingY);
     
-        let invertVineGrowth = jf.logs.vines.invertVineGrowth;
         let verticalVineGrowth = true;
-        let startingAngle = verticalVineGrowth ? -3 * Math.PI / 2 : Math.PI;
-        let finalAngle = startingAngle;
-    
+        let angledVineGrowth = true;
+        console.log('angledVineGrowth',angledVineGrowth);
+
+        ///
+
+        let finalAngle;
+        let startingAngle;
+
+        let deltaX;
+        let deltaY;
+
+        let setTrajectory = () => {
+            let quadrants = [1, 2, 3, 4];
+            let selectedQuadrant = quadrants[parseInt(Math.random() * 4)];
+
+            if (selectedQuadrant == 2){
+                deltaX = deltaX * -1;
+            }
+            else if (selectedQuadrant == 3){
+                deltaX = deltaX * -1;
+                deltaY = deltaY * -1;
+            }
+            else if (selectedQuadrant == 4){
+                deltaY = deltaY * -1;
+            }
+
+            finalAngle = Math.atan2(deltaY, deltaX) - Math.PI;
+            startingAngle = finalAngle;
+
+            return selectedQuadrant;
+        };
+        console.log(setTrajectory());
+
+        // doing triangle math
+        let radius = 15;
+        deltaX = parseInt(15 * Math.random() + 1);
+        // let deltaX = 8;
+        console.log('deltaX',deltaX);
+        deltaY = parseInt(Math.pow( Math.pow(radius,2) - Math.pow(deltaX,2), 0.5));
+        // let deltaY = 12;
+        console.log('deltaY',deltaY);
+        // let startingAngle = Math.atan2(deltaX, deltaY);
+        setTrajectory();
+        console.log('finalAngle',finalAngle);
+        console.log('startingAngle',startingAngle);
+
+        //// original method /////
+        // let startingAngle = verticalVineGrowth ? -3 * Math.PI / 2 : Math.PI;
+        // let finalAngle = startingAngle;
+
+        // console.log('startingAngle',startingAngle);
+        // console.log('finalAngle',finalAngle);
+
+        // instantiating variable to save animation processes
         let leafCreator;
     
-        let animateLeaf = (cancel) => {
+        let animateLeaf = () => {
             let percentage = 0;
             let leafStartingX = startingX;
             let leafStartingY = startingY;
@@ -195,11 +245,11 @@ $(document).ready(function(){
             let createLeaf = () => {
                 let leaf = mainCanvas.getContext("2d");
                 let leafColor = jf.colorPalette[jf.selectedColor];
+
+                console.log('leafColor', leafColor);
                 
                 leaf.beginPath();
-                console.log(jf.colorPalette);
                 leaf.fillStyle = leafColor;
-                console.log(leafColor);
     
                 if (switchSide){
                     leaf.moveTo(leafStartingX, leafStartingY);
@@ -237,31 +287,28 @@ $(document).ready(function(){
         };
         
     
-        // instantiating leaf creator
+        // instantiating variable to save animation processes
         let vineCreator;
     
         let createVine = () => {
             let invertThisVine = jf.logs.vines.invertVineGrowth;
             let vine = mainCanvas.getContext("2d");
             let vineColor = jf.colorPalette["green-light"];
-    
-            // console.log('verticalVineGrowth',verticalVineGrowth);
-            
-            
+
             vine.beginPath();
             vine.lineWidth = 1;
             vine.strokeStyle = vineColor;
             vine.shadowColor = vineColor;
             vine.shadowBlur = 1;
-            if (!verticalVineGrowth){
+            if (!verticalVineGrowth && !angledVineGrowth){
                 if (!invertThisVine) {
-                    vine.arc(startingX + 15, startingY, 15, startingAngle, finalAngle, false);
+                    vine.arc(startingX + 15, startingY, 15, startingAngle - Math.PI, finalAngle, false);
                 }
                 else {
-                    vine.arc(startingX + 15, startingY, 15, startingAngle, finalAngle, true);
+                    vine.arc(startingX + 15, startingY, 15, startingAngle - Math.PI, finalAngle, true);
                 }
             }
-            else {
+            else if (!angledVineGrowth) {
                 if (!invertThisVine) {
                     // console.log('if !invertThisVine');
                     vine.arc(startingX, startingY - 15, 15, startingAngle, finalAngle, false);
@@ -269,6 +316,16 @@ $(document).ready(function(){
                 else {
                     // console.log('else !invertThisVine');
                     vine.arc(startingX, startingY - 15, 15, startingAngle, finalAngle, true);
+                }
+            }
+            else if (angledVineGrowth) {
+                if (!invertThisVine) {
+                    // console.log('if !invertThisVine');
+                    vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, false);
+                }
+                else {
+                    // console.log('else !invertThisVine');
+                    vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, true);
                 }
             }
     
@@ -283,7 +340,7 @@ $(document).ready(function(){
                 return;
             }
     
-            if (!verticalVineGrowth){
+            if (!verticalVineGrowth && !angledVineGrowth){
                 if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
                     finalAngle += ( Math.PI / 16);
                 }
@@ -303,7 +360,7 @@ $(document).ready(function(){
                     animateLeaf();
                 }
             }
-            else {
+            else if (!angledVineGrowth) {
                 if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
                     finalAngle += ( Math.PI / 16);
                     console.log('if');
@@ -322,6 +379,33 @@ $(document).ready(function(){
                 else if (invertThisVine){
                     jf.logs.vines.invertVineGrowth = false;
                     startingY -= 30;
+                    finalAngle = startingAngle;
+                    animateLeaf();
+                    console.log('if4');
+                }
+            }
+            else if (angledVineGrowth) {
+                // startingAngle defintion: let finalAngle = startingAngle;
+                if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
+                    finalAngle += ( Math.PI / 16);
+                    console.log('if');
+                }
+                else if (!invertThisVine) {
+                    jf.logs.vines.invertVineGrowth  = true;
+                    startingX += (2 * deltaX);
+                    startingY += (2 * deltaY);
+                    finalAngle = startingAngle;
+                    animateLeaf();
+                    console.log('if2');
+                }
+                else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
+                    finalAngle -= ( Math.PI / 16);
+                    console.log('if3');
+                }
+                else if (invertThisVine){
+                    jf.logs.vines.invertVineGrowth = false;
+                    startingX += (2 * deltaX);
+                    startingY += (2 * deltaY);
                     finalAngle = startingAngle;
                     animateLeaf();
                     console.log('if4');
@@ -427,14 +511,6 @@ $(document).ready(function(){
             throw error;
         }
     });
-    
-    // document.querySelectorAll('.card:not(flipped)')[0].addEventListener('click',e => {
-    //     document.querySelectorAll('.card')[0].classList.add('flipping');
-    //     setTimeout(function(){
-    //         document.querySelectorAll('.card')[0].classList.remove('flipping');
-    //         document.querySelectorAll('.card')[0].classList.add('flipped');
-    //     }, 600);
-    // });
     
     //////////////////////////
     /////// card flip ////////
