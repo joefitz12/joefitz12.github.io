@@ -14,6 +14,9 @@ $(document).ready( () => {
         'cream':         '#f9ebc8',
         'purple':        '#353450',
         'purple-dark':   '#2C0E37',
+        // vine colors
+        'green-light_20%-light': '#b8dec6',
+        'green-light_20%-dark': '#85ab93',
     };
     
     jf.mouseDown = 0;

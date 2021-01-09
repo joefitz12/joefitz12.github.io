@@ -1,168 +1,63 @@
 $(document).ready(function(){
-    const $main = document.querySelectorAll('.main')[0];
-
-
-    let runCount = 0;
-    let showerCounter = 0;
-    let spread = 0;
-    let increaseSpread = true;
-    let blastQueue = [];
-    let rendering = false;
-    
-    let emergency_shutdown = 0;
-    
-    let setBoxShadow = (color) =>{
-        let number = (arg) => {
-            return parseInt(arg*Math.random()) + 1;
-        };
-    
-        let sizeValue = number(9);
-    
-        return `box-shadow: 0 0 ${number(5)}px 5px ${jf.colorPalette[jf.selectedColor]};height:${sizeValue}px;width:${sizeValue}px;`;
-    };
-    
-    let randomNumberGenerator = () => {
-        spreadBlasts();
-        let activeShowerCount = showerCounter;
-        // console.log('showerCounter',showerCounter);
-        let random = Math.round(Math.random()*10) >= 5 ? parseInt(2 * Math.random()*activeShowerCount*spread) + 1 : -1 * parseInt(2*Math.random()*activeShowerCount*spread) + 1;
-        // console.log('random',random);
-        return random;
-    };
-    
-    let spreadBlasts = (cb) => {
-        if (increaseSpread){
-            spread += (Math.PI/8);
-            if (spread == Math.PI){increaseSpread = false;}
-        }
-        else {
-            spread -= (Math.PI/8);
-            if (spread == 0){increaseSpread = true;}
-        }
-        
-        console.log('spread',spread);
-    };
-    
-    let gravity = (selector,x,y) => {
-        y = y / 2;
-    
-        document.querySelector(selector).style.transform = `translate(${x}px,${y}px)`;
-    };
-    
-    let translateBlast = (colorBlast) => {
-        let x = randomNumberGenerator();
-        let y = randomNumberGenerator();
-        let selector = `#${colorBlast.colorBlastId}`;
-        
-        // console.log(spread);
-        console.log(`x: ${x}, y: ${y}`);
-        // console.log(document.querySelector(`#${colorBlast.colorId}`));
-        document.querySelector(selector).style.transform = `translate(${x}px,${y}px)`;
-        // document.querySelector(selector).classList.add('gravity');
-        rendering = false;
-        startQueue();
-    };
-    
-    let startQueue = () => {
-        if (rendering) { return; }
-    
-        for (let i = 0; i < blastQueue.length && !rendering; i++){
-            // console.log(blastQueue.length);
-            emergency_shutdown++;
-            if (emergency_shutdown > 10000000){alert('emergency_shutdown');blastQueue = [];rendering = false;return;}
-            rendering = true;
-            let colorBlast = blastQueue.shift();
-            // console.log('colorBlast',colorBlast);
-            
-            setTimeout(() => translateBlast(colorBlast), 50);
-        }
-    };
-    
-    let createBlast = (event) => {
-        console.log('event', event);
-        let colorBlast = document.createElement('div');
-        
-        runCount++;
-        let positionX = event.screenX;
-        // console.log(positionX);
-        let positionY = event.screenY - 132;
-        // console.log(positionY);
-        let color = selectedColor;
-        let colorBlastId = 'color_blast' + runCount;
-        let boxShadow = setBoxShadow();
-        console.log(boxShadow);
-        colorBlast.setAttribute('id', colorBlastId);
-        colorBlast.setAttribute('class',`color_blast ${color}`);
-        // console.log('all info', `top:${positionY}px;left:${positionX}px;${boxShadow}`);
-        colorBlast.setAttribute('style',`top:${positionY}px;left:${positionX}px;${boxShadow}`);
-        // debugger;
-        document.body.append(colorBlast);
-    
-        let blastData = {
-            runCount,
-            positionX,
-            positionY,
-            color,
-            boxShadow,
-            colorBlastId
-        };
-        
-        blastQueue.push(blastData);
-    
-        // console.log(Object.keys(blastData));
-    
-        // console.log('rendering',rendering);
-    
-        !rendering && startQueue();
-    };
-    
-    //////////////////////////
-    //// click listeners /////
-    //////////////////////////
-    
-    // document.body.addEventListener('mousedown', e => {
-    //     // console.log(e.target);
-    //     if (e.target.classList.contains('main') || e.target.parentElement.classList.contains('main') || e.target.classList.contains('color_blast')){
-    //         ++mouseDown;
-    //         let createBlastShower = function (){
-    //             // console.log('addEventLister mouseDown',mouseDown);
-    //             if (mouseDown){
-    //                 if (showerCounter > 30){
-    //                     showerCounter = 0;
-    //                 }
-    //                 showerCounter += 1;
-    //                 // console.log('addEventListener showerCounter',showerCounter);
-    //                 createBlast(e);
-    //                 setTimeout(() => {
-    //                     createBlastShower();
-    //                 },  50);
-    //             }
-    //             else {
-    //                 showerCounter = 0;
-    //                 return;
-    //             }
-    //         };
-            
-    //         createBlastShower();
-    //     }
-    // });
-    
     let requestAnimationFrame = window.requestAnimationFrame || 
         window.mozRequestAnimationFrame || 
         window.webkitRequestAnimationFrame || 
         window.msRequestAnimationFrame;
     
     let cancelAnimations = (key) => {
+        console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
         while(jf.logs.animations[key].length){
             let animationToCancel = jf.logs.animations[key].shift();
             cancelAnimationFrame(animationToCancel);
         }
+        console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
     };
+
+    document.body.addEventListener('mouseup', e => {   
+        // console.log('addEventLister mouseUp',mouseDown);
+        if (jf.mouseDown){
+            jf.mouseDown--;
+        }
+    });
+
+    document.body.addEventListener('touchend', e => {   
+        if (jf.mouseDown){ jf.mouseDown--; }
+        // console.log('jf.mouseDown', jf.mouseDown);
+    });
     
-    document.getElementById('canvas-main').addEventListener('mousedown', e => {
-        if (!jf.mouseDown) { jf.mouseDown++; }
+
+    ///////////////////////////////
+    ///////// controller //////////
+    ///////////////////////////////
+    document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
+        if (e.target.children[0] && e.target.children[0].dataset.color){
+            jf.selectedColor = e.target.children[0].dataset.color;
+        } 
+    });
+
+    document.querySelectorAll('.button-container')[0].addEventListener('touchstart', e => {
+        if (e.target.children[0] && e.target.children[0].dataset.color){
+            jf.selectedColor = e.target.children[0].dataset.color;
+            e.target.classList.add('hover');
+        } 
+    });
+
+    document.querySelectorAll('.button-container')[0].addEventListener('touchend', e => {
+        if (e.target.children[0] && e.target.children[0].dataset.color){
+            e.target.classList.remove('hover');
+        } 
+    });
+
+    ///////////////////////////////
+    ///////// vines //////////
+    ///////////////////////////////
+    const handleVineCreation = (e) => {
+        if ( !jf.mouseDown ) { jf.mouseDown++; }
         let mainCanvas = document.getElementById('canvas-main');
         mainCanvas.getContext("2d").imageSmoothingQuality = 'high';
+
+        // instantiating growthSpeed
+        let growthSpeed = 1.5;
     
         // look up the size the canvas is being displayed
         let width = mainCanvas.clientWidth;
@@ -174,19 +69,65 @@ $(document).ready(function(){
             mainCanvas.height = height;
         }
     
-        let startingX = e.layerX;
-        // console.log(positionX);
-        let startingY = e.layerY;
-        // createLeaf(startingX, startingY);
-    
-        let invertVineGrowth = jf.logs.vines.invertVineGrowth;
-        let verticalVineGrowth = true;
-        let startingAngle = verticalVineGrowth ? -3 * Math.PI / 2 : Math.PI;
-        let finalAngle = startingAngle;
-    
+        let startingX = e.layerX ? e.layerX : e.touches[0].clientX;
+        let startingY = e.layerY ? e.layerY : e.touches[0].clientY - 176;
+
+        // console.log('startingX', startingX);
+        // console.log('startingY', startingY);
+        // debugger;
+
+        // instantiating final and starting angle variables for vine animation
+        let finalAngle;
+        let startingAngle;
+        let selectedQuadrant;
+
+        // instantiating 
+        let deltaX;
+        let deltaY;
+
+        let setTrajectory = () => {
+            let quadrants = [1, 2, 3, 4];
+            selectedQuadrant = quadrants[parseInt(Math.random() * 4)];
+
+            if (selectedQuadrant == 2){
+                deltaX = deltaX * -1;
+            }
+            else if (selectedQuadrant == 3){
+                deltaX = deltaX * -1;
+                deltaY = deltaY * -1;
+            }
+            else if (selectedQuadrant == 4){
+                deltaY = deltaY * -1;
+            }
+
+            finalAngle = Math.atan2(deltaY, deltaX) - Math.PI;
+            startingAngle = finalAngle;
+        };
+
+        // doing triangle math
+        let radius = 15;
+        deltaX = parseInt(radius * Math.random() + 1);
+        // let deltaX = 8;
+        console.log('deltaX',deltaX);
+        deltaY = parseInt(Math.pow( Math.pow(radius,2) - Math.pow(deltaX,2), 0.5));
+        // let deltaY = 12;
+        console.log('deltaY',deltaY);
+        // let startingAngle = Math.atan2(deltaX, deltaY);
+        setTrajectory();
+        console.log('finalAngle',finalAngle);
+        console.log('startingAngle',startingAngle);
+
+        //// original method /////
+        // let startingAngle = verticalVineGrowth ? -3 * Math.PI / 2 : Math.PI;
+        // let finalAngle = startingAngle;
+
+        // console.log('startingAngle',startingAngle);
+        // console.log('finalAngle',finalAngle);
+
+        // instantiating variable to save animation processes
         let leafCreator;
     
-        let animateLeaf = (cancel) => {
+        let animateLeaf = () => {
             let percentage = 0;
             let leafStartingX = startingX;
             let leafStartingY = startingY;
@@ -195,11 +136,14 @@ $(document).ready(function(){
             let createLeaf = () => {
                 let leaf = mainCanvas.getContext("2d");
                 let leafColor = jf.colorPalette[jf.selectedColor];
+
+                console.log('leafColor', leafColor);
+                if (jf.logs.animations.leaves.length > 1000){
+                    cancelAnimations('leaves');
+                }
                 
                 leaf.beginPath();
-                console.log(jf.colorPalette);
                 leaf.fillStyle = leafColor;
-                console.log(leafColor);
     
                 if (switchSide){
                     leaf.moveTo(leafStartingX, leafStartingY);
@@ -237,39 +181,42 @@ $(document).ready(function(){
         };
         
     
-        // instantiating leaf creator
+        // instantiating variable to save animation processes
         let vineCreator;
     
         let createVine = () => {
             let invertThisVine = jf.logs.vines.invertVineGrowth;
             let vine = mainCanvas.getContext("2d");
-            let vineColor = jf.colorPalette["green-light"];
-    
-            // console.log('verticalVineGrowth',verticalVineGrowth);
+            let vineColor;
             
-            
+            if (jf.logs.vines.count % 3 == 0){
+                vineColor = jf.colorPalette["green-light"];
+                console.log('vine color 0');
+            }
+            else if (jf.logs.vines.count % 3 == 1){
+                vineColor = jf.colorPalette['green-light_20%-light'];
+                console.log('vine color 1');
+
+            }
+            else if (jf.logs.vines.count % 3 == 2){
+                vineColor = jf.colorPalette['green-light_20%-dark'];
+                console.log('vine color 2');
+            }
+
             vine.beginPath();
             vine.lineWidth = 1;
             vine.strokeStyle = vineColor;
             vine.shadowColor = vineColor;
             vine.shadowBlur = 1;
-            if (!verticalVineGrowth){
-                if (!invertThisVine) {
-                    vine.arc(startingX + 15, startingY, 15, startingAngle, finalAngle, false);
-                }
-                else {
-                    vine.arc(startingX + 15, startingY, 15, startingAngle, finalAngle, true);
-                }
+            vine.lineCap = "round";
+
+            if (!invertThisVine) {
+                // console.log('if !invertThisVine');
+                vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, false);
             }
             else {
-                if (!invertThisVine) {
-                    // console.log('if !invertThisVine');
-                    vine.arc(startingX, startingY - 15, 15, startingAngle, finalAngle, false);
-                }
-                else {
-                    // console.log('else !invertThisVine');
-                    vine.arc(startingX, startingY - 15, 15, startingAngle, finalAngle, true);
-                }
+                // console.log('else !invertThisVine');
+                vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, true);
             }
     
             vine.stroke();
@@ -278,54 +225,35 @@ $(document).ready(function(){
             if (!jf.mouseDown) {
                 // console.log(vine);
                 vine.closePath();
+                jf.logs.vines.count++;
                 cancelAnimationFrame(vineCreator);
                 cancelAnimations('leaves');
                 return;
             }
-    
-            if (!verticalVineGrowth){
-                if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-                    finalAngle += ( Math.PI / 16);
-                }
-                else if (!invertThisVine) {
-                    jf.logs.vines.invertVineGrowth = true;
-                    startingX += 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                }
-                else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-                    finalAngle -= ( Math.PI / 16);
-                }
-                else if (invertThisVine){
-                    jf.logs.vines.invertVineGrowth = false;
-                    startingX += 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                }
+            
+            if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
+                finalAngle += ( Math.PI / (16 / growthSpeed) );
+                // console.log('if');
             }
-            else {
-                if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-                    finalAngle += ( Math.PI / 16);
-                    console.log('if');
-                }
-                else if (!invertThisVine) {
-                    jf.logs.vines.invertVineGrowth  = true;
-                    startingY -= 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                    console.log('if2');
-                }
-                else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-                    finalAngle -= ( Math.PI / 16);
-                    console.log('if3');
-                }
-                else if (invertThisVine){
-                    jf.logs.vines.invertVineGrowth = false;
-                    startingY -= 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                    console.log('if4');
-                }
+            else if (!invertThisVine) {
+                jf.logs.vines.invertVineGrowth  = true;
+                startingX += (2 * deltaX);
+                startingY += (2 * deltaY);
+                finalAngle = startingAngle;
+                animateLeaf();
+                // console.log('if2');
+            }
+            else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
+                finalAngle -= ( Math.PI / (16 / growthSpeed));
+                // console.log('if3');
+            }
+            else if (invertThisVine){
+                jf.logs.vines.invertVineGrowth = false;
+                startingX += (2 * deltaX);
+                startingY += (2 * deltaY);
+                finalAngle = startingAngle;
+                animateLeaf();
+                // console.log('if4');
             }
     
             vineCreator = requestAnimationFrame(createVine);
@@ -333,49 +261,77 @@ $(document).ready(function(){
     
     
         vineCreator = requestAnimationFrame(createVine);
+    };
+
+    document.getElementById('canvas-main').addEventListener('mousedown', e => {
+        handleVineCreation(e);
     });
+
+    document.getElementById('canvas-main').addEventListener('touchstart', e => {
+        if ( !jf.mouseDown ) { jf.mouseDown++; }
+        handleVineCreation(e);
+    });
+
+    document.getElementById('canvas-main').addEventListener('contextmenu', e => {
+        e.preventDefault();
+    });
+
+    ///////////////////////////////////////
+    ////////////// lightbulb //////////////
+    ///////////////////////////////////////
+    const handleLightbulbEngagement = (e) => {
+        e.stopPropagation();
+        let isLightbulb = e.target.classList.contains('bulb') || e.target.classList.contains('bulb-inner') || e.target.classList.contains('bulb-base');
+        if (!isLightbulb){ return; }
+        let lightbulb;
+        let lightbulbContainerClassList;
+        let parent = e.target.parentElement;
+        let grandParent = e.target.parentElement.parentElement;
+        let greatGrandParent = e.target.parentElement.parentElement.parentElement;
+        let parentClassList = parent.classList;
+        let grandparentClassList = grandParent.classList;
+        let greatGrandParentClassList = greatGrandParent.classList;
+
     
-    document.body.addEventListener('mouseup', e => {   
-        // console.log('addEventLister mouseUp',mouseDown);
-        if (jf.mouseDown){
-            jf.mouseDown--;
+        // console.log('is lightbulb');
+        // console.log(e);
+        // debugger;
+        if (parentClassList.contains('lightbulb')){
+            lightbulb = parent;
+            lightbulbContainerClassList = parentClassList;
         }
-    });
-    
-    document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
-        if (e.target.children[0] && e.target.children[0].dataset.color){
-            jf.selectedColor = e.target.children[0].dataset.color;
-        } 
-    });
+        else if (grandparentClassList.contains('lightbulb')){
+            lightbulb = grandParent;
+            lightbulbContainerClassList = grandparentClassList;
+            // adds clicked class to rotate container to trigger animation
+        }
+        else if (greatGrandParentClassList.contains('lightbulb')){
+            lightbulb = greatGrandParent;
+            lightbulbContainerClassList = greatGrandParentClassList;
+        }
+
+        if (!lightbulb.classList.contains('clicked')){ lightbulb.classList.add('clicked'); }
+        else { console.log ('nope');}
+
+        setTimeout(function(){
+            lightbulb.classList.remove('clicked');
+        }, 1000);
+        
+        for (let i = 0; i < Object.keys(jf.colorPalette).length; i++){
+            if (lightbulbContainerClassList.contains(Object.keys(jf.colorPalette)[i])){
+                lightbulbContainerClassList.remove(Object.keys(jf.colorPalette)[i]);
+                lightbulbContainerClassList.add(jf.selectedColor);
+                break;
+            }
+        }
+    };
     
     document.querySelectorAll('.lightbulb-container')[0].addEventListener('click', e => {
-        let isLightbulb = e.target.classList.contains('bulb') || e.target.classList.contains('bulb-inner') || e.target.classList.contains('bulb-base');
-        let lightbulbContainerClassList;
-    
-        if (isLightbulb){
-            // console.log('is lightbulb');
-            // console.log(e);
-            // debugger;
-            if (e.target.parentElement.classList.contains('lightbulb')){
-                lightbulbContainerClassList = e.target.parentElement.classList;
-            }
-            else if (e.target.parentElement.parentElement.classList.contains('lightbulb')){
-                lightbulbContainerClassList = e.target.parentElement.parentElement.classList;
-            }
-            else if (e.target.parentElement.parentElement.parentElement.classList.contains('lightbulb')){
-                lightbulbContainerClassList = e.target.parentElement.parentElement.parentElement.classList;
-            }
-            
-            for (let i = 0; i < Object.keys(jf.colorPalette).length; i++){
-                if (lightbulbContainerClassList.contains(Object.keys(jf.colorPalette)[i])){
-                    lightbulbContainerClassList.remove(Object.keys(jf.colorPalette)[i]);
-                    lightbulbContainerClassList.add(jf.selectedColor);
-                    break;
-                }
-            }
-    
-    
-        } 
+        handleLightbulbEngagement(e);
+    });
+
+    document.querySelectorAll('.lightbulb-container')[0].addEventListener('touchstart', e => {
+        handleLightbulbEngagement(e);
     });
     
     /////////////////////
@@ -415,26 +371,20 @@ $(document).ready(function(){
     
     document.querySelectorAll('.television .dial')[0].addEventListener('click', e => {
         try {
-            createStatic( () => {
-                document.querySelectorAll('.television')[0].classList.add('display_on');
-    
-            setTimeout(function(){
-                document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
-                // cancelAnimations('static');
-            }, 1500);
-            });
+            if (document.querySelectorAll('.static_none').length < 1){
+                createStatic( () => {
+                    document.querySelectorAll('.television')[0].classList.add('display_on');
+        
+                    setTimeout(function(){
+                        document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
+                        // cancelAnimations('static');
+                    }, 1500);
+                });
+            }
         } catch (error) {
             throw error;
         }
     });
-    
-    // document.querySelectorAll('.card:not(flipped)')[0].addEventListener('click',e => {
-    //     document.querySelectorAll('.card')[0].classList.add('flipping');
-    //     setTimeout(function(){
-    //         document.querySelectorAll('.card')[0].classList.remove('flipping');
-    //         document.querySelectorAll('.card')[0].classList.add('flipped');
-    //     }, 600);
-    // });
     
     //////////////////////////
     /////// card flip ////////
@@ -492,7 +442,6 @@ $(document).ready(function(){
                 newCard.classList.remove('flipping');
                 if (document.querySelectorAll('.top_card').length) {document.querySelectorAll('.top_card')[0].classList.remove('top_card');}
                 newCard.classList.add('flipped','top_card');
-    
             }, 600);
     
             document.querySelectorAll('.cards.container')[0].append(newCard);
