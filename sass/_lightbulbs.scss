@@ -1,3 +1,37 @@
+@keyframes changeColor-bulb {
+    from {
+        // transform: rotateZ(2deg);
+        transform: var(--z);
+    }
+    40% {
+        // transform: rotateY(-2deg);
+        transform: calc(var(--z)-4);
+    }
+    60% {
+        // transform: rotateY(0deg);
+        transform: calc(var(--z) + 1);
+    }
+    to {
+        // transform: rotateZ(1deg);
+        transform: calc(var(--z) - 1);
+    }
+}
+
+@keyframes changeColor-cord {
+    from {
+        height: 30px;
+    }
+    20% {
+        height: 31px;
+    }
+    60% {
+        height: 30px;
+    }
+    to {
+        height: 29px;
+    }
+}
+
 @mixin lightbulb($color) {
     &.container {
         flex-direction: column;
@@ -55,7 +89,8 @@
     }
     .lightbulb {
         &:nth-child(1) .rotate-container {
-            transform: rotateZ(2deg);
+            transform: rotateZ(2deg); 
+            --z: 2deg;
         }
         &:nth-child(2) .rotate-container {
             transform: rotateZ(-2deg);    
@@ -92,3 +127,18 @@
         @include lightbulb($red);
     }
 }
+
+.lightbulb.clicked {
+    .cord {
+        animation-duration: 0.5s;
+        animation-name: changeColor-cord;
+        -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+        animation-timing-function: linear; 
+    }
+    .rotate-container {
+        animation-duration: 0.6s;
+        animation-name: changeColor-bulb;
+        -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+        animation-timing-function: linear;
+    }
+} 

@@ -153,16 +153,41 @@ $(document).ready(function(){
         window.msRequestAnimationFrame;
     
     let cancelAnimations = (key) => {
+        console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
         while(jf.logs.animations[key].length){
             let animationToCancel = jf.logs.animations[key].shift();
             cancelAnimationFrame(animationToCancel);
         }
+        console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
     };
+
+    document.body.addEventListener('mouseup', e => {   
+        // console.log('addEventLister mouseUp',mouseDown);
+        if (jf.mouseDown){
+            jf.mouseDown--;
+        }
+    });
     
+
+    ///////////////////////////////
+    ///////// controller //////////
+    ///////////////////////////////
+    document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
+        if (e.target.children[0] && e.target.children[0].dataset.color){
+            jf.selectedColor = e.target.children[0].dataset.color;
+        } 
+    });
+
+    ///////////////////////////////
+    ///////// vines //////////
+    ///////////////////////////////
     document.getElementById('canvas-main').addEventListener('mousedown', e => {
         if ( !jf.mouseDown ) { jf.mouseDown++; }
         let mainCanvas = document.getElementById('canvas-main');
         mainCanvas.getContext("2d").imageSmoothingQuality = 'high';
+
+        // instantiating growthSpeed
+        let growthSpeed = 1.5;
     
         // look up the size the canvas is being displayed
         let width = mainCanvas.clientWidth;
@@ -175,25 +200,21 @@ $(document).ready(function(){
         }
     
         let startingX = e.layerX;
-        // console.log(positionX);
         let startingY = e.layerY;
-        // createLeaf(startingX, startingY);
-    
-        let verticalVineGrowth = true;
-        let angledVineGrowth = true;
-        console.log('angledVineGrowth',angledVineGrowth);
 
-        ///
 
+        // instantiating final and starting angle variables for vine animation
         let finalAngle;
         let startingAngle;
+        let selectedQuadrant;
 
+        // instantiating 
         let deltaX;
         let deltaY;
 
         let setTrajectory = () => {
             let quadrants = [1, 2, 3, 4];
-            let selectedQuadrant = quadrants[parseInt(Math.random() * 4)];
+            selectedQuadrant = quadrants[parseInt(Math.random() * 4)];
 
             if (selectedQuadrant == 2){
                 deltaX = deltaX * -1;
@@ -208,14 +229,11 @@ $(document).ready(function(){
 
             finalAngle = Math.atan2(deltaY, deltaX) - Math.PI;
             startingAngle = finalAngle;
-
-            return selectedQuadrant;
         };
-        console.log(setTrajectory());
 
         // doing triangle math
         let radius = 15;
-        deltaX = parseInt(15 * Math.random() + 1);
+        deltaX = parseInt(radius * Math.random() + 1);
         // let deltaX = 8;
         console.log('deltaX',deltaX);
         deltaY = parseInt(Math.pow( Math.pow(radius,2) - Math.pow(deltaX,2), 0.5));
@@ -300,33 +318,15 @@ $(document).ready(function(){
             vine.strokeStyle = vineColor;
             vine.shadowColor = vineColor;
             vine.shadowBlur = 1;
-            if (!verticalVineGrowth && !angledVineGrowth){
-                if (!invertThisVine) {
-                    vine.arc(startingX + 15, startingY, 15, startingAngle - Math.PI, finalAngle, false);
-                }
-                else {
-                    vine.arc(startingX + 15, startingY, 15, startingAngle - Math.PI, finalAngle, true);
-                }
+            vine.lineCap = "round";
+
+            if (!invertThisVine) {
+                // console.log('if !invertThisVine');
+                vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, false);
             }
-            else if (!angledVineGrowth) {
-                if (!invertThisVine) {
-                    // console.log('if !invertThisVine');
-                    vine.arc(startingX, startingY - 15, 15, startingAngle, finalAngle, false);
-                }
-                else {
-                    // console.log('else !invertThisVine');
-                    vine.arc(startingX, startingY - 15, 15, startingAngle, finalAngle, true);
-                }
-            }
-            else if (angledVineGrowth) {
-                if (!invertThisVine) {
-                    // console.log('if !invertThisVine');
-                    vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, false);
-                }
-                else {
-                    // console.log('else !invertThisVine');
-                    vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, true);
-                }
+            else {
+                // console.log('else !invertThisVine');
+                vine.arc(startingX + deltaX, startingY + deltaY, radius, startingAngle, finalAngle, true);
             }
     
             vine.stroke();
@@ -339,77 +339,30 @@ $(document).ready(function(){
                 cancelAnimations('leaves');
                 return;
             }
-    
-            if (!verticalVineGrowth && !angledVineGrowth){
-                if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-                    finalAngle += ( Math.PI / 16);
-                }
-                else if (!invertThisVine) {
-                    jf.logs.vines.invertVineGrowth = true;
-                    startingX += 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                }
-                else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-                    finalAngle -= ( Math.PI / 16);
-                }
-                else if (invertThisVine){
-                    jf.logs.vines.invertVineGrowth = false;
-                    startingX += 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                }
+            
+            if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
+                finalAngle += ( Math.PI / (16 / growthSpeed) );
+                // console.log('if');
             }
-            else if (!angledVineGrowth) {
-                if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-                    finalAngle += ( Math.PI / 16);
-                    console.log('if');
-                }
-                else if (!invertThisVine) {
-                    jf.logs.vines.invertVineGrowth  = true;
-                    startingY -= 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                    console.log('if2');
-                }
-                else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-                    finalAngle -= ( Math.PI / 16);
-                    console.log('if3');
-                }
-                else if (invertThisVine){
-                    jf.logs.vines.invertVineGrowth = false;
-                    startingY -= 30;
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                    console.log('if4');
-                }
+            else if (!invertThisVine) {
+                jf.logs.vines.invertVineGrowth  = true;
+                startingX += (2 * deltaX);
+                startingY += (2 * deltaY);
+                finalAngle = startingAngle;
+                animateLeaf();
+                // console.log('if2');
             }
-            else if (angledVineGrowth) {
-                // startingAngle defintion: let finalAngle = startingAngle;
-                if (!invertThisVine && finalAngle <= (startingAngle + Math.PI)) {
-                    finalAngle += ( Math.PI / 16);
-                    console.log('if');
-                }
-                else if (!invertThisVine) {
-                    jf.logs.vines.invertVineGrowth  = true;
-                    startingX += (2 * deltaX);
-                    startingY += (2 * deltaY);
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                    console.log('if2');
-                }
-                else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
-                    finalAngle -= ( Math.PI / 16);
-                    console.log('if3');
-                }
-                else if (invertThisVine){
-                    jf.logs.vines.invertVineGrowth = false;
-                    startingX += (2 * deltaX);
-                    startingY += (2 * deltaY);
-                    finalAngle = startingAngle;
-                    animateLeaf();
-                    console.log('if4');
-                }
+            else if (invertThisVine && finalAngle >= (startingAngle - Math.PI)){
+                finalAngle -= ( Math.PI / (16 / growthSpeed));
+                // console.log('if3');
+            }
+            else if (invertThisVine){
+                jf.logs.vines.invertVineGrowth = false;
+                startingX += (2 * deltaX);
+                startingY += (2 * deltaY);
+                finalAngle = startingAngle;
+                animateLeaf();
+                // console.log('if4');
             }
     
             vineCreator = requestAnimationFrame(createVine);
@@ -418,48 +371,57 @@ $(document).ready(function(){
     
         vineCreator = requestAnimationFrame(createVine);
     });
-    
-    document.body.addEventListener('mouseup', e => {   
-        // console.log('addEventLister mouseUp',mouseDown);
-        if (jf.mouseDown){
-            jf.mouseDown--;
-        }
-    });
-    
-    document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
-        if (e.target.children[0] && e.target.children[0].dataset.color){
-            jf.selectedColor = e.target.children[0].dataset.color;
-        } 
-    });
+
+    ///////////////////////////////////////
+    ////////////// lightbulb //////////////
+    ///////////////////////////////////////
     
     document.querySelectorAll('.lightbulb-container')[0].addEventListener('click', e => {
+        e.stopPropagation();
         let isLightbulb = e.target.classList.contains('bulb') || e.target.classList.contains('bulb-inner') || e.target.classList.contains('bulb-base');
+        if (!isLightbulb){ return; }
+        let lightbulb;
+        let lightbulbClassList;
         let lightbulbContainerClassList;
+        let parent = e.target.parentElement;
+        let grandParent = e.target.parentElement.parentElement;
+        let greatGrandParent = e.target.parentElement.parentElement.parentElement;
+        let parentClassList = parent.classList;
+        let grandparentClassList = grandParent.classList;
+        let greatGrandParentClassList = greatGrandParent.classList;
+
     
-        if (isLightbulb){
-            // console.log('is lightbulb');
-            // console.log(e);
-            // debugger;
-            if (e.target.parentElement.classList.contains('lightbulb')){
-                lightbulbContainerClassList = e.target.parentElement.classList;
+        // console.log('is lightbulb');
+        // console.log(e);
+        // debugger;
+        if (parentClassList.contains('lightbulb')){
+            lightbulb = parent;
+            lightbulbContainerClassList = parentClassList;
+        }
+        else if (grandparentClassList.contains('lightbulb')){
+            lightbulb = grandParent;
+            lightbulbContainerClassList = grandparentClassList;
+            // adds clicked class to rotate container to trigger animation
+        }
+        else if (greatGrandParentClassList.contains('lightbulb')){
+            lightbulb = greatGrandParent;
+            lightbulbContainerClassList = greatGrandParentClassList;
+        }
+
+        if (!lightbulb.classList.contains('clicked')){ lightbulb.classList.add('clicked'); }
+        else { console.log ('nope');}
+
+        setTimeout(function(){
+            lightbulb.classList.remove('clicked');
+        }, 1000);
+        
+        for (let i = 0; i < Object.keys(jf.colorPalette).length; i++){
+            if (lightbulbContainerClassList.contains(Object.keys(jf.colorPalette)[i])){
+                lightbulbContainerClassList.remove(Object.keys(jf.colorPalette)[i]);
+                lightbulbContainerClassList.add(jf.selectedColor);
+                break;
             }
-            else if (e.target.parentElement.parentElement.classList.contains('lightbulb')){
-                lightbulbContainerClassList = e.target.parentElement.parentElement.classList;
-            }
-            else if (e.target.parentElement.parentElement.parentElement.classList.contains('lightbulb')){
-                lightbulbContainerClassList = e.target.parentElement.parentElement.parentElement.classList;
-            }
-            
-            for (let i = 0; i < Object.keys(jf.colorPalette).length; i++){
-                if (lightbulbContainerClassList.contains(Object.keys(jf.colorPalette)[i])){
-                    lightbulbContainerClassList.remove(Object.keys(jf.colorPalette)[i]);
-                    lightbulbContainerClassList.add(jf.selectedColor);
-                    break;
-                }
-            }
-    
-    
-        } 
+        }
     });
     
     /////////////////////
@@ -499,14 +461,16 @@ $(document).ready(function(){
     
     document.querySelectorAll('.television .dial')[0].addEventListener('click', e => {
         try {
-            createStatic( () => {
-                document.querySelectorAll('.television')[0].classList.add('display_on');
-    
-            setTimeout(function(){
-                document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
-                // cancelAnimations('static');
-            }, 1500);
-            });
+            if (document.querySelectorAll('.static_none').length < 1){
+                createStatic( () => {
+                    document.querySelectorAll('.television')[0].classList.add('display_on');
+        
+                    setTimeout(function(){
+                        document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
+                        // cancelAnimations('static');
+                    }, 1500);
+                });
+            }
         } catch (error) {
             throw error;
         }
@@ -568,7 +532,6 @@ $(document).ready(function(){
                 newCard.classList.remove('flipping');
                 if (document.querySelectorAll('.top_card').length) {document.querySelectorAll('.top_card')[0].classList.remove('top_card');}
                 newCard.classList.add('flipped','top_card');
-    
             }, 600);
     
             document.querySelectorAll('.cards.container')[0].append(newCard);

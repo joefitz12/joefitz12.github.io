@@ -479,7 +479,7 @@ ul {
   width: 86%;
   box-sizing: border-box;
   border: 2px solid #f06339;
-  padding: 4px 0;
+  padding: 6px 4px 2px;
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -758,12 +758,41 @@ ul {
   opacity: 0;
 }
 
+@keyframes changeColor-bulb {
+  from {
+    transform: var(--z);
+  }
+  40% {
+    transform: calc(var(--z)-4);
+  }
+  60% {
+    transform: calc(var(--z) + 1);
+  }
+  to {
+    transform: calc(var(--z) - 1);
+  }
+}
+@keyframes changeColor-cord {
+  from {
+    height: 30px;
+  }
+  20% {
+    height: 31px;
+  }
+  60% {
+    height: 30px;
+  }
+  to {
+    height: 29px;
+  }
+}
 .lightbulb-container.container {
   position: absolute;
   top: -40px;
 }
 .lightbulb-container .lightbulb:nth-child(1) .rotate-container {
   transform: rotateZ(2deg);
+  --z: 2deg;
 }
 .lightbulb-container .lightbulb:nth-child(2) .rotate-container {
   transform: rotateZ(-2deg);
@@ -1059,6 +1088,21 @@ ul {
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #f48868 inset, 4px -3px 0px 0px #f48868 inset;
   background: radial-gradient(#f06339 25%, transparent 80%);
+}
+
+.lightbulb.clicked .cord {
+  animation-duration: 0.5s;
+  animation-name: changeColor-cord;
+  -webkit-animation-timing-function: linear;
+  /* Chrome, Safari, Opera */
+  animation-timing-function: linear;
+}
+.lightbulb.clicked .rotate-container {
+  animation-duration: 0.6s;
+  animation-name: changeColor-bulb;
+  -webkit-animation-timing-function: linear;
+  /* Chrome, Safari, Opera */
+  animation-timing-function: linear;
 }
 
 .container {
