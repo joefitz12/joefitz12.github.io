@@ -5,30 +5,28 @@
     }
     40% {
         // transform: rotateY(-2deg);
-        transform: calc(var(--z)-4);
+        transform: calc(var(--z) - 3);
     }
     60% {
         // transform: rotateY(0deg);
-        transform: calc(var(--z) + 1);
+        transform: calc(var(--z) + 2);
     }
     to {
         // transform: rotateZ(1deg);
-        transform: calc(var(--z) - 1);
+        transform: var(--z);
+        // transform: calc(var(--z) - 1);
     }
 }
 
 @keyframes changeColor-cord {
     from {
-        height: 30px;
+        height: var(--defaultHeight);
     }
     20% {
-        height: 31px;
-    }
-    60% {
-        height: 30px;
+        height: calc(var(--defaultHeight) + 1px);
     }
     to {
-        height: 29px;
+        height: var(--defaultHeight);
     }
 }
 
@@ -39,13 +37,14 @@
     }
     .cord {
         width: calc(100% + 30px);
+        --defaultHeight: 30px;
         height: 30px;
         border-bottom-left-radius: 40px;
         border-bottom-right-radius: 40px;
         border: 2px solid $pink;
         border-top: none;
         margin-bottom: -10px;
-        box-shadow: 0px 0px 4px 1px darken($green-light, 10%),
+        box-shadow: 0px 0px 4px 1px darken($green-light, 10%);
     }
     .base {
         background: darken($purple, 5%);
@@ -89,20 +88,22 @@
     }
     .lightbulb {
         &:nth-child(1) .rotate-container {
-            transform: rotateZ(2deg); 
             --z: 2deg;
         }
         &:nth-child(2) .rotate-container {
-            transform: rotateZ(-2deg);    
+            --z: -2deg;  
         }
         &:nth-child(3) .rotate-container {
-            transform: rotateZ(1deg);    
+            --z: 1deg;   
         }
         &:nth-child(4) .rotate-container {
-            transform: rotateZ(-1deg);
+            --z: -1deg;
         }
         &:nth-child(5) .rotate-container {
-            transform: rotateZ(-2deg);
+            --z: -2deg;
+        }
+        .rotate-container{
+            transform: rotateZ(var(--z)); 
         }
     }
 }
@@ -136,7 +137,7 @@
         animation-timing-function: linear; 
     }
     .rotate-container {
-        animation-duration: 0.6s;
+        animation-duration: 0.4s;
         animation-name: changeColor-bulb;
         -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
         animation-timing-function: linear;

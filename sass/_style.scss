@@ -6,6 +6,7 @@
 @import '_color-blasts.scss';
 @import '_television.scss';
 @import '_lightbulbs.scss';
+@import '_mobile.scss';
 
 .container {
     display: flex;
@@ -43,6 +44,10 @@
 .width_half {
     width: calc(50% - 30px);
     min-width: calc(50% - 30px);
+    @include phone {
+        width: calc(100% - 30px);
+        min-width: calc(100% - 30px);
+    }
 }
 
 .width_quarter {
@@ -76,7 +81,7 @@ body {
 // This is where we use the custom properties
 
 @supports (background: paint(something)) {
-    .header .title {
+    .header .title.super_underline {
       /* 
         Optionally set property values. 
         This can be done at root or local scope 
@@ -143,17 +148,4 @@ body {
         z-index: 1;
         // background: transparent;
     }
-}
-
-// .main .code span:first-child,
-// .main .code span:last-child {
-//     margin-left: 0;
-// }
-
-// .main .code span {
-//     margin-left: 15px;
-// }
-
-.code.container {
-    flex-direction: column;
 }

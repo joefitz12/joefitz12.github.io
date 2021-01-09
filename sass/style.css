@@ -360,6 +360,7 @@ ul {
 
 .container.cards {
   justify-content: flex-end;
+  min-height: 230px;
 }
 
 .draw-deck {
@@ -534,6 +535,7 @@ ul {
   top: 0;
   left: 0;
   font-size: 30px;
+  user-select: none;
 }
 .card .back .background.background_transparent,
 .draw-deck .back .background.background_transparent {
@@ -568,34 +570,34 @@ ul {
 
 @keyframes drawCard {
   from {
-    transform: translate(0, 0);
+    transform: translate(0, 0) rotateZ(0deg);
   }
   10% {
-    transform: translate(-30%, 5%) rotateZ(-15deg);
+    transform: translate(-30%, calc(var(--defaultTranslateY) + 5%)) rotateZ(calc(var(--defaultRotation) - 5deg));
   }
   20% {
-    transform: translate(-50%, 6%) rotateZ(-35deg);
+    transform: translate(-50%, calc(var(--defaultTranslateY) + 6%)) rotateZ(calc(var(--defaultRotation) - 25deg));
   }
   30% {
-    transform: translate(-100%, 7%) rotateZ(-55deg);
+    transform: translate(-100%, calc(var(--defaultTranslateY) + 7%)) rotateZ(calc(var(--defaultRotation) - 45deg));
   }
   40% {
-    transform: translate(-130%, 7%) rotateZ(-45deg);
+    transform: translate(-130%, calc(var(--defaultTranslateY) + 7%)) rotateZ(calc(var(--defaultRotation) - 35deg));
   }
   50% {
-    transform: translate(-140%, 6%) rotateZ(-30deg);
+    transform: translate(-140%, calc(var(--defaultTranslateY) + 6%)) rotateZ(calc(var(--defaultRotation) - 20deg));
   }
   60% {
-    transform: translate(-138%, 6%) rotateZ(-22deg);
+    transform: translate(-138%, calc(var(--defaultTranslateY) + 6%)) rotateZ(calc(var(--defaultRotation) - 12deg));
   }
   70% {
-    transform: translate(-130%, 5%) rotateZ(-18deg);
+    transform: translate(-130%, calc(var(--defaultTranslateY) + 5%)) rotateZ(calc(var(--defaultRotation) - 8deg));
   }
   80% {
-    transform: translate(-127%, 4%) rotateZ(-15deg);
+    transform: translate(-127%, calc(var(--defaultTranslateY) + 4%)) rotateZ(calc(var(--defaultRotation) - 5deg));
   }
   90% {
-    transform: translate(-123%, 3%) rotateZ(-12deg);
+    transform: translate(-123%, calc(var(--defaultTranslateY) + 2%)) rotateZ(calc(var(--defaultRotation) - 2deg));
   }
   to {
     transform: translate(-120%, var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
@@ -763,27 +765,24 @@ ul {
     transform: var(--z);
   }
   40% {
-    transform: calc(var(--z)-4);
+    transform: calc(var(--z) - 3);
   }
   60% {
-    transform: calc(var(--z) + 1);
+    transform: calc(var(--z) + 2);
   }
   to {
-    transform: calc(var(--z) - 1);
+    transform: var(--z);
   }
 }
 @keyframes changeColor-cord {
   from {
-    height: 30px;
+    height: var(--defaultHeight);
   }
   20% {
-    height: 31px;
-  }
-  60% {
-    height: 30px;
+    height: calc(var(--defaultHeight) + 1px);
   }
   to {
-    height: 29px;
+    height: var(--defaultHeight);
   }
 }
 .lightbulb-container.container {
@@ -791,20 +790,22 @@ ul {
   top: -40px;
 }
 .lightbulb-container .lightbulb:nth-child(1) .rotate-container {
-  transform: rotateZ(2deg);
   --z: 2deg;
 }
 .lightbulb-container .lightbulb:nth-child(2) .rotate-container {
-  transform: rotateZ(-2deg);
+  --z: -2deg;
 }
 .lightbulb-container .lightbulb:nth-child(3) .rotate-container {
-  transform: rotateZ(1deg);
+  --z: 1deg;
 }
 .lightbulb-container .lightbulb:nth-child(4) .rotate-container {
-  transform: rotateZ(-1deg);
+  --z: -1deg;
 }
 .lightbulb-container .lightbulb:nth-child(5) .rotate-container {
-  transform: rotateZ(-2deg);
+  --z: -2deg;
+}
+.lightbulb-container .lightbulb .rotate-container {
+  transform: rotateZ(var(--z));
 }
 
 .lightbulb.yellow.container {
@@ -813,6 +814,7 @@ ul {
 }
 .lightbulb.yellow .cord {
   width: calc(100% + 30px);
+  --defaultHeight: 30px;
   height: 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -860,6 +862,7 @@ ul {
 }
 .lightbulb.yellow-vibrant .cord {
   width: calc(100% + 30px);
+  --defaultHeight: 30px;
   height: 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -907,6 +910,7 @@ ul {
 }
 .lightbulb.purple .cord {
   width: calc(100% + 30px);
+  --defaultHeight: 30px;
   height: 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -954,6 +958,7 @@ ul {
 }
 .lightbulb.purple-dark .cord {
   width: calc(100% + 30px);
+  --defaultHeight: 30px;
   height: 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -1001,6 +1006,7 @@ ul {
 }
 .lightbulb.pink .cord {
   width: calc(100% + 30px);
+  --defaultHeight: 30px;
   height: 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -1048,6 +1054,7 @@ ul {
 }
 .lightbulb.red .cord {
   width: calc(100% + 30px);
+  --defaultHeight: 30px;
   height: 30px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -1098,11 +1105,73 @@ ul {
   animation-timing-function: linear;
 }
 .lightbulb.clicked .rotate-container {
-  animation-duration: 0.6s;
+  animation-duration: 0.4s;
   animation-name: changeColor-bulb;
   -webkit-animation-timing-function: linear;
   /* Chrome, Safari, Opera */
   animation-timing-function: linear;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  html, body {
+    overflow-y: hidden;
+  }
+}
+
+@media (max-width: 599px) {
+  .header .title-container {
+    flex-direction: column;
+    padding-left: 0;
+    padding-top: 25px;
+  }
+  .header .title {
+    display: none;
+  }
+  .header .mobile.title {
+    display: inline;
+    min-width: 100%;
+    font-size: 44px;
+  }
+  .header .lightbulb-container {
+    right: -30px;
+  }
+  .header .lightbulb-container > div:nth-child(n+4) {
+    display: none;
+  }
+  .header .lightbulb .cord {
+    --defaultHeight: 27px;
+    height: 27px;
+  }
+  .header > div:nth-child(1) {
+    width: 100%;
+    padding-left: 5px;
+  }
+  .header > div:nth-child(2) {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 599px) {
+  .main.container {
+    min-height: calc(100vh - 193px);
+    overflow-y: hidden;
+    align-content: flex-start;
+  }
+  .main.container .controller-container {
+    position: fixed;
+    left: calc(15px / 2);
+    z-index: 2;
+    bottom: -125px;
+  }
+  .main.container .television-container {
+    display: none;
+  }
 }
 
 .container {
@@ -1143,6 +1212,12 @@ ul {
   width: calc(50% - 30px);
   min-width: calc(50% - 30px);
 }
+@media (max-width: 599px) {
+  .width_half {
+    width: calc(100% - 30px);
+    min-width: calc(100% - 30px);
+  }
+}
 
 .width_quarter {
   width: calc(25% - 30px);
@@ -1173,7 +1248,7 @@ body {
 }
 
 @supports (background: paint(something)) {
-  .header .title {
+  .header .title.super_underline {
     /* 
       Optionally set property values. 
       This can be done at root or local scope 
@@ -1219,10 +1294,6 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
-}
-
-.code.container {
-  flex-direction: column;
 }
 
 /*# sourceMappingURL=style.css.map */

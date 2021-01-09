@@ -1,5 +1,6 @@
 .container.cards {
     justify-content: flex-end;
+    min-height: 230px;
 }
 
 .draw-deck {
@@ -184,6 +185,7 @@
         top: 0;
         left: 0;
         font-size: 30px;
+        user-select: none;
     }
     &.background_transparent {
         background-color: transparent;
@@ -219,36 +221,47 @@
 
 @keyframes drawCard {
     from {
-        transform: translate(0,0);
+        // --defaultTranslateY: 1%;
+        transform: translate(0,0) rotateZ(0deg);
     }
     10% {
-        transform: translate(-30%,5%) rotateZ(-15deg);
+        // transform: translate(-30%,5%) rotateZ(-15deg);
+        transform: translate(-30%,calc(var(--defaultTranslateY) + 5%)) rotateZ(calc(var(--defaultRotation) - 5deg));
     }
     20% {
-        transform: translate(-50%,6%) rotateZ(-35deg);
+        // transform: translate(-50%,6%) rotateZ(-35deg);
+        transform: translate(-50%,calc(var(--defaultTranslateY) + 6%)) rotateZ(calc(var(--defaultRotation) - 25deg));
     }
     30% {
-        transform: translate(-100%,7%) rotateZ(-55deg);
+        // transform: translate(-100%,7%) rotateZ(-55deg);
+        transform: translate(-100%,calc(var(--defaultTranslateY) + 7%)) rotateZ(calc(var(--defaultRotation) - 45deg));
     }
     40% {
-        transform: translate(-130%,7%) rotateZ(-45deg);
+        // transform: translate(-130%,7%) rotateZ(-45deg);
+        transform: translate(-130%,calc(var(--defaultTranslateY) + 7%)) rotateZ(calc(var(--defaultRotation) - 35deg));
     }
     50% {
-        transform: translate(-140%,6%) rotateZ(-30deg);
+        // transform: translate(-140%,6%) rotateZ(-30deg);
+        transform: translate(-140%,calc(var(--defaultTranslateY) + 6%)) rotateZ(calc(var(--defaultRotation) - 20deg));
     }
     60% {
-        transform: translate(-138%,6%) rotateZ(-22deg);
+        // transform: translate(-138%,6%) rotateZ(-22deg);
+        transform: translate(-138%,calc(var(--defaultTranslateY) + 6%)) rotateZ(calc(var(--defaultRotation) - 12deg));
     }
     70% {
-        transform: translate(-130%,5%) rotateZ(-18deg);
+        // transform: translate(-130%,5%) rotateZ(-18deg);
+        transform: translate(-130%,calc(var(--defaultTranslateY) + 5%)) rotateZ(calc(var(--defaultRotation) - 8deg));
     }
     80% {
-        transform: translate(-127%,4%) rotateZ(-15deg);
+        // transform: translate(-127%,4%) rotateZ(-15deg);
+        transform: translate(-127%,calc(var(--defaultTranslateY) + 4%)) rotateZ(calc(var(--defaultRotation) - 5deg));
     }
     90% {
-        transform: translate(-123%,3%) rotateZ(-12deg);
+        // transform: translate(-123%,3%) rotateZ(-12deg);
+        transform: translate(-123%,calc(var(--defaultTranslateY) + 2%)) rotateZ(calc(var(--defaultRotation) - 2deg));
     }
     to {
+        // transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
         transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
     }
 }

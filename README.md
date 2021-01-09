@@ -12,5 +12,5 @@ Refactor JS
 CSS
 - Build utilities
    - Box shadow
-   - 
+   - Border-radius
 - Standardize class / mix-in structure

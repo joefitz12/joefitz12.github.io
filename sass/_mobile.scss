@@ -1,0 +1,84 @@
+// defining breakpoints
+@mixin phone {
+    @media (max-width: 599px) { @content; }
+}
+@mixin tablet_portrait {
+    @media (min-width: 600px) { @content; }
+}
+@mixin tablet_landscape {
+    @media (min-width: 900px) { @content; }
+}
+@mixin desktop_medium {
+    @media (min-width: 1200px) { @content; }
+}
+@mixin desktop_large {
+    @media (min-width: 1800px) { @content; }
+}
+
+// header
+.mobile {
+    display: none;
+}
+
+html, body {
+    @include phone {
+        overflow-y: hidden;
+    }
+}
+
+.header {
+    @include phone {
+        // title
+        .title-container {
+            flex-direction: column;
+            padding-left: 0;
+            padding-top: 25px;
+        }
+        .title {
+            display: none;
+        }
+        .mobile.title {
+            display: inline;
+            min-width: 100%;
+            font-size: 44px;
+        }
+        // lightbulbs
+        .lightbulb-container {
+            right: -30px;
+            > div:nth-child(n+4){
+                display:none;
+            }
+        }
+        .lightbulb .cord {
+            --defaultHeight: 27px;
+            height: 27px;
+        }
+        // main div containers
+        > div:nth-child(1) {
+            width: 100%;
+            padding-left: 5px;
+        }
+        > div:nth-child(2){
+            width: 0;
+            min-width: 0;
+            padding: 0;
+        }
+    }
+}
+
+.main.container {
+    @include phone {
+        min-height: calc(100vh - 193px);
+        overflow-y: hidden;
+        align-content: flex-start;
+        .controller-container {
+            position: fixed;
+            left: calc(15px / 2);
+            z-index: 2;
+            bottom: -125px;
+        }
+        .television-container {
+            display: none;
+        } 
+    }
+}
