@@ -389,8 +389,9 @@ $(document).ready(function(){
     //////////////////////////
     /////// card flip ////////
     //////////////////////////
-    document.querySelectorAll('.draw-deck')[0].addEventListener('click', e => {
+    let handleCardFlip = (e) => {
         if (!jf.cards.flipping){
+            jf.cards.flipping = true;
             let cardIndex = document.querySelectorAll('.card').length;
             let card = jf.cards.data[cardIndex];
             let title = card.title;
@@ -448,7 +449,27 @@ $(document).ready(function(){
     
             jf.cards.flipping = false;
         }
-       
+    };
+
+    document.querySelectorAll('.draw-deck')[0].addEventListener('click', e => {
+        e.preventDefault();
+        handleCardFlip(e);
+    });
+
+    document.querySelectorAll('.draw-deck')[0].addEventListener('touchmove', e => {
+        e.preventDefault();
+        // e.stopImmediatePropagation();
+        jf.cards.touches.push(e);
+    });
+
+    document.querySelectorAll('.draw-deck')[0].addEventListener('touchend', e => {
+        e.preventDefault();
+        // console.log("it's over", e);
+        if (jf.cards.touches.length && jf.cards.touches[0].touches[0].clientX > jf.cards.touches[jf.cards.touches.length - 1].touches[0].clientX){
+            handleCardFlip(e);
+            jf.cards.touches = [];
+        }  
+        // handleCardFlip(e);
     });
     
     //////////////////////////
