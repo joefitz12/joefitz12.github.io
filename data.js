@@ -35,6 +35,7 @@ $(document).ready( () => {
 
     jf.cards = {
         flipping: false,
+        touches: []
     };
 
     jf.cards.data = [
