@@ -854,7 +854,6 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #fbd689 inset, 4px -3px 0px 0px #fbd689 inset;
-  background: radial-gradient(#fac557 25%, transparent 80%);
 }
 .lightbulb.yellow-vibrant.container {
   flex-direction: column;
@@ -902,7 +901,6 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #ffc333 inset, 4px -3px 0px 0px #ffc333 inset;
-  background: radial-gradient(#ffb400 25%, transparent 80%);
 }
 .lightbulb.purple.container {
   flex-direction: column;
@@ -950,7 +948,6 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #49486f inset, 4px -3px 0px 0px #49486f inset;
-  background: radial-gradient(#353450 25%, transparent 80%);
 }
 .lightbulb.purple-dark.container {
   flex-direction: column;
@@ -998,7 +995,6 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #4d1860 inset, 4px -3px 0px 0px #4d1860 inset;
-  background: radial-gradient(#2C0E37 25%, transparent 80%);
 }
 .lightbulb.pink.container {
   flex-direction: column;
@@ -1046,7 +1042,6 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #fbd3d2 inset, 4px -3px 0px 0px #fbd3d2 inset;
-  background: radial-gradient(#F6A6A4 25%, transparent 80%);
 }
 .lightbulb.red.container {
   flex-direction: column;
@@ -1094,7 +1089,6 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   box-shadow: 1px -1px 0px -8px #f48868 inset, 4px -3px 0px 0px #f48868 inset;
-  background: radial-gradient(#f06339 25%, transparent 80%);
 }
 
 .lightbulb.clicked .cord {
@@ -1159,9 +1153,17 @@ ul {
 
 @media (max-width: 599px) {
   .main.container {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     min-height: calc(100vh - 193px);
     overflow-y: hidden;
     align-content: flex-start;
+  }
+  .main.container * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
   }
   .main.container .controller-container {
     position: fixed;

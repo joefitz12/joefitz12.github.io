@@ -68,6 +68,14 @@ html, body {
 
 .main.container {
     @include phone {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
         min-height: calc(100vh - 193px);
         overflow-y: hidden;
         align-content: flex-start;

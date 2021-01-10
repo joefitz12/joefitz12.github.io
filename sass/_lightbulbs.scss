@@ -77,7 +77,7 @@
         transform: translate(-50%, -50%);
         border-radius: 50%;
         box-shadow: 1px -1px 0px -8px lighten($color,10%) inset, 4px -3px 0px 0px lighten($color,10%) inset;
-        background: radial-gradient($color 25%, transparent 80%);
+        // background: radial-gradient($color 25%, transparent 80%);
     }
 }
 
