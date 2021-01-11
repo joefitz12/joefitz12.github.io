@@ -111,7 +111,9 @@ let createBlast = (event) => {
 
     // console.log('rendering',rendering);
 
-    !rendering && startQueue();
+    if (!rendering){
+        startQueue();
+    }
 };
 
 document.body.addEventListener('mousedown', e => {

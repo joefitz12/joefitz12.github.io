@@ -360,7 +360,8 @@ ul {
 
 .container.cards {
   justify-content: flex-end;
-  min-height: 230px;
+  align-items: center;
+  min-height: 260px;
 }
 
 .draw-deck {
@@ -370,7 +371,7 @@ ul {
   border-radius: 5px;
   box-shadow: 3px 1px 4px 1px #547d6f, 2px 0px 1px #0c0c12, 2px 1px 1px #161622;
   position: absolute;
-  top: 10px;
+  top: 25px;
   right: 15px;
   z-index: 10;
 }
@@ -1239,6 +1240,7 @@ ul {
 body {
   font-family: "ichiban_slim";
   color: #353450;
+  background: #6a9a8a;
   position: relative;
   overflow-x: hidden;
 }
