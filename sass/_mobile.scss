@@ -15,6 +15,11 @@
     @media (min-width: 1800px) { @content; }
 }
 
+// header fixes
+@mixin header_query {
+    @media (max-width: 791px) { @content; }
+}
+
 // header
 .mobile {
     display: none;
@@ -34,20 +39,12 @@ html, body {
             padding-left: 0;
             padding-top: 25px;
         }
-        .title {
-            display: none;
-        }
-        .mobile.title {
-            display: inline;
-            min-width: 100%;
-            font-size: 44px;
-        }
         // lightbulbs
         .lightbulb-container {
             right: -30px;
-            > div:nth-child(n+4){
-                display:none;
-            }
+            // > div:nth-child(n+4){
+            //     display:none;
+            // }
         }
         .lightbulb .cord {
             --defaultHeight: 27px;
@@ -62,6 +59,25 @@ html, body {
             width: 0;
             min-width: 0;
             padding: 0;
+        }
+    }
+    @include header_query {
+        .title-container {
+            flex-direction: column;;
+        }
+        .title {
+            display: none;
+        }
+        .mobile.title {
+            display: inline;
+            min-width: 100%;
+            font-size: 44px;
+        }
+        // lightbulbs
+        .lightbulb-container {
+            > div:nth-child(n+4){
+                display:none;
+            }
         }
     }
 }

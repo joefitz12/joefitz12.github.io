@@ -1,4 +1,24 @@
 $(document).ready(function(){
+    const setViewPort = () => {
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.body.style.setProperty('--vh', `${vh}px`);
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vw = window.innerWidth * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.body.style.setProperty('--vw', `${vw}px`);
+    };
+
+    setViewPort();
+
+    // We listen to the resize event
+    window.addEventListener('resize', () => {
+        setViewPort();
+    });
+    
+
     let requestAnimationFrame = window.requestAnimationFrame || 
         window.mozRequestAnimationFrame || 
         window.webkitRequestAnimationFrame || 

@@ -14,3 +14,6 @@ CSS
    - Box shadow
    - Border-radius
 - Standardize class / mix-in structure
+
+Font
+- Card text shouldn't be all caps
