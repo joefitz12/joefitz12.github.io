@@ -1123,19 +1123,8 @@ ul {
     padding-left: 0;
     padding-top: 25px;
   }
-  .header .title {
-    display: none;
-  }
-  .header .mobile.title {
-    display: inline;
-    min-width: 100%;
-    font-size: 44px;
-  }
   .header .lightbulb-container {
     right: -30px;
-  }
-  .header .lightbulb-container > div:nth-child(n+4) {
-    display: none;
   }
   .header .lightbulb .cord {
     --defaultHeight: 27px;
@@ -1149,6 +1138,22 @@ ul {
     width: 0;
     min-width: 0;
     padding: 0;
+  }
+}
+@media (max-width: 791px) {
+  .header .title-container {
+    flex-direction: column;
+  }
+  .header .title {
+    display: none;
+  }
+  .header .mobile.title {
+    display: inline;
+    min-width: 100%;
+    font-size: 44px;
+  }
+  .header .lightbulb-container > div:nth-child(n+4) {
+    display: none;
   }
 }
 
@@ -1243,6 +1248,12 @@ body {
   background: #6a9a8a;
   position: relative;
   overflow-x: hidden;
+  height: 100vh;
+  /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
+  /* Fallback for browsers that do not support Custom Properties */
+  width: calc(var(--vw, 1vw) * 100);
 }
 
 .header {
