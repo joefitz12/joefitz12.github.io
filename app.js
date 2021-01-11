@@ -64,9 +64,21 @@ $(document).ready(function(){
         } 
     });
 
+    // unclicks button when another is selected
     document.querySelectorAll('.button-container')[0].addEventListener('touchend', e => {
         if (e.target.children[0] && e.target.children[0].dataset.color){
             e.target.classList.remove('hover');
+
+            var log = '!!window.CSS.paintWorklet:' + !!window.CSS.paintWorklet;
+            var printLog = document.createElement('p');
+            printLog.innerText = log;
+            printLog.style.position = 'absolute';
+            printLog.style.top = '50%';
+            printLog.style.background = 'white';
+            printLog.style.background = 'white';
+            printLog.style['font-size'] = '18px';
+            printLog.style['z-index'] = '20';
+            document.body.append(printLog);
         } 
     });
 
