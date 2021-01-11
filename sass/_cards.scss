@@ -1,6 +1,7 @@
 .container.cards {
     justify-content: flex-end;
-    min-height: 230px;
+    align-items: center;
+    min-height: 260px;
 }
 
 .draw-deck {
@@ -13,7 +14,7 @@
         2px 0px 1px darken($purple, 20%),
         2px 1px 1px darken($purple, 15%);
     position: absolute;
-    top: 10px;
+    top: 25px;
     right: 15px;
     z-index:10;
 }
