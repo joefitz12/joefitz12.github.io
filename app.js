@@ -28,8 +28,8 @@ $(document).ready(function(){
     
     let cancelAnimations = (key) => {
         console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
-        while(jf.logs.animations[key].length){
-            let animationToCancel = jf.logs.animations[key].shift();
+        while(jf.logs.animations[key].length > 4){
+            let animationToCancel = jf.logs.animations[key].shift().id;
             cancelAnimationFrame(animationToCancel);
         }
         console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
@@ -196,17 +196,24 @@ $(document).ready(function(){
                 if (percentage < 1){
                     percentage += 0.018;
                     switchSide = switchSide ? switchSide : switchSide;
+                    
+                    // debugging this
+                    leafCreator = requestAnimationFrame(createLeaf);
+                    jf.logs.animations.leaves.push({
+                        id: leafCreator,
+                        percentage: percentage
+                    });
                 }
                 else if (!jf.mouseDown) {
                     cancelAnimations('leaves');
                 }
-            
-                leafCreator = requestAnimationFrame(createLeaf);
-                jf.logs.animations.leaves.push(leafCreator);
             };
     
             leafCreator = requestAnimationFrame(createLeaf);
-            jf.logs.animations.leaves.push(leafCreator);
+            jf.logs.animations.leaves.push({
+                id: leafCreator,
+                percentage: percentage
+            });
         };
         
     
