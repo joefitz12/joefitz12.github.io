@@ -33,6 +33,10 @@ $(document).ready( () => {
         data: []
     };
 
+    jf.logs.leaves = {
+        count: 0
+    }
+
     jf.vines = {
         sizeModifier: 1.1
     };

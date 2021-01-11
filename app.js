@@ -26,13 +26,14 @@ $(document).ready(function(){
         window.webkitRequestAnimationFrame || 
         window.msRequestAnimationFrame;
     
-    let cancelAnimations = (key) => {
+    let cancelAnimations = (key, limit) => {
         console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
-        while(jf.logs.animations[key].length > 4){
+        console.log('cancel animations limit',limit);
+        while(jf.logs.animations[key].length > limit){
             let animationToCancel = jf.logs.animations[key].shift().id;
             cancelAnimationFrame(animationToCancel);
         }
-        console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
+        // console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
     };
 
     document.body.addEventListener('mouseup', e => {   
@@ -204,8 +205,12 @@ $(document).ready(function(){
                         percentage: percentage
                     });
                 }
-                else if (!jf.mouseDown) {
-                    cancelAnimations('leaves');
+                else {
+                    jf.logs.leaves.count++;
+                }
+                
+                if (!jf.mouseDown) {
+                    // cancelAnimations('leaves', 5);
                 }
             };
     
@@ -266,7 +271,7 @@ $(document).ready(function(){
                 vine.closePath();
                 jf.logs.vines.count++;
                 cancelAnimationFrame(vineCreator);
-                cancelAnimations('leaves');
+                // cancelAnimations('leaves', 5);
                 return;
             }
             
