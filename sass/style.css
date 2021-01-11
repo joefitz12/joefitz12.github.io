@@ -1163,6 +1163,12 @@ ul {
     -webkit-user-select: none;
     -moz-user-select: none;
     min-height: calc(100vh - 193px);
+    height: calc(100vh - 193px);
+    /* Fallback for browsers that do not support Custom Properties */
+    height: calc((var(--vh, 1vh) * 100) - 193px);
+    width: 100vw;
+    /* Fallback for browsers that do not support Custom Properties */
+    width: calc(var(--vw, 1vw) * 100);
     overflow-y: hidden;
     align-content: flex-start;
   }

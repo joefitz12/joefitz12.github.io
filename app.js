@@ -4,11 +4,13 @@ $(document).ready(function(){
         let vh = window.innerHeight * 0.01;
         // Then we set the value in the --vh custom property to the root of the document
         document.body.style.setProperty('--vh', `${vh}px`);
+        document.querySelectorAll('.main')[0].style.setProperty('--vh', `${vh}px`);
 
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
         let vw = window.innerWidth * 0.01;
         // Then we set the value in the --vh custom property to the root of the document
         document.body.style.setProperty('--vw', `${vw}px`);
+        document.querySelectorAll('.main')[0].style.setProperty('--vw', `${vw}px`);
     };
 
     setViewPort();
