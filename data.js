@@ -33,6 +33,14 @@ $(document).ready( () => {
         data: []
     };
 
+    jf.vines = {
+        sizeModifier: 1.1
+    };
+
+    jf.leaves = {
+        sizeModifier: 1.3
+    };
+
     jf.cards = {
         flipping: false,
         touches: []

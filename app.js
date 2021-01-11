@@ -58,6 +58,10 @@ $(document).ready(function(){
 
         // instantiating growthSpeed
         let growthSpeed = 1.5;
+
+        // instantiating s;
+        let leafSizeModifier = jf.leaves.sizeModifier;
+        let vineSizeModifier = jf.vines.sizeModifier;
     
         // look up the size the canvas is being displayed
         let width = mainCanvas.clientWidth;
@@ -86,13 +90,11 @@ $(document).ready(function(){
         let deltaY;
 
         let setTrajectory = () => {
-            let quadrants = [1, 2, 3, 4];
-            selectedQuadrant = quadrants[parseInt(Math.random() * 4)];
+            let quadrants = [3, 4];
+            selectedQuadrant = quadrants[parseInt(Math.random() * 2)];
+            // console.log('selectedQuadrant',selectedQuadrant);
 
-            if (selectedQuadrant == 2){
-                deltaX = deltaX * -1;
-            }
-            else if (selectedQuadrant == 3){
+            if (selectedQuadrant == 3){
                 deltaX = deltaX * -1;
                 deltaY = deltaY * -1;
             }
@@ -105,17 +107,18 @@ $(document).ready(function(){
         };
 
         // doing triangle math
-        let radius = 15;
-        deltaX = parseInt(radius * Math.random() + 1);
+        let radius = 15 * vineSizeModifier;
+        // deltaX = parseInt(radius * Math.random() + 1);
+        deltaX = parseInt((radius / 5) * Math.random() + 1);
         // let deltaX = 8;
-        console.log('deltaX',deltaX);
+        // console.log('deltaX',deltaX);
         deltaY = parseInt(Math.pow( Math.pow(radius,2) - Math.pow(deltaX,2), 0.5));
         // let deltaY = 12;
-        console.log('deltaY',deltaY);
+        // console.log('deltaY',deltaY);
         // let startingAngle = Math.atan2(deltaX, deltaY);
         setTrajectory();
-        console.log('finalAngle',finalAngle);
-        console.log('startingAngle',startingAngle);
+        // console.log('finalAngle',finalAngle);
+        // console.log('startingAngle',startingAngle);
 
         //// original method /////
         // let startingAngle = verticalVineGrowth ? -3 * Math.PI / 2 : Math.PI;
@@ -137,35 +140,38 @@ $(document).ready(function(){
                 let leaf = mainCanvas.getContext("2d");
                 let leafColor = jf.colorPalette[jf.selectedColor];
 
-                console.log('leafColor', leafColor);
-                if (jf.logs.animations.leaves.length > 1000){
-                    cancelAnimations('leaves');
-                }
+                // console.log('leafColor', leafColor);
+                // if (jf.logs.animations.leaves.length > 1000){
+                //     cancelAnimations('leaves');
+                // }
                 
                 leaf.beginPath();
+                leaf.strokeStyle = leafColor;
+                leaf.shadowColor = leafColor;
                 leaf.fillStyle = leafColor;
     
                 if (switchSide){
                     leaf.moveTo(leafStartingX, leafStartingY);
-                    leaf.quadraticCurveTo(leafStartingX, leafStartingY + (percentage * 20), leafStartingX + (percentage * 30), leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX + (percentage * 7 * leafSizeModifier), leafStartingY - (percentage * 18 * leafSizeModifier), leafStartingX + (percentage * 30 * leafSizeModifier), leafStartingY);
                     leaf.stroke();
                     leaf.moveTo(leafStartingX, leafStartingY);
-                    leaf.quadraticCurveTo(leafStartingX + (percentage * 10), leafStartingY - (percentage * 10), leafStartingX + (percentage * 30), leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX + (percentage * 10 * leafSizeModifier), leafStartingY + (percentage * 15 * leafSizeModifier), leafStartingX + (percentage * 30 * leafSizeModifier), leafStartingY);
+                    leaf.stroke();
                 }
                 else {
                     leaf.moveTo(leafStartingX, leafStartingY);
-                    leaf.quadraticCurveTo(leafStartingX, leafStartingY - (percentage * 20), leafStartingX - (percentage * 30), leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX - (percentage * 8 * leafSizeModifier), leafStartingY - (percentage * 18 * leafSizeModifier), leafStartingX - (percentage * 30 * leafSizeModifier), leafStartingY);
                     leaf.stroke();
                     leaf.moveTo(leafStartingX, leafStartingY);
-                    leaf.quadraticCurveTo(leafStartingX - (percentage * 10), leafStartingY + (percentage * 10), leafStartingX - (percentage * 30), leafStartingY);
+                    leaf.quadraticCurveTo(leafStartingX - (percentage * 10 * leafSizeModifier), leafStartingY + (percentage * 15 * leafSizeModifier), leafStartingX - (percentage * 30 * leafSizeModifier), leafStartingY);
+                    leaf.stroke();
                 }
                 
-                leaf.stroke();
                 leaf.fill();
                 leaf.closePath();
             
                 if (percentage < 1){
-                    percentage += 0.01;
+                    percentage += 0.018;
                     switchSide = switchSide ? switchSide : switchSide;
                 }
                 else if (!jf.mouseDown) {
@@ -188,20 +194,23 @@ $(document).ready(function(){
             let invertThisVine = jf.logs.vines.invertVineGrowth;
             let vine = mainCanvas.getContext("2d");
             let vineColor;
-            
-            if (jf.logs.vines.count % 3 == 0){
-                vineColor = jf.colorPalette["green-light"];
-                console.log('vine color 0');
-            }
-            else if (jf.logs.vines.count % 3 == 1){
-                vineColor = jf.colorPalette['green-light_20%-light'];
-                console.log('vine color 1');
 
-            }
-            else if (jf.logs.vines.count % 3 == 2){
-                vineColor = jf.colorPalette['green-light_20%-dark'];
-                console.log('vine color 2');
-            }
+            vineColor = jf.colorPalette["green-light"];
+            
+            /// switches vine color randomly
+            // if (jf.logs.vines.count % 3 == 0){
+            //     vineColor = jf.colorPalette["green-light"];
+            //     // console.log('vine color 0');
+            // }
+            // else if (jf.logs.vines.count % 3 == 1){
+            //     vineColor = jf.colorPalette['green-light_20%-light'];
+            //     // console.log('vine color 1');
+
+            // }
+            // else if (jf.logs.vines.count % 3 == 2){
+            //     vineColor = jf.colorPalette['green-light_20%-dark'];
+            //     // console.log('vine color 2');
+            // }
 
             vine.beginPath();
             vine.lineWidth = 1;
@@ -443,11 +452,10 @@ $(document).ready(function(){
                 newCard.classList.remove('flipping');
                 if (document.querySelectorAll('.top_card').length) {document.querySelectorAll('.top_card')[0].classList.remove('top_card');}
                 newCard.classList.add('flipped','top_card');
+                jf.cards.flipping = false;
             }, 600);
     
             document.querySelectorAll('.cards.container')[0].append(newCard);
-    
-            jf.cards.flipping = false;
         }
     };
 
@@ -458,7 +466,6 @@ $(document).ready(function(){
 
     document.querySelectorAll('.draw-deck')[0].addEventListener('touchmove', e => {
         e.preventDefault();
-        // e.stopImmediatePropagation();
         jf.cards.touches.push(e);
     });
 
