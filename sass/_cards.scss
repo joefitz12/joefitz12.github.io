@@ -13,7 +13,7 @@
         2px 0px 1px darken($purple, 20%),
         2px 1px 1px darken($purple, 15%);
     position: absolute;
-    top: 15px;
+    top: 10px;
     right: 15px;
     z-index:10;
 }
@@ -68,6 +68,14 @@
 // --defaultRotation: -10deg;
 // --defaultTranslateY: 2%;
 .card {
+    &:nth-child(3n){
+        --defaultRotation: -9deg;
+        --defaultTranslateY: 0%;
+    }
+    &:nth-child(3n){
+        --defaultRotation: -9deg;
+        --defaultTranslateY: 0%;
+    }
     &:nth-child(3n){
         --defaultRotation: -9deg;
         --defaultTranslateY: 0%;
