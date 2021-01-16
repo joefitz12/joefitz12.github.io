@@ -21,6 +21,8 @@
 .card {
     --defaultRotation: -10deg;
     --defaultTranslateY: 2%;
+    --defaultHeight: 230px;
+    --defaultWidth: 136px;
     height: 230px;
     width: 136px;
     border-radius: 5px;
@@ -51,6 +53,13 @@
         &.top_card {
             opacity: 1;
         }
+    }
+
+    &.spinning {
+        animation-duration: 0.6s;
+        animation-name: spinAndShrink;
+        -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+        animation-timing-function: linear;
     }
 }
 
@@ -284,5 +293,43 @@
     }
     to {
         transform: rotateY(180deg);
+    }
+}
+
+@keyframes spinAndShrink {
+    from {
+        transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
+        height: var(--defaultHeight);
+        width: var(--defaultWidth);
+    }
+    10% {
+        transform: translate(calc(-120% / 0.9),calc(var(--defaultTranslateY) / 0.9)) rotateZ(calc(var(--defaultRotation) + 5deg));
+        height: calc(0.9 * var(--defaultHeight));
+        width: calc(0.9 * var(--defaultWidth));
+    }
+    20% {
+        transform: translate(calc(-120% / 0.6),calc(var(--defaultTranslateY) / 0.6)) rotateZ(calc(var(--defaultRotation) + 15deg));
+        height: calc(0.6 * var(--defaultHeight));
+        width: calc(0.6 * var(--defaultWidth));
+    }
+    25% {
+        transform: translate(calc(-120% / 0.3),calc(var(--defaultTranslateY) / 0.3)) rotateZ(calc(var(--defaultRotation) + 40deg));
+        height: calc(0.3 * var(--defaultHeight));
+        width: calc(0.3 * var(--defaultWidth));
+    }
+    40% {
+        transform: translate(calc(-120% / 0.2),calc(var(--defaultTranslateY) / 0.2)) rotateZ(calc(var(--defaultRotation) + 200deg));
+        height: calc(0.2 * var(--defaultHeight));
+        width: calc(0.2 * var(--defaultWidth));
+    }
+    45% {
+        transform: translate(calc(-120% / 0.1),calc(var(--defaultTranslateY) / 0.1)) rotateZ(calc(var(--defaultRotation) + 360deg));
+        height: calc(0.1 * var(--defaultHeight));
+        width: calc(0.1 * var(--defaultWidth));
+    }
+    to {
+        transform: translate(-120%,var(--defaultTranslateY)) rotateZ(calc(var(--defaultRotation) + 720deg));
+        height: calc(0.0 * var(--defaultHeight));
+        width: calc(0.0 * var(--defaultWidth));
     }
 }

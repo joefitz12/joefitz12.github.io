@@ -53,6 +53,15 @@
         }
         margin-top:6px;
     }
+    &:active {
+        box-shadow: 
+            0px 0px 4px 1px darken($background-color, 10%),
+            inset 3px 0px 1px darken($button-color, 20%),
+            inset 3px -3px 1px darken($button-color, 15%);
+        padding-top: 38px;
+        padding-left: 13px;
+        margin-top:7px;
+    }
 }
 
 .button {

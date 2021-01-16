@@ -81,15 +81,16 @@
         position: absolute;
         bottom: 7%;
         right: 10%;
+        cursor: pointer;
         box-shadow: 
-        1px 1px 3px 1px darken($rose, 10%),
-        inset 2px 0px 1px darken($purple, 20%),
-        inset 3px -2px 1px darken($purple, 15%);
+            1px 1px 3px 1px darken($rose, 10%),
+            inset 2px 0px 1px darken($purple, 20%),
+            inset 3px -2px 1px darken($purple, 15%);
         &:active {
             box-shadow: 
-            0px 1px 2px 0px darken($rose, 10%),
-            inset 0px 0px 1px darken($purple, 20%),
-            inset 0px 0px 1px darken($purple, 15%);
+                0px 1px 2px 0px darken($rose, 10%),
+                inset 0px 0px 1px darken($purple, 20%),
+                inset 0px 0px 1px darken($purple, 15%);
         }
     }
 

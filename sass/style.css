@@ -32,6 +32,20 @@ ul {
   font-family: "ichiban_slim";
   src: url("../assets/fonts/ichiban/Ichiban-Stamp.otf");
 }
+@font-face {
+  font-family: "enceladus";
+  src: url("../assets/fonts/enceladus/EnceladusRegular.otf");
+}
+@font-face {
+  font-family: "enceladus";
+  src: url("../assets/fonts/enceladus/EnceladusBold.otf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "enceladus";
+  src: url("../assets/fonts/enceladus/EnceladusDemibold.otf");
+  font-weight: 500;
+}
 .controller {
   background: #f9ebc8;
   height: 300px;
@@ -77,6 +91,12 @@ ul {
 .button:hover div, .button.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.button:active {
+  box-shadow: 0px 0px 4px 1px #83c69c, inset 3px 0px 1px #60b680, inset 3px -3px 1px #72be8e;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .button.yellow {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -99,6 +119,12 @@ ul {
 }
 .button.yellow:hover div, .button.yellow.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.yellow:active {
+  box-shadow: 0px 0px 4px 1px #547d6f, inset 3px 0px 1px #e49c07, inset 3px -3px 1px #f8ab0d;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
 }
 .button.yellow-vibrant {
   max-height: 40px;
@@ -123,6 +149,12 @@ ul {
 .button.yellow-vibrant:hover div, .button.yellow-vibrant.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.button.yellow-vibrant:active {
+  box-shadow: 0px 0px 4px 1px #547d6f, inset 3px 0px 1px #996c00, inset 3px -3px 1px #b37e00;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .button.red {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -145,6 +177,12 @@ ul {
 }
 .button.red:hover div, .button.red.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.red:active {
+  box-shadow: 0px 0px 4px 1px #547d6f, inset 3px 0px 1px #b5340e, inset 3px -3px 1px #cd3b10;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
 }
 .button.purple {
   max-height: 40px;
@@ -169,6 +207,12 @@ ul {
 .button.purple:hover div, .button.purple.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.button.purple:active {
+  box-shadow: 0px 0px 4px 1px #547d6f, inset 3px 0px 1px #0c0c12, inset 3px -3px 1px #161622;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .button.purple-dark {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -192,6 +236,12 @@ ul {
 .button.purple-dark:hover div, .button.purple-dark.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.button.purple-dark:active {
+  box-shadow: 0px 0px 4px 1px #547d6f, inset 3px 0px 1px black, inset 3px -3px 1px black;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .button.pink {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -214,6 +264,12 @@ ul {
 }
 .button.pink:hover div, .button.pink.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.button.pink:active {
+  box-shadow: 0px 0px 4px 1px #547d6f, inset 3px 0px 1px #ed4b47, inset 3px -3px 1px #ef625e;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
 }
 
 .controller .button {
@@ -242,6 +298,12 @@ ul {
 .controller .button.yellow:hover div, .controller .button.yellow.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.controller .button.yellow:active {
+  box-shadow: 0px 0px 4px 1px #f4da9a, inset 3px 0px 1px #e49c07, inset 3px -3px 1px #f8ab0d;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .controller .button.yellow-vibrant {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -264,6 +326,12 @@ ul {
 }
 .controller .button.yellow-vibrant:hover div, .controller .button.yellow-vibrant.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.yellow-vibrant:active {
+  box-shadow: 0px 0px 4px 1px #f4da9a, inset 3px 0px 1px #996c00, inset 3px -3px 1px #b37e00;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
 }
 .controller .button.red {
   max-height: 40px;
@@ -288,6 +356,12 @@ ul {
 .controller .button.red:hover div, .controller .button.red.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.controller .button.red:active {
+  box-shadow: 0px 0px 4px 1px #f4da9a, inset 3px 0px 1px #b5340e, inset 3px -3px 1px #cd3b10;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .controller .button.purple {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -310,6 +384,12 @@ ul {
 }
 .controller .button.purple:hover div, .controller .button.purple.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
+}
+.controller .button.purple:active {
+  box-shadow: 0px 0px 4px 1px #f4da9a, inset 3px 0px 1px #0c0c12, inset 3px -3px 1px #161622;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
 }
 .controller .button.purple-dark {
   max-height: 40px;
@@ -334,6 +414,12 @@ ul {
 .controller .button.purple-dark:hover div, .controller .button.purple-dark.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.controller .button.purple-dark:active {
+  box-shadow: 0px 0px 4px 1px #f4da9a, inset 3px 0px 1px black, inset 3px -3px 1px black;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 .controller .button.pink {
   max-height: 40px;
   padding: 40px 5px 15px 15px;
@@ -357,6 +443,12 @@ ul {
 .controller .button.pink:hover div, .controller .button.pink.hover div {
   transform: rotateX(-10deg) rotateY(5deg) rotateZ(1deg) translate3d(-3px, 1px, 0px);
 }
+.controller .button.pink:active {
+  box-shadow: 0px 0px 4px 1px #f4da9a, inset 3px 0px 1px #ed4b47, inset 3px -3px 1px #ef625e;
+  padding-top: 38px;
+  padding-left: 13px;
+  margin-top: 7px;
+}
 
 .container.cards {
   justify-content: flex-end;
@@ -378,6 +470,8 @@ ul {
 .card {
   --defaultRotation: -10deg;
   --defaultTranslateY: 2%;
+  --defaultHeight: 230px;
+  --defaultWidth: 136px;
   height: 230px;
   width: 136px;
   border-radius: 5px;
@@ -410,6 +504,13 @@ ul {
 }
 .card.flipped.top_card {
   opacity: 1;
+}
+.card.spinning {
+  animation-duration: 0.6s;
+  animation-name: spinAndShrink;
+  -webkit-animation-timing-function: linear;
+  /* Chrome, Safari, Opera */
+  animation-timing-function: linear;
 }
 
 .card:nth-child(3n) {
@@ -623,6 +724,43 @@ ul {
     transform: rotateY(180deg);
   }
 }
+@keyframes spinAndShrink {
+  from {
+    transform: translate(-120%, var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
+    height: var(--defaultHeight);
+    width: var(--defaultWidth);
+  }
+  10% {
+    transform: translate(calc(-120% / 0.9), calc(var(--defaultTranslateY) / 0.9)) rotateZ(calc(var(--defaultRotation) + 5deg));
+    height: calc(0.9 * var(--defaultHeight));
+    width: calc(0.9 * var(--defaultWidth));
+  }
+  20% {
+    transform: translate(calc(-120% / 0.6), calc(var(--defaultTranslateY) / 0.6)) rotateZ(calc(var(--defaultRotation) + 15deg));
+    height: calc(0.6 * var(--defaultHeight));
+    width: calc(0.6 * var(--defaultWidth));
+  }
+  25% {
+    transform: translate(calc(-120% / 0.3), calc(var(--defaultTranslateY) / 0.3)) rotateZ(calc(var(--defaultRotation) + 40deg));
+    height: calc(0.3 * var(--defaultHeight));
+    width: calc(0.3 * var(--defaultWidth));
+  }
+  40% {
+    transform: translate(calc(-120% / 0.2), calc(var(--defaultTranslateY) / 0.2)) rotateZ(calc(var(--defaultRotation) + 200deg));
+    height: calc(0.2 * var(--defaultHeight));
+    width: calc(0.2 * var(--defaultWidth));
+  }
+  45% {
+    transform: translate(calc(-120% / 0.1), calc(var(--defaultTranslateY) / 0.1)) rotateZ(calc(var(--defaultRotation) + 360deg));
+    height: calc(0.1 * var(--defaultHeight));
+    width: calc(0.1 * var(--defaultWidth));
+  }
+  to {
+    transform: translate(-120%, var(--defaultTranslateY)) rotateZ(calc(var(--defaultRotation) + 720deg));
+    height: calc(0.0 * var(--defaultHeight));
+    width: calc(0.0 * var(--defaultWidth));
+  }
+}
 .color_blast {
   border-radius: 50%;
   position: absolute;
@@ -722,6 +860,7 @@ ul {
   position: absolute;
   bottom: 7%;
   right: 10%;
+  cursor: pointer;
   box-shadow: 1px 1px 3px 1px #7d3651, inset 2px 0px 1px #0c0c12, inset 3px -2px 1px #161622;
 }
 .television.dial:active {
@@ -835,6 +974,7 @@ ul {
   width: 20px;
   height: 15px;
   margin: 0px auto -10px;
+  cursor: pointer;
 }
 .lightbulb.yellow .bulb {
   z-index: -1;
@@ -844,6 +984,7 @@ ul {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 20px 0px #fcdfa1;
+  cursor: pointer;
 }
 .lightbulb.yellow .bulb-inner {
   position: absolute;
@@ -882,6 +1023,7 @@ ul {
   width: 20px;
   height: 15px;
   margin: 0px auto -10px;
+  cursor: pointer;
 }
 .lightbulb.yellow-vibrant .bulb {
   z-index: -1;
@@ -891,6 +1033,7 @@ ul {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 20px 0px #ffcb4d;
+  cursor: pointer;
 }
 .lightbulb.yellow-vibrant .bulb-inner {
   position: absolute;
@@ -929,6 +1072,7 @@ ul {
   width: 20px;
   height: 15px;
   margin: 0px auto -10px;
+  cursor: pointer;
 }
 .lightbulb.purple .bulb {
   z-index: -1;
@@ -938,6 +1082,7 @@ ul {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 20px 0px #54527e;
+  cursor: pointer;
 }
 .lightbulb.purple .bulb-inner {
   position: absolute;
@@ -976,6 +1121,7 @@ ul {
   width: 20px;
   height: 15px;
   margin: 0px auto -10px;
+  cursor: pointer;
 }
 .lightbulb.purple-dark .bulb {
   z-index: -1;
@@ -985,6 +1131,7 @@ ul {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 20px 0px #5d1e74;
+  cursor: pointer;
 }
 .lightbulb.purple-dark .bulb-inner {
   position: absolute;
@@ -1023,6 +1170,7 @@ ul {
   width: 20px;
   height: 15px;
   margin: 0px auto -10px;
+  cursor: pointer;
 }
 .lightbulb.pink .bulb {
   z-index: -1;
@@ -1032,6 +1180,7 @@ ul {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 20px 0px #fdeaea;
+  cursor: pointer;
 }
 .lightbulb.pink .bulb-inner {
   position: absolute;
@@ -1070,6 +1219,7 @@ ul {
   width: 20px;
   height: 15px;
   margin: 0px auto -10px;
+  cursor: pointer;
 }
 .lightbulb.red .bulb {
   z-index: -1;
@@ -1079,6 +1229,7 @@ ul {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0px 5px 20px 0px #f59b80;
+  cursor: pointer;
 }
 .lightbulb.red .bulb-inner {
   position: absolute;
