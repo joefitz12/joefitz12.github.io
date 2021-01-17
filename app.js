@@ -79,11 +79,11 @@ $(document).ready(function(){
         if ( !jf.mouseDown ) { jf.mouseDown++; }
         let mainCanvas = document.getElementById('canvas-main');
         mainCanvas.getContext("2d").imageSmoothingQuality = 'high';
-
+        
         // instantiating growthSpeed
         let growthSpeed = 1.5;
 
-        // instantiating s;
+        // instantiating sizeModifier
         let leafSizeModifier = jf.leaves.sizeModifier;
         let vineSizeModifier = jf.vines.sizeModifier;
     
@@ -158,7 +158,7 @@ $(document).ready(function(){
             let percentage = 0;
             let leafStartingX = startingX;
             let leafStartingY = startingY;
-            let switchSide = jf.logs.vines.invertVineGrowth;
+            let switchSide = jf.vines.invertVineGrowth;
     
             let createLeaf = () => {
                 let leaf = mainCanvas.getContext("2d");
@@ -211,7 +211,7 @@ $(document).ready(function(){
                 
                 if (!jf.mouseDown) {
                     // cancelAnimations('leaves', 5);
-                }
+                } 
             };
     
             leafCreator = requestAnimationFrame(createLeaf);
@@ -226,7 +226,7 @@ $(document).ready(function(){
         let vineCreator;
     
         let createVine = () => {
-            let invertThisVine = jf.logs.vines.invertVineGrowth;
+            let invertThisVine = jf.vines.invertVineGrowth;
             let vine = mainCanvas.getContext("2d");
             let vineColor;
 
@@ -280,7 +280,7 @@ $(document).ready(function(){
                 // console.log('if');
             }
             else if (!invertThisVine) {
-                jf.logs.vines.invertVineGrowth  = true;
+                jf.vines.invertVineGrowth  = true;
                 startingX += (2 * deltaX);
                 startingY += (2 * deltaY);
                 finalAngle = startingAngle;
@@ -292,7 +292,7 @@ $(document).ready(function(){
                 // console.log('if3');
             }
             else if (invertThisVine){
-                jf.logs.vines.invertVineGrowth = false;
+                jf.vines.invertVineGrowth = false;
                 startingX += (2 * deltaX);
                 startingY += (2 * deltaY);
                 finalAngle = startingAngle;
@@ -397,14 +397,14 @@ $(document).ready(function(){
             }
             
             c.putImageData(imageData, 0, 0);
-            staticAnimation = requestAnimationFrame(loop);
-            
-            if (!jf.logs.animations.static) {jf.logs.animations.static = [];}
-            jf.logs.animations.static.push(staticAnimation);
+
+            if (jf.static.animate){
+                staticAnimation = requestAnimationFrame(loop);
+                jf.logs.animations.static.push(staticAnimation);
+            }
         };
 
         staticAnimation = requestAnimationFrame(loop);
-        if (!jf.logs.animations.static) {jf.logs.animations.static = [];}
         jf.logs.animations.static.push(staticAnimation);
 
         if (cb){
@@ -421,7 +421,8 @@ $(document).ready(function(){
         
                     setTimeout(function(){
                         document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
-                        // cancelAnimations('static');
+                        jf.static.animate = false;
+                        // cancelAnimations('static',0);
                     }, 1500);
                 });
             }
@@ -433,20 +434,23 @@ $(document).ready(function(){
     //////////////////////////
     /////// card flip ////////
     //////////////////////////
+    const selectCard = () => {
+        let eligibleCards = jf.cards.data.filter(card => card.flipped != true);
+        let selectedCard = eligibleCards[parseInt(Math.random() * eligibleCards.length)];
+        selectedCard.flipped = true;
+        return selectedCard;
+    };
+
     let handleCardFlip = (e) => {
         if (!jf.cards.flipping){
             jf.cards.flipping = true;
             let cardIndex = document.querySelectorAll('.card').length;
-            let card = jf.cards.data[cardIndex];
-            let title = card.title;
-            let content = card.content;
-            var type = card.type;
-            var link = card.link;
-            
-            var newCard = document.createElement('div');
-            newCard.classList.add(type,'card');
+            let card = selectCard();
 
-            if (title.length > 10){
+            var newCard = document.createElement('div');
+            newCard.classList.add(card.type,'card');
+
+            if (card.title.length > 10){
                 newCard.classList.add('title_long');
             }
 
@@ -463,14 +467,14 @@ $(document).ready(function(){
                         </div>
                     </div>
                     <div class='front'>
-                        <span class='title'>${title}</span>
+                        <span class='title'>${card.title}</span>
                         <div class='polygon background'></div>
                         <div class='polygon angle'></div>
                         <div class='polygon angle2'></div>
                         <div class='container text-container'>
-                            ${content}
+                            ${card.content}
                         </div>
-                        <a class='card-link' target="_blank" href="${link}">go to</a>
+                        <a class='card-link' target="_blank" href="${card.link}">go to</a>
                     </div>
                 </div>`;
     
@@ -482,6 +486,7 @@ $(document).ready(function(){
             // console.log(cardIndex, cards.length);
             if (cardIndex == jf.cards.data.length - 1){
                 document.querySelectorAll('.draw-deck')[0].classList.add('display_none');
+                document.querySelectorAll('.draw-deck_under-screen')[0].classList.remove('display_none');
             }
             setTimeout(function(){
                 newCard.classList.remove('flipping');

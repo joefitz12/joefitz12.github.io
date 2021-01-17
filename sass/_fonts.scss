@@ -1,3 +1,4 @@
+// ichiban
 @font-face {
     font-family: 'ichiban';
     src: url('../assets/fonts/ichiban/Ichiban.otf');
@@ -27,4 +28,22 @@
 @font-face {
     font-family: 'ichiban_slim';
     src: url('../assets/fonts/ichiban/Ichiban-Stamp.otf');
+}
+
+// enceladus
+@font-face {
+    font-family: 'enceladus';
+    src: url('../assets/fonts/enceladus/EnceladusRegular.otf');
+}
+
+@font-face {
+    font-family: 'enceladus';
+    src: url('../assets/fonts/enceladus/EnceladusBold.otf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'enceladus';
+    src: url('../assets/fonts/enceladus/EnceladusDemibold.otf');
+    font-weight: 500;
 }

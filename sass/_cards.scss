@@ -3,24 +3,40 @@
     min-height: 260px;
 }
 
-.draw-deck {
+.draw-deck,
+.draw-deck_under-screen {
     height: 230px;
     width: 136px;
-    background: $purple;
     border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index:10;
+}
+
+.draw-deck {
+    background: $purple;
     box-shadow: 
         3px 1px 4px 1px darken($green-dark, 10%),
         2px 0px 1px darken($purple, 20%),
         2px 1px 1px darken($purple, 15%);
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index:10;
+}
+
+.draw-deck_under-screen {
+    background: $green-dark;
+    &.appearing {
+        animation-duration: 1.1s;
+        animation-name: appearUnderScreen;
+        -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+        animation-timing-function: linear;
+    }
 }
 
 .card {
     --defaultRotation: -10deg;
     --defaultTranslateY: 2%;
+    --defaultHeight: 230px;
+    --defaultWidth: 136px;
     height: 230px;
     width: 136px;
     border-radius: 5px;
@@ -41,7 +57,7 @@
     &.flipped {
         transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
         position: absolute;
-        opacity: .9;
+        filter: grayscale(0.1);
         .container_inner {
             transform: rotateY(180deg);
         }
@@ -49,8 +65,15 @@
             visibility: hidden;;
         }
         &.top_card {
-            opacity: 1;
+            filter: grayscale(0.0);
         }
+    }
+
+    &.spinning {
+        animation-duration: 0.6s;
+        animation-name: spinAndShrink;
+        -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+        animation-timing-function: linear;
     }
 }
 
@@ -59,6 +82,14 @@
 // --defaultRotation: -10deg;
 // --defaultTranslateY: 2%;
 .card {
+    &:nth-child(3n){
+        --defaultRotation: -9deg;
+        --defaultTranslateY: 0%;
+    }
+    &:nth-child(3n){
+        --defaultRotation: -9deg;
+        --defaultTranslateY: 0%;
+    }
     &:nth-child(3n){
         --defaultRotation: -9deg;
         --defaultTranslateY: 0%;
@@ -284,5 +315,64 @@
     }
     to {
         transform: rotateY(180deg);
+    }
+}
+
+@keyframes spinAndShrink {
+    from {
+        transform: translate(-120%,var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
+        height: var(--defaultHeight);
+        width: var(--defaultWidth);
+    }
+    10% {
+        transform: translate(calc(-120% / 0.9),calc(var(--defaultTranslateY) / 0.9)) rotateZ(calc(var(--defaultRotation) + 5deg));
+        height: calc(0.9 * var(--defaultHeight));
+        width: calc(0.9 * var(--defaultWidth));
+    }
+    20% {
+        transform: translate(calc(-120% / 0.6),calc(var(--defaultTranslateY) / 0.6)) rotateZ(calc(var(--defaultRotation) + 15deg));
+        height: calc(0.6 * var(--defaultHeight));
+        width: calc(0.6 * var(--defaultWidth));
+    }
+    25% {
+        transform: translate(calc(-120% / 0.3),calc(var(--defaultTranslateY) / 0.3)) rotateZ(calc(var(--defaultRotation) + 40deg));
+        height: calc(0.3 * var(--defaultHeight));
+        width: calc(0.3 * var(--defaultWidth));
+    }
+    40% {
+        transform: translate(calc(-120% / 0.2),calc(var(--defaultTranslateY) / 0.2)) rotateZ(calc(var(--defaultRotation) + 200deg));
+        height: calc(0.2 * var(--defaultHeight));
+        width: calc(0.2 * var(--defaultWidth));
+    }
+    45% {
+        transform: translate(calc(-120% / 0.1),calc(var(--defaultTranslateY) / 0.1)) rotateZ(calc(var(--defaultRotation) + 360deg));
+        height: calc(0.1 * var(--defaultHeight));
+        width: calc(0.1 * var(--defaultWidth));
+    }
+    to {
+        transform: translate(-120%,var(--defaultTranslateY)) rotateZ(calc(var(--defaultRotation) + 720deg));
+        height: calc(0.0 * var(--defaultHeight));
+        width: calc(0.0 * var(--defaultWidth));
+    }
+}
+
+@keyframes appearUnderScreen {
+    from {
+        box-shadow: 
+        0px 0px 0px 0px darken($green-dark, 10%);
+        height: 230px;
+        width: 136px;
+    }
+    40% {
+        box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%);
+        height: 230px;
+        width: 136px;
+    }
+    to {
+        box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%);
+        height: 0px;
+        width: 136px;
     }
 }
