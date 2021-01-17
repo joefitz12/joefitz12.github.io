@@ -455,16 +455,31 @@ ul {
   min-height: 260px;
 }
 
-.draw-deck {
+.draw-deck,
+.draw-deck_under-screen {
   height: 230px;
   width: 136px;
-  background: #353450;
   border-radius: 5px;
-  box-shadow: 3px 1px 4px 1px #547d6f, 2px 0px 1px #0c0c12, 2px 1px 1px #161622;
   position: absolute;
   top: 10px;
   right: 15px;
   z-index: 10;
+}
+
+.draw-deck {
+  background: #353450;
+  box-shadow: 3px 1px 4px 1px #547d6f, 2px 0px 1px #0c0c12, 2px 1px 1px #161622;
+}
+
+.draw-deck_under-screen {
+  background: #6a9a8a;
+}
+.draw-deck_under-screen.appearing {
+  animation-duration: 1.1s;
+  animation-name: appearUnderScreen;
+  -webkit-animation-timing-function: linear;
+  /* Chrome, Safari, Opera */
+  animation-timing-function: linear;
 }
 
 .card {
@@ -494,7 +509,7 @@ ul {
 .card.flipped {
   transform: translate(-120%, var(--defaultTranslateY)) rotateZ(var(--defaultRotation));
   position: absolute;
-  opacity: 0.9;
+  filter: grayscale(0.1);
 }
 .card.flipped .container_inner {
   transform: rotateY(180deg);
@@ -503,7 +518,7 @@ ul {
   visibility: hidden;
 }
 .card.flipped.top_card {
-  opacity: 1;
+  filter: grayscale(0);
 }
 .card.spinning {
   animation-duration: 0.6s;
@@ -767,6 +782,23 @@ ul {
     transform: translate(-120%, var(--defaultTranslateY)) rotateZ(calc(var(--defaultRotation) + 720deg));
     height: calc(0.0 * var(--defaultHeight));
     width: calc(0.0 * var(--defaultWidth));
+  }
+}
+@keyframes appearUnderScreen {
+  from {
+    box-shadow: 0px 0px 0px 0px #547d6f;
+    height: 230px;
+    width: 136px;
+  }
+  40% {
+    box-shadow: 3px 1px 4px 1px #547d6f;
+    height: 230px;
+    width: 136px;
+  }
+  to {
+    box-shadow: 3px 1px 4px 1px #547d6f;
+    height: 0px;
+    width: 136px;
   }
 }
 .color_blast {

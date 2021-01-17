@@ -485,7 +485,8 @@ $(document).ready(function(){
             newCard.classList.add('flipping');
             // console.log(cardIndex, cards.length);
             if (cardIndex == jf.cards.data.length - 1){
-                // document.querySelectorAll('.draw-deck')[0].classList.add('display_none');
+                document.querySelectorAll('.draw-deck')[0].classList.add('display_none');
+                document.querySelectorAll('.draw-deck_under-screen')[0].classList.remove('display_none');
             }
             setTimeout(function(){
                 newCard.classList.remove('flipping');
