@@ -72,11 +72,18 @@ $(document).ready(() => {
                         flipped: false
                     },
                     {
-                        type:'games',
-                        title: 'games',
-                        contentTitle: 'games',
-                        content: '<div class="link"><a href="boardgamegeek.com">BoardGameGeek</a></div>',
+                        type:'comedy',
+                        title: 'thank you, five',
+                        content: '<p>audrey schiffhauer, kennedy baldwin, renee barry, and i put up a show at sc.</p>',
+                        link: 'https://vimeo.com/390878707',
                         flipped: false
+                    },
+                    {
+                        type:'code',
+                        title: 'extra.css',
+                        content: '<p>i used extra.css, a houdini library, to style some of the titles on this page</p>',
+                        link: 'https://extra-css.netlify.app/',
+                        flipped: false 
                     }
                 ]
             },
