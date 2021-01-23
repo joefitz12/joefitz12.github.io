@@ -30,7 +30,7 @@ ul {
 }
 @font-face {
   font-family: "ichiban_slim";
-  src: url("../assets/fonts/ichiban/Ichiban-Stamp.otf");
+  src: url("../assets/fonts/ichiban/Ichiban-Slim.otf");
 }
 @font-face {
   font-family: "enceladus";
@@ -62,7 +62,7 @@ ul {
 }
 .controller ul div {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 .controller ul li {
   margin: 0 auto;
@@ -453,6 +453,7 @@ ul {
 .container.cards {
   justify-content: flex-end;
   min-height: 260px;
+  font-family: "ichiban_slim";
 }
 
 .draw-deck,
@@ -470,9 +471,18 @@ ul {
   background: #353450;
   box-shadow: 3px 1px 4px 1px #547d6f, 2px 0px 1px #0c0c12, 2px 1px 1px #161622;
 }
+.draw-deck.appearing {
+  animation-duration: 1.1s;
+  animation-name: removeBlur;
+  -webkit-animation-timing-function: linear;
+  /* Chrome, Safari, Opera */
+  animation-timing-function: linear;
+  z-index: 11;
+}
 
 .draw-deck_under-screen {
   background: #6a9a8a;
+  opacity: 0;
 }
 .draw-deck_under-screen.appearing {
   animation-duration: 1.1s;
@@ -582,16 +592,13 @@ ul {
   transform: rotateY(180deg);
 }
 .front .title {
-  font-size: 18px;
+  font-size: 22px;
   position: absolute;
   top: 14px;
   left: 3px;
 }
-.front .content-title {
+.front .title.title_long {
   font-size: 18px;
-  color: #F6A6A4;
-  top: 70px;
-  left: 10px;
 }
 .front .text-container {
   background: #f9ebc8;
@@ -605,7 +612,7 @@ ul {
   box-sizing: border-box;
   border: 2px solid #f06339;
   padding: 6px 4px 2px;
-  font-size: 14px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   min-height: 90px;
@@ -614,16 +621,13 @@ ul {
   color: #353450;
 }
 .front .card-link {
+  font-family: "ichiban_marker";
   position: absolute;
   font-size: 15px;
   color: #F6A6A4;
   bottom: 10px;
   right: 10px;
   text-decoration: none;
-}
-
-.card.title_long .front .title {
-  font-size: 15px;
 }
 
 .card .polygon {
@@ -650,15 +654,18 @@ ul {
 }
 .card .back .background .title-container,
 .draw-deck .back .background .title-container {
-  padding: 10px 30px 7px;
+  padding: 10px 35px 7px;
 }
 .card .back .background .title,
 .draw-deck .back .background .title {
+  font-family: "ichiban";
   color: #f06339;
   position: relative;
   top: 0;
   left: 0;
-  font-size: 30px;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 200%;
   user-select: none;
 }
 .card .back .background.background_transparent,
@@ -676,16 +683,16 @@ ul {
   border: 2px solid #ffb400;
 }
 
-.card .angle2 {
-  background: #ffb400;
-  clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
-  -webkit-clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
-}
-
 .card .angle {
   background: #f06339;
   clip-path: polygon(0% 15%, 0% 100%, 0% 21%, 100% 15%, 100% 14%);
   -webkit-clip-path: polygon(0% 15%, 0% 100%, 0% 21%, 100% 15%, 100% 14%);
+}
+
+.card .angle2 {
+  background: #ffb400;
+  clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
+  -webkit-clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
 }
 
 .card ul li {
@@ -787,18 +794,33 @@ ul {
 @keyframes appearUnderScreen {
   from {
     box-shadow: 0px 0px 0px 0px #547d6f;
-    height: 230px;
-    width: 136px;
+    opacity: 1;
   }
   40% {
     box-shadow: 3px 1px 4px 1px #547d6f;
-    height: 230px;
-    width: 136px;
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 3px 1px 4px 1px #547d6f;
+    opacity: 1;
   }
   to {
     box-shadow: 3px 1px 4px 1px #547d6f;
-    height: 0px;
-    width: 136px;
+    opacity: 0;
+  }
+}
+@keyframes removeBlur {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  51% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 .color_blast {
@@ -884,13 +906,44 @@ ul {
 .television iframe .ytp-title-text {
   visibility: hidden;
 }
-.television.button-panel {
-  height: 45px;
-  width: 45px;
-  background: #ffb400;
+.television.arrow {
+  height: 35px;
+  width: 25px;
+  background: #353450;
   position: absolute;
-  bottom: 7%;
-  left: 10%;
+  bottom: 8%;
+  left: 12%;
+  filter: drop-shadow(1px 2px 2px #7d3651);
+  -webkit-filter: drop-shadow(1px 2px 2px #7d3651);
+}
+.television.arrow.left {
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  -webkit-clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+}
+.television.arrow.left .angle.upper {
+  clip-path: polygon(0% 50%, 100% 0%, 100% 3%, 0% 53%);
+  -webkit-clip-path: polygon(0% 50%, 100% 0%, 100% 3%, 0% 53%);
+  background: #161622;
+}
+.television.arrow.left .angle.lower {
+  clip-path: polygon(0% 50%, 100% 100%, 100% 95%, 0% 45%);
+  -webkit-clip-path: polygon(0% 50%, 100% 100%, 100% 95%, 0% 45%);
+  background: #0c0c12;
+}
+.television.arrow.right {
+  left: 22%;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+}
+.television.arrow.right .angle.left {
+  clip-path: polygon(0% 0%, 2% 0%, 2% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 2% 0%, 2% 100%, 0% 100%);
+  background: #0c0c12;
+}
+.television.arrow .angle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 .television.dial {
   height: 45px;
@@ -1358,7 +1411,7 @@ ul {
     height: calc((var(--vh, 1vh) * 100) - 193px);
     width: 100vw;
     /* Fallback for browsers that do not support Custom Properties */
-    width: calc(var(--vw, 1vw) * 100);
+    width: calc(var(--vw, 1vw) * 100 - 30px);
     overflow-y: hidden;
     align-content: flex-start;
   }
@@ -1372,9 +1425,6 @@ ul {
     left: calc(15px / 2);
     z-index: 2;
     bottom: -125px;
-  }
-  .main.container .television-container {
-    display: none;
   }
 }
 
@@ -1418,8 +1468,8 @@ ul {
 }
 @media (max-width: 599px) {
   .width_half {
-    width: calc(100% - 60px);
-    min-width: calc(100% - 60px);
+    width: calc(100% - 30px);
+    min-width: calc(100% - 30px);
   }
 }
 
@@ -1437,11 +1487,15 @@ ul {
   height: 0;
 }
 
+.opacity_zero {
+  opacity: 0;
+}
+
 /* Specifics */
 body {
-  font-family: "ichiban_slim";
+  font-family: "ichiban_stamp";
   color: #353450;
-  background: #6a9a8a;
+  background: linear-gradient(#6a9a8a 90%, #a6d6b8 10%);
   position: relative;
   overflow-x: hidden;
   height: 100vh;
@@ -1456,6 +1510,38 @@ body {
   background: #a6d6b8;
   box-shadow: 0px 5px 4px 1px #5f8c7d;
   z-index: 10;
+}
+
+body .main.container .controller-container {
+  order: 1;
+}
+body .main.container .cards {
+  order: 2;
+}
+body .main.container .television-container {
+  order: 3;
+}
+@media (max-width: 599px) {
+  body .main.container .cards {
+    order: 1;
+  }
+  body .main.container .television-container {
+    order: 2;
+    position: absolute;
+    width: calc(100% - 60px);
+    min-width: calc(100% - 60px);
+  }
+  body .main.container > div:not(.controller-container) {
+    transition: transform 750ms ease-in-out;
+    transform: translate(calc(-100% - 60px), 0);
+    z-index: 2;
+  }
+  body .main.container > div.mobile_focus {
+    transform: translate(0, 0);
+  }
+  body .main.container > div.mobile_focus ~ div {
+    transform: translate(calc(100% + 60px), 0);
+  }
 }
 
 @supports (background: paint(something)) {

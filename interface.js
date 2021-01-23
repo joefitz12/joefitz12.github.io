@@ -27,25 +27,25 @@ $(document).ready(function(){
         window.msRequestAnimationFrame;
     
     let cancelAnimations = (key, limit) => {
-        console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
+        console.log("interface.logs.animations[" + key+ "].length", interface.logs.animations[key].length);
         console.log('cancel animations limit',limit);
-        while(jf.logs.animations[key].length > limit){
-            let animationToCancel = jf.logs.animations[key].shift().id;
+        while(interface.logs.animations[key].length > limit){
+            let animationToCancel = interface.logs.animations[key].shift().id;
             cancelAnimationFrame(animationToCancel);
         }
-        // console.log("jf.logs.animations[" + key+ "].length", jf.logs.animations[key].length);
+        // console.log("interface.logs.animations[" + key+ "].length", interface.logs.animations[key].length);
     };
 
     document.body.addEventListener('mouseup', e => {   
         // console.log('addEventLister mouseUp',mouseDown);
-        if (jf.mouseDown){
-            jf.mouseDown--;
+        if (interface.mouseDown){
+            interface.mouseDown--;
         }
     });
 
     document.body.addEventListener('touchend', e => {   
-        if (jf.mouseDown){ jf.mouseDown--; }
-        // console.log('jf.mouseDown', jf.mouseDown);
+        if (interface.mouseDown){ interface.mouseDown--; }
+        // console.log('interface.mouseDown', interface.mouseDown);
     });
     
 
@@ -54,13 +54,13 @@ $(document).ready(function(){
     ///////////////////////////////
     document.querySelectorAll('.button-container')[0].addEventListener('click', e => {
         if (e.target.children[0] && e.target.children[0].dataset.color){
-            jf.selectedColor = e.target.children[0].dataset.color;
+            interface.selectedColor = e.target.children[0].dataset.color;
         } 
     });
 
     document.querySelectorAll('.button-container')[0].addEventListener('touchstart', e => {
         if (e.target.children[0] && e.target.children[0].dataset.color){
-            jf.selectedColor = e.target.children[0].dataset.color;
+            interface.selectedColor = e.target.children[0].dataset.color;
             e.target.classList.add('hover');
         } 
     });
@@ -76,7 +76,7 @@ $(document).ready(function(){
     ///////// vines //////////
     ///////////////////////////////
     const handleVineCreation = (e) => {
-        if ( !jf.mouseDown ) { jf.mouseDown++; }
+        if ( !interface.mouseDown ) { interface.mouseDown++; }
         let mainCanvas = document.getElementById('canvas-main');
         mainCanvas.getContext("2d").imageSmoothingQuality = 'high';
         
@@ -84,8 +84,8 @@ $(document).ready(function(){
         let growthSpeed = 1.5;
 
         // instantiating sizeModifier
-        let leafSizeModifier = jf.leaves.sizeModifier;
-        let vineSizeModifier = jf.vines.sizeModifier;
+        let leafSizeModifier = interface.leaves.sizeModifier;
+        let vineSizeModifier = interface.vines.sizeModifier;
     
         // look up the size the canvas is being displayed
         let width = mainCanvas.clientWidth;
@@ -158,14 +158,14 @@ $(document).ready(function(){
             let percentage = 0;
             let leafStartingX = startingX;
             let leafStartingY = startingY;
-            let switchSide = jf.vines.invertVineGrowth;
+            let switchSide = interface.vines.invertVineGrowth;
     
             let createLeaf = () => {
                 let leaf = mainCanvas.getContext("2d");
-                let leafColor = jf.colorPalette[jf.selectedColor];
+                let leafColor = interface.colorPalette[interface.selectedColor];
 
                 // console.log('leafColor', leafColor);
-                // if (jf.logs.animations.leaves.length > 1000){
+                // if (interface.logs.animations.leaves.length > 1000){
                 //     cancelAnimations('leaves');
                 // }
                 
@@ -200,22 +200,22 @@ $(document).ready(function(){
                     
                     // debugging this
                     leafCreator = requestAnimationFrame(createLeaf);
-                    jf.logs.animations.leaves.push({
+                    interface.logs.animations.leaves.push({
                         id: leafCreator,
                         percentage: percentage
                     });
                 }
                 else {
-                    jf.logs.leaves.count++;
+                    interface.logs.leaves.count++;
                 }
                 
-                if (!jf.mouseDown) {
+                if (!interface.mouseDown) {
                     // cancelAnimations('leaves', 5);
                 } 
             };
     
             leafCreator = requestAnimationFrame(createLeaf);
-            jf.logs.animations.leaves.push({
+            interface.logs.animations.leaves.push({
                 id: leafCreator,
                 percentage: percentage
             });
@@ -226,24 +226,24 @@ $(document).ready(function(){
         let vineCreator;
     
         let createVine = () => {
-            let invertThisVine = jf.vines.invertVineGrowth;
+            let invertThisVine = interface.vines.invertVineGrowth;
             let vine = mainCanvas.getContext("2d");
             let vineColor;
 
-            vineColor = jf.colorPalette["green-light"];
+            vineColor = interface.colorPalette["green-light"];
             
             /// switches vine color randomly
-            // if (jf.logs.vines.count % 3 == 0){
-            //     vineColor = jf.colorPalette["green-light"];
+            // if (interface.logs.vines.count % 3 == 0){
+            //     vineColor = interface.colorPalette["green-light"];
             //     // console.log('vine color 0');
             // }
-            // else if (jf.logs.vines.count % 3 == 1){
-            //     vineColor = jf.colorPalette['green-light_20%-light'];
+            // else if (interface.logs.vines.count % 3 == 1){
+            //     vineColor = interface.colorPalette['green-light_20%-light'];
             //     // console.log('vine color 1');
 
             // }
-            // else if (jf.logs.vines.count % 3 == 2){
-            //     vineColor = jf.colorPalette['green-light_20%-dark'];
+            // else if (interface.logs.vines.count % 3 == 2){
+            //     vineColor = interface.colorPalette['green-light_20%-dark'];
             //     // console.log('vine color 2');
             // }
 
@@ -266,10 +266,10 @@ $(document).ready(function(){
             vine.stroke();
     
             // stop animation on mouseup
-            if (!jf.mouseDown) {
+            if (!interface.mouseDown) {
                 // console.log(vine);
                 vine.closePath();
-                jf.logs.vines.count++;
+                interface.logs.vines.count++;
                 cancelAnimationFrame(vineCreator);
                 // cancelAnimations('leaves', 5);
                 return;
@@ -280,7 +280,7 @@ $(document).ready(function(){
                 // console.log('if');
             }
             else if (!invertThisVine) {
-                jf.vines.invertVineGrowth  = true;
+                interface.vines.invertVineGrowth  = true;
                 startingX += (2 * deltaX);
                 startingY += (2 * deltaY);
                 finalAngle = startingAngle;
@@ -292,7 +292,7 @@ $(document).ready(function(){
                 // console.log('if3');
             }
             else if (invertThisVine){
-                jf.vines.invertVineGrowth = false;
+                interface.vines.invertVineGrowth = false;
                 startingX += (2 * deltaX);
                 startingY += (2 * deltaY);
                 finalAngle = startingAngle;
@@ -312,8 +312,39 @@ $(document).ready(function(){
     });
 
     document.getElementById('canvas-main').addEventListener('touchstart', e => {
-        if ( !jf.mouseDown ) { jf.mouseDown++; }
+        if ( !interface.mouseDown ) { interface.mouseDown++; }
         handleVineCreation(e);
+    });
+
+    document.getElementById('canvas-main').addEventListener('touchmove', e => {
+        e.preventDefault();
+        interface.canvas.touches.push(e);
+    });
+
+    document.getElementById('canvas-main').addEventListener('touchend', e => {
+        e.preventDefault();
+        // console.log("it's over", e);
+        if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX > interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
+            // handleCardFlip(e);
+            if (interface.canvas.containers.length > interface.canvas.focus_index - 1){
+                document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
+                interface.canvas.focus_index++;
+                document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
+            }
+
+            interface.canvas.touches = [];
+        }
+        else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
+            // handleCardFlip(e);
+            if (interface.canvas.focus_index > 0){
+                document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
+                interface.canvas.focus_index--;
+                document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
+            }
+
+            interface.canvas.touches = [];
+        }
+        // handleCardFlip(e);
     });
 
     document.getElementById('canvas-main').addEventListener('contextmenu', e => {
@@ -355,16 +386,16 @@ $(document).ready(function(){
         }
 
         if (!lightbulb.classList.contains('clicked')){ lightbulb.classList.add('clicked'); }
-        else { console.log ('nope');}
+        // else { console.log ('nope');}
 
         setTimeout(function(){
             lightbulb.classList.remove('clicked');
         }, 1000);
         
-        for (let i = 0; i < Object.keys(jf.colorPalette).length; i++){
-            if (lightbulbContainerClassList.contains(Object.keys(jf.colorPalette)[i])){
-                lightbulbContainerClassList.remove(Object.keys(jf.colorPalette)[i]);
-                lightbulbContainerClassList.add(jf.selectedColor);
+        for (let i = 0; i < Object.keys(interface.colorPalette).length; i++){
+            if (lightbulbContainerClassList.contains(Object.keys(interface.colorPalette)[i])){
+                lightbulbContainerClassList.remove(Object.keys(interface.colorPalette)[i]);
+                lightbulbContainerClassList.add(interface.selectedColor);
                 break;
             }
         }
@@ -398,14 +429,14 @@ $(document).ready(function(){
             
             c.putImageData(imageData, 0, 0);
 
-            if (jf.static.animate){
+            if (interface.static.animate){
                 staticAnimation = requestAnimationFrame(loop);
-                jf.logs.animations.static.push(staticAnimation);
+                interface.logs.animations.static.push(staticAnimation);
             }
         };
 
         staticAnimation = requestAnimationFrame(loop);
-        jf.logs.animations.static.push(staticAnimation);
+        interface.logs.animations.static.push(staticAnimation);
 
         if (cb){
             cb();
@@ -421,7 +452,7 @@ $(document).ready(function(){
         
                     setTimeout(function(){
                         document.querySelectorAll('.television.display_on')[0].classList.add('static_none');
-                        jf.static.animate = false;
+                        interface.static.animate = false;
                         // cancelAnimations('static',0);
                     }, 1500);
                 });
@@ -435,26 +466,29 @@ $(document).ready(function(){
     /////// card flip ////////
     //////////////////////////
     const selectCard = () => {
-        let eligibleCards = jf.cards.data.filter(card => card.flipped != true);
+        let eligibleCards = interface.cards.data.filter(card => card.flipped != true);
         let selectedCard = eligibleCards[parseInt(Math.random() * eligibleCards.length)];
         selectedCard.flipped = true;
         return selectedCard;
     };
 
     let handleCardFlip = (e) => {
-        if (!jf.cards.flipping){
-            jf.cards.flipping = true;
+        if (!interface.cards.flipping){
+            interface.cards.flipping = true;
             let cardIndex = document.querySelectorAll('.card').length;
             let card = selectCard();
 
-            var newCard = document.createElement('div');
+            let newCard = document.createElement('div');
             newCard.classList.add(card.type,'card');
 
+            // instantiating modifier variables
+            let title_length = '';
+
             if (card.title.length > 10){
-                newCard.classList.add('title_long');
+                title_length = 'title_long';
             }
 
-            var cardHtml = 
+            let cardHtml = 
                 `<div class='container_inner'>
                     <div class='back'>
                         <div class='background'>
@@ -467,12 +501,14 @@ $(document).ready(function(){
                         </div>
                     </div>
                     <div class='front'>
-                        <span class='title'>${card.title}</span>
+                        <span class='title ${title_length}'>${card.title}</span>
                         <div class='polygon background'></div>
                         <div class='polygon angle'></div>
                         <div class='polygon angle2'></div>
                         <div class='container text-container'>
-                            ${card.content}
+                            <p>
+                                ${card.content}
+                            </p>
                         </div>
                         <a class='card-link' target="_blank" href="${card.link}">go to</a>
                     </div>
@@ -484,15 +520,15 @@ $(document).ready(function(){
     
             newCard.classList.add('flipping');
             // console.log(cardIndex, cards.length);
-            if (cardIndex == jf.cards.data.length - 1){
-                document.querySelectorAll('.draw-deck')[0].classList.add('display_none');
+            if (cardIndex == interface.cards.data.length - 1){
+                document.querySelectorAll('.draw-deck')[0].classList.add('opacity_zero');
                 document.querySelectorAll('.draw-deck_under-screen')[0].classList.remove('display_none');
             }
             setTimeout(function(){
                 newCard.classList.remove('flipping');
                 if (document.querySelectorAll('.top_card').length) {document.querySelectorAll('.top_card')[0].classList.remove('top_card');}
                 newCard.classList.add('flipped','top_card');
-                jf.cards.flipping = false;
+                interface.cards.flipping = false;
             }, 600);
     
             document.querySelectorAll('.cards.container')[0].append(newCard);
@@ -506,67 +542,16 @@ $(document).ready(function(){
 
     document.querySelectorAll('.draw-deck')[0].addEventListener('touchmove', e => {
         e.preventDefault();
-        jf.cards.touches.push(e);
+        interface.cards.touches.push(e);
     });
 
     document.querySelectorAll('.draw-deck')[0].addEventListener('touchend', e => {
         e.preventDefault();
         // console.log("it's over", e);
-        if (jf.cards.touches.length && jf.cards.touches[0].touches[0].clientX > jf.cards.touches[jf.cards.touches.length - 1].touches[0].clientX){
+        if (interface.cards.touches.length && interface.cards.touches[0].touches[0].clientX > interface.cards.touches[interface.cards.touches.length - 1].touches[0].clientX){
             handleCardFlip(e);
-            jf.cards.touches = [];
+            interface.cards.touches = [];
         }  
         // handleCardFlip(e);
-    });
-    
-    //////////////////////////
-    /// keyboard listeners ///
-    //////////////////////////
-    document.body.addEventListener('keydown', e => {
-        if (e.key == '1'){
-            document.querySelectorAll('.button-container')[0].children[0].children[1].classList.add('hover');
-            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[1].children[0].dataset.color;
-        }
-        if (e.key == '2'){
-            document.querySelectorAll('.button-container')[0].children[1].children[1].classList.add('hover');
-            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[1].children[0].dataset.color;
-        }
-        if (e.key == '3'){
-            document.querySelectorAll('.button-container')[0].children[2].children[1].classList.add('hover');
-            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[1].children[0].dataset.color;
-        }
-        if (e.key == '4'){
-            document.querySelectorAll('.button-container')[0].children[0].children[0].classList.add('hover');
-            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[0].children[0].dataset.color;
-        }
-        if (e.key == '5'){
-            document.querySelectorAll('.button-container')[0].children[1].children[0].classList.add('hover');
-            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[0].children[0].dataset.color;
-        }
-        if (e.key == '6'){
-            document.querySelectorAll('.button-container')[0].children[2].children[0].classList.add('hover');
-            jf.selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[0].children[0].dataset.color;
-        }
-    });
-    
-    document.body.addEventListener('keyup', e => {
-        if (e.key == '1'){
-            document.querySelectorAll('.button-container')[0].children[0].children[1].classList.remove('hover');
-        }
-        if (e.key == '2'){
-            document.querySelectorAll('.button-container')[0].children[1].children[1].classList.remove('hover');
-        }
-        if (e.key == '3'){
-            document.querySelectorAll('.button-container')[0].children[2].children[1].classList.remove('hover');
-        }
-        if (e.key == '4'){
-            document.querySelectorAll('.button-container')[0].children[0].children[0].classList.remove('hover');
-        }
-        if (e.key == '5'){
-            document.querySelectorAll('.button-container')[0].children[1].children[0].classList.remove('hover');
-        }
-        if (e.key == '6'){
-            document.querySelectorAll('.button-container')[0].children[2].children[0].classList.remove('hover');
-        }
     });
 });

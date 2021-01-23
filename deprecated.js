@@ -16,7 +16,7 @@ let setBoxShadow = (color) =>{
 
     let sizeValue = number(9);
 
-    return `box-shadow: 0 0 ${number(5)}px 5px ${jf.colorPalette[jf.selectedColor]};height:${sizeValue}px;width:${sizeValue}px;`;
+    return `box-shadow: 0 0 ${number(5)}px 5px ${interface.colorPalette[interface.selectedColor]};height:${sizeValue}px;width:${sizeValue}px;`;
 };
 
 let randomNumberGenerator = () => {
@@ -140,5 +140,58 @@ document.body.addEventListener('mousedown', e => {
         };
         
         createBlastShower();
+    }
+});
+
+//////////////////////////
+/// keyboard listeners ///
+//////////////////////////
+
+// allows visitor to use number keys to select color on controller
+document.body.addEventListener('keydown', e => {
+    if (e.key == '1'){
+        document.querySelectorAll('.button-container')[0].children[0].children[1].classList.add('hover');
+        interface.selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[1].children[0].dataset.color;
+    }
+    if (e.key == '2'){
+        document.querySelectorAll('.button-container')[0].children[1].children[1].classList.add('hover');
+        interface.selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[1].children[0].dataset.color;
+    }
+    if (e.key == '3'){
+        document.querySelectorAll('.button-container')[0].children[2].children[1].classList.add('hover');
+        interface.selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[1].children[0].dataset.color;
+    }
+    if (e.key == '4'){
+        document.querySelectorAll('.button-container')[0].children[0].children[0].classList.add('hover');
+        interface.selectedColor = document.querySelectorAll('.button-container')[0].children[0].children[0].children[0].dataset.color;
+    }
+    if (e.key == '5'){
+        document.querySelectorAll('.button-container')[0].children[1].children[0].classList.add('hover');
+        interface.selectedColor = document.querySelectorAll('.button-container')[0].children[1].children[0].children[0].dataset.color;
+    }
+    if (e.key == '6'){
+        document.querySelectorAll('.button-container')[0].children[2].children[0].classList.add('hover');
+        interface.selectedColor = document.querySelectorAll('.button-container')[0].children[2].children[0].children[0].dataset.color;
+    }
+});
+
+document.body.addEventListener('keyup', e => {
+    if (e.key == '1'){
+        document.querySelectorAll('.button-container')[0].children[0].children[1].classList.remove('hover');
+    }
+    if (e.key == '2'){
+        document.querySelectorAll('.button-container')[0].children[1].children[1].classList.remove('hover');
+    }
+    if (e.key == '3'){
+        document.querySelectorAll('.button-container')[0].children[2].children[1].classList.remove('hover');
+    }
+    if (e.key == '4'){
+        document.querySelectorAll('.button-container')[0].children[0].children[0].classList.remove('hover');
+    }
+    if (e.key == '5'){
+        document.querySelectorAll('.button-container')[0].children[1].children[0].classList.remove('hover');
+    }
+    if (e.key == '6'){
+        document.querySelectorAll('.button-container')[0].children[2].children[0].classList.remove('hover');
     }
 });
