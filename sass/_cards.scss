@@ -1,6 +1,7 @@
 .container.cards {
     justify-content: flex-end;
     min-height: 260px;
+    font-family: 'ichiban_slim';
 }
 
 .draw-deck,
@@ -20,10 +21,18 @@
         3px 1px 4px 1px darken($green-dark, 10%),
         2px 0px 1px darken($purple, 20%),
         2px 1px 1px darken($purple, 15%);
+    &.appearing {
+        animation-duration: 1.1s;
+        animation-name: removeBlur;
+        -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+        animation-timing-function: linear;
+        z-index: 11;
+    }
 }
 
 .draw-deck_under-screen {
     background: $green-dark;
+    opacity: 0;
     &.appearing {
         animation-duration: 1.1s;
         animation-name: appearUnderScreen;
@@ -62,7 +71,7 @@
             transform: rotateY(180deg);
         }
         .back {
-            visibility: hidden;;
+            visibility: hidden;
         }
         &.top_card {
             filter: grayscale(0.0);
@@ -137,16 +146,13 @@
     overflow: hidden;
     transform: rotateY(180deg);
     .title {
-        font-size: 18px;
+        font-size: 22px;
         position: absolute;
         top: 14px;
         left: 3px;
-    }
-    .content-title {
-        font-size: 18px;
-        color: $pink;
-        top: 70px;
-        left: 10px;
+        &.title_long {
+            font-size: 18px;
+        }
     }
     .text-container {
         background: $cream;
@@ -160,7 +166,7 @@
         box-sizing: border-box;
         border: 2px solid $red;
         padding: 6px 4px 2px;
-        font-size: 14px;
+        font-size: 18px;
         display: flex;
         align-items: center;
         min-height: 90px;
@@ -169,20 +175,13 @@
         }
     }
     .card-link {
+        font-family: 'ichiban_marker';
         position: absolute;
         font-size: 15px;
         color: $pink;
         bottom: 10px;
         right: 10px;
         text-decoration: none;
-    }
-}
-
-.card.title_long {
-    .front {
-        .title {
-            font-size: 15px;
-        }
     }
 }
 
@@ -208,14 +207,17 @@
     align-items: center;
     justify-content: space-around;
     .title-container {
-        padding: 10px 30px 7px;
+        padding: 10px 35px 7px;
     }
     .title {
+        font-family: 'ichiban';
         color: $red;
         position: relative;
         top: 0;
         left: 0;
-        font-size: 30px;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 200%;
         user-select: none;
     }
     &.background_transparent {
@@ -234,17 +236,31 @@
     border: 2px solid $yellow-vibrant;
 }
 
-.card .angle2 {
-    background: $yellow-vibrant;
-    clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
-    -webkit-clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
-}
+// .card .angle {
+// .card .angle {
+//     background: $red;
+//     clip-path: polygon(0% 15%, 0% 23%, 100% 16%, 100% 14%);
+//     -webkit-clip-path: polygon(0% 15%, 0% 23%, 100% 16%, 100% 14%);
+// } 
 
+// .card .angle2 {
+//     background: $yellow-vibrant;
+//     clip-path: polygon(0% 23%, 0% 31%, 100% 18%, 100% 16%);
+//     -webkit-clip-path: polygon(0% 23%, 0% 31%, 100% 18%, 100% 16%);
+// }
+
+// working version
 .card .angle {
     background: $red;
     clip-path: polygon(0% 15%, 0% 100%, 0% 21%, 100% 15%, 100% 14%);
     -webkit-clip-path: polygon(0% 15%, 0% 100%, 0% 21%, 100% 15%, 100% 14%);
 } 
+
+.card .angle2 {
+    background: $yellow-vibrant;
+    clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
+    -webkit-clip-path: polygon(0% 19%, 0% 100%, 0% 22%, 100% 16%, 100% 15%);
+}
 
 .card ul li {
     padding: 3px 14px 2px 3px;
@@ -360,19 +376,40 @@
     from {
         box-shadow: 
         0px 0px 0px 0px darken($green-dark, 10%);
-        height: 230px;
-        width: 136px;
+        opacity: 1;
     }
     40% {
         box-shadow: 
         3px 1px 4px 1px darken($green-dark, 10%);
-        height: 230px;
-        width: 136px;
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 
+        3px 1px 4px 1px darken($green-dark, 10%);
+        opacity: 1;
     }
     to {
         box-shadow: 
         3px 1px 4px 1px darken($green-dark, 10%);
-        height: 0px;
-        width: 136px;
+        opacity: 0;
+    }
+}
+
+@keyframes removeBlur {
+    from {
+        // filter: blur(30px);
+        opacity: 0;
+    }
+    50% {
+        // filter: blur(30px);
+        opacity: 0;
+    }
+    51% {
+        // filter: blur(30px);
+        opacity: 0;
+    }
+    to {
+        // filter: blur(0px);
+        opacity: 1;
     }
 }

@@ -1,7 +1,7 @@
 $(document).ready(() => {
     // instantiating jf property on window
-    if (!window.jf){ 
-        window.jf = {
+    if (!window.interface){ 
+        window.interface = {
             // DESIGN
             selectedColor: 'yellow',
             colorPalette: {
@@ -33,6 +33,11 @@ $(document).ready(() => {
                     count: 0
                 }
             },
+            canvas: {
+                touches: [],
+                containers: ['.cards.container','.television-container'],
+                focus_index: 0
+            },
             vines: {
                 sizeModifier: 1.1,
             },
@@ -46,42 +51,42 @@ $(document).ready(() => {
                     {
                         type:'personal',
                         title:'pronouns',
-                        content: '<p>my pronouns are he/him</p>',
+                        content: 'my pronouns are he/him',
                         link: 'http://pronoun.is/he',
                         flipped: false
                     },
                     {
                         type:'comedy',
                         title:'LSI',
-                        content: '<p>my team <i>holy goat</i> hosts the friday show at logan square improv. it\'s <a target="_blank" href="https://scapimag.com/2019/10/03/the-rise-of-logan-square-improv-how-one-indie-improv-theater-became-the-most-fun-place-to-play-in-the-city/">the best</a>.</p>',
+                        content: 'my team <i>holy goat</i> hosts the friday show at logan square improv. it\'s <a target="_blank" href="https://scapimag.com/2019/10/03/the-rise-of-logan-square-improv-how-one-indie-improv-theater-became-the-most-fun-place-to-play-in-the-city/">the best</a>.',
                         link: 'https://www.logansquareimprov.com',
                         flipped: false
                     },
                     {
                         type:'comedy',
                         title:'family friends',
-                        content: '<p>alex prichodko and i made a bunch of sketch videos. i\'m proud of them.</p>',
+                        content: 'alex prichodko and i made a bunch of sketch videos. i\'m proud of them.',
                         link: 'https://www.youtube.com/c/FamilyFriends',
                         flipped: false
                     },
                     {
                         type:'code',
                         title:'this website',
-                        content: '<p>please enjoy this work in progress! all the code can be found on github.</p>',
+                        content: 'please enjoy this work in progress! all the code can be found on github.',
                         link: 'https://github.com/joefitz12/personal-website',
                         flipped: false
                     },
                     {
                         type:'comedy',
-                        title: 'thank you, five',
-                        content: '<p>audrey schiffhauer, kennedy baldwin, renee barry, and i put up a show at sc.</p>',
+                        title: '<i>thank you, five</i>',
+                        content: 'audrey schiffhauer, kennedy baldwin, renee barry, and i put up this show at sc.',
                         link: 'https://vimeo.com/390878707',
                         flipped: false
                     },
                     {
                         type:'code',
                         title: 'extra.css',
-                        content: '<p>i used extra.css, a houdini library, to style some of the titles on this page</p>',
+                        content: 'i used extra.css, a houdini library, to style some of the titles on this page',
                         link: 'https://extra-css.netlify.app/',
                         flipped: false 
                     }

@@ -1,7 +1,7 @@
 @import '_reset.scss';
 @import '_fonts.scss';
 @import '_colors.scss';
-@import '_buttons.scss';
+@import '_controller.scss';
 @import '_cards.scss';
 @import '_color-blasts.scss';
 @import '_television.scss';
@@ -45,8 +45,8 @@
     width: calc(50% - 30px);
     min-width: calc(50% - 30px);
     @include phone {
-        width: calc(100% - 60px);
-        min-width: calc(100% - 60px);
+        width: calc(100% - 30px);
+        min-width: calc(100% - 30px);
     }
 }
 
@@ -64,11 +64,16 @@
     height: 0;
 }
 
+.opacity_zero {
+    opacity: 0;
+}
+
 /* Specifics */
 body {
-    font-family: 'ichiban_slim';
+    font-family: 'ichiban_stamp';
     color: $purple;
-    background: $green-dark;
+    // background: $green-dark;
+    background: linear-gradient($green-dark 90%, $green-light 10%);
     position: relative;
     overflow-x: hidden;
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
@@ -81,6 +86,43 @@ body {
     background: $green-light;
     box-shadow: 0px 5px 4px 1px darken($green-dark, 5%);
     z-index: 10;
+}
+
+// flex box for main grid
+body {
+    .main.container {
+        .controller-container {
+            order: 1;
+        }
+        .cards {
+            order: 2;
+        }
+        .television-container {
+            order: 3;
+        }
+        @include phone {
+            .cards {
+                order: 1;
+            }
+            .television-container {
+                order: 2;
+                position: absolute;
+                width: calc(100% - 60px);
+                min-width: calc(100% - 60px);
+            }
+            > div:not(.controller-container) {
+                transition: transform 750ms ease-in-out;
+                transform: translate(calc(-100% - 60px),0);
+                z-index: 2;
+            }
+            > div.mobile_focus {
+                transform: translate(0,0);
+                & ~ div {
+                    transform: translate(calc(100% + 60px),0);
+                }
+            }
+        }
+    }
 }
 
 // This is where we use the custom properties
@@ -99,20 +141,7 @@ body {
       background: paint(extra-superUnderline);
       line-height: 1.5;
     }
-    // below is the template to add clouds via extra library
-    // .header .title {
-    //     /* 
-    //       Optionally set property values. 
-    //       This can be done at root or local scope 
-    //     */
-    //     --extra-scallopRadius: 15; /* default: 10 */
-    //     --extra-scallopColor: #F6A6A4; /* default: black */
-    //     --extra-scallopWeight: 3; /* default: 2 */
-    
-    //     background: paint(extra-scallopedBorder);
-    //     line-height: 1.5;
-    // }
-    // .card .front,
+
     .card .back,
     .draw-deck .back {
         .title {

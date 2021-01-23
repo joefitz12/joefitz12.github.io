@@ -65,13 +65,51 @@
             visibility: hidden;
         }
     }
-    &.button-panel {
-        height: 45px;
-        width: 45px;
-        background: $yellow-vibrant;
+    &.arrow {
+        height: 35px;
+        width: 25px;
+        background: $purple;
         position: absolute;
-        bottom: 7%;
-        left: 10%;
+        bottom: 8%;
+        left: 12%;
+        filter: drop-shadow(1px 2px 2px darken($rose, 10%));
+        -webkit-filter: drop-shadow(1px 2px 2px darken($rose, 10%));
+        &.left {
+            clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+            -webkit-clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+            .angle {
+                &.upper {
+                    clip-path: polygon(0% 50%, 100% 0%, 100% 3%, 0% 53%);
+                    -webkit-clip-path: polygon(0% 50%, 100% 0%, 100% 3%, 0% 53%);
+                    background: darken($purple, 15%);
+                }
+                &.lower {
+                    clip-path: polygon(0% 50%, 100% 100%, 100% 95%, 0% 45%);
+                    -webkit-clip-path: polygon(0% 50%, 100% 100%, 100% 95%, 0% 45%);
+                    background: darken($purple, 20%);
+                }
+            }
+            
+        }
+        &.right {
+            left: 22%;
+            clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+            -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+            // box-shadow: 
+            // inset 2px -2px 1px 1px darken($purple, 20%);
+            .angle {
+                &.left { 
+                    clip-path: polygon(0% 0%, 2% 0%, 2% 100%, 0% 100%);
+                    -webkit-clip-path: polygon(0% 0%, 2% 0%, 2% 100%, 0% 100%);
+                    background: darken($purple, 20%);
+                }
+            }
+        }
+        .angle {
+            position: absolute;
+            width:100%;
+            height:100%;
+        }
     }
     &.dial {
         height: 45px;
