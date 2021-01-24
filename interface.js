@@ -102,7 +102,7 @@ $(document).ready(function(){
             mainCanvas.width = width;
             mainCanvas.height = height;
         }
-        console.log(e.touches[0]);
+
         let startingX = e.touches ? e.touches[0].clientX : e.layerX;
         let startingY = e.touches ? e.touches[0].clientY : e.layerY;
         // let startingY = e.layerY ? e.layerY : e.touches[0].clientY + document.querySelectorAll('.header')[0].offsetHeight;

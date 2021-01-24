@@ -110,7 +110,6 @@ html, body {
         > div:not(.controller-container) {
             padding-left: 30px;
             padding-right: 30px;
-            scroll-snap-align: center;
             > div {
                 z-index: 2;
             }

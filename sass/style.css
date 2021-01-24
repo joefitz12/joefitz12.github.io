@@ -1429,7 +1429,6 @@ ul {
   .main.container > div:not(.controller-container) {
     padding-left: 30px;
     padding-right: 30px;
-    scroll-snap-align: center;
   }
   .main.container > div:not(.controller-container) > div {
     z-index: 2;
