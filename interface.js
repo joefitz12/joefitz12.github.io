@@ -336,7 +336,7 @@ $(document).ready(function(){
 
     document.getElementById('canvas-main').addEventListener('touchend', e => {
         e.preventDefault();
-        let scrollDistance = window.innerWidth;
+        let scrollDistance = window.innerWidth + 15;
         if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX > interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
             // handleCardFlip(e);
             document.getElementsByClassName('main')[0].scrollTo({
