@@ -1414,11 +1414,27 @@ ul {
     width: calc(var(--vw, 1vw) * 100 - 30px);
     overflow-y: hidden;
     align-content: flex-start;
+    flex-flow: row nowrap;
+    scroll-snap-type: x mandatory;
   }
   .main.container * {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+  }
+  .main.container > canvas {
+    left: 15px;
+  }
+  .main.container > div:not(.controller-container) {
+    padding-left: 30px;
+    padding-right: 30px;
+    scroll-snap-align: center;
+  }
+  .main.container > div:not(.controller-container) > div {
+    z-index: 2;
+  }
+  .main.container .draw-deck {
+    right: 20px;
   }
   .main.container .controller-container {
     position: fixed;
@@ -1527,20 +1543,6 @@ body .main.container .television-container {
   }
   body .main.container .television-container {
     order: 2;
-    position: absolute;
-    width: calc(100% - 60px);
-    min-width: calc(100% - 60px);
-  }
-  body .main.container > div:not(.controller-container) {
-    transition: transform 750ms ease-in-out;
-    transform: translate(calc(-100% - 60px), 0);
-    z-index: 2;
-  }
-  body .main.container > div.mobile_focus {
-    transform: translate(0, 0);
-  }
-  body .main.container > div.mobile_focus ~ div {
-    transform: translate(calc(100% + 60px), 0);
   }
 }
 
