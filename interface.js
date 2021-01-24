@@ -106,7 +106,7 @@ $(document).ready(function(){
         let startingX = e.layerX ? e.layerX : e.touches[0].clientX;
         let startingY = e.layerY ? e.layerY : e.touches[0].clientY;
         // let startingY = e.layerY ? e.layerY : e.touches[0].clientY - document.querySelectorAll('.header')[0].offsetHeight;
-        // alert('e.touches[0].clientY' + e.touches[0].clientY);
+        alert('e.touches[0].clientY ' + e.touches[0].clientY);
         // alert("document.querySelectorAll('.header')[0].offsetHeight" + document.querySelectorAll('.header')[0].offsetHeight);
         // alert('startingY' + startingY);
         // let startingY = e.layerY ? e.layerY : e.touches[0].clientY;
