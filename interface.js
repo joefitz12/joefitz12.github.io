@@ -339,10 +339,11 @@ $(document).ready(function(){
         let scrollDistance = window.innerWidth + 15;
         if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX > interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
             // handleCardFlip(e);
-            document.getElementsByClassName('main')[0].scrollTo({
-                left: scrollDistance,
-                behavior: 'smooth'
-            });
+            console.log('scrollDistance',scrollDistance);
+            // document.getElementsByClassName('main')[0].scrollTo({
+            //     left: scrollDistance,
+            //     behavior: 'smooth'
+            // });
             // if (interface.canvas.containers.length > interface.canvas.focus_index - 1){
             //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
             //     interface.canvas.focus_index++;
