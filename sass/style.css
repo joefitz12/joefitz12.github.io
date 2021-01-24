@@ -1425,7 +1425,7 @@ ul {
     position: fixed;
     top: 0;
     left: 0;
-    background: maroon;
+    background: turquoise;
   }
   .main.container > div:not(.controller-container) {
     padding-left: 30px;
