@@ -347,8 +347,10 @@ $(document).ready(function(){
             if (interface.canvas.containers.length > interface.canvas.focus_index + 1){
                 interface.canvas.focus_index++;
                 scrollToElement = interface.canvas.containers[interface.canvas.focus_index];
-                console.log('interface.canvas.containers[interface.canvas.focus_index]',interface.canvas.containers[interface.canvas.focus_index]);
-                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth'});
+                console.log('scrollToElement',scrollToElement);
+                console.log('document.querySelectorAll(scrollToElement)[0]',document.querySelectorAll(scrollToElement)[0]);
+                // debugger;
+                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth', inline: 'end'});
             }
         }
         else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
@@ -360,8 +362,10 @@ $(document).ready(function(){
             if (interface.canvas.focus_index > 0){
                 interface.canvas.focus_index--;
                 scrollToElement = interface.canvas.containers[interface.canvas.focus_index];
-                console.log('interface.canvas.containers[interface.canvas.focus_index]',interface.canvas.containers[interface.canvas.focus_index]);
-                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth'});
+                console.log('scrollToElement',scrollToElement);
+                console.log('document.querySelectorAll(scrollToElement)[0]',document.querySelectorAll(scrollToElement)[0]);
+                // debugger;
+                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth', inline: 'end'});
             }  
         }
         interface.canvas.touches = [];
