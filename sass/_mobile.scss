@@ -99,6 +99,23 @@ html, body {
         width: calc(var(--vw, 1vw) * 100 - 30px);
         overflow-y: hidden;
         align-content: flex-start;
+        // setting up horizontal scroll 
+        flex-flow: row nowrap;
+        scroll-snap-type: x mandatory;
+        > canvas {
+            left: 15px;
+        }
+        > div:not(.controller-container) {
+            padding-left: 30px;
+            padding-right: 30px;
+            scroll-snap-align: center;
+            > div {
+                z-index: 2;
+            }
+        }
+        .draw-deck {
+            right: 20px;
+        }
         .controller-container {
             position: fixed;
             left: calc(15px / 2);

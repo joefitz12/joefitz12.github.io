@@ -106,21 +106,21 @@ body {
             }
             .television-container {
                 order: 2;
-                position: absolute;
-                width: calc(100% - 60px);
-                min-width: calc(100% - 60px);
+                // position: absolute;
+                // width: calc(100% - 60px);
+                // min-width: calc(100% - 60px);
             }
-            > div:not(.controller-container) {
-                transition: transform 750ms ease-in-out;
-                transform: translate(calc(-100% - 60px),0);
-                z-index: 2;
-            }
-            > div.mobile_focus {
-                transform: translate(0,0);
-                & ~ div {
-                    transform: translate(calc(100% + 60px),0);
-                }
-            }
+            // > div:not(.controller-container) {
+            //     transition: transform 750ms ease-in-out;
+            //     transform: translate(calc(-100% - 60px),0);
+            //     z-index: 2;
+            // }
+            // > div.mobile_focus {
+            //     transform: translate(0,0);
+            //     & ~ div {
+            //         transform: translate(calc(100% + 60px),0);
+            //     }
+            // }
         }
     }
 }
@@ -180,6 +180,5 @@ body {
         top: 0;
         left: 0;
         z-index: 1;
-        // background: transparent;
     }
 }
