@@ -38,7 +38,7 @@ $(document).ready(() => {
             },
             canvas: {
                 touches: [],
-                containers: ['.cards.container','.television-container'],
+                containers: ['.cards-container','.television-container'],
                 focus_index: 0
             },
             vines: {

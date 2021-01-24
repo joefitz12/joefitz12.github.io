@@ -336,31 +336,33 @@ $(document).ready(function(){
 
     document.getElementById('canvas-main').addEventListener('touchend', e => {
         e.preventDefault();
-        let scrollDistance = window.innerWidth + 15;
+        let scrollToElement;
         if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX > interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
             // handleCardFlip(e);
-            console.log('scrollDistance',scrollDistance);
+            // console.log('scrollDistance',scrollDistance);
             // document.getElementsByClassName('main')[0].scrollTo({
             //     left: scrollDistance,
             //     behavior: 'smooth'
             // });
-            // if (interface.canvas.containers.length > interface.canvas.focus_index - 1){
-            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
-            //     interface.canvas.focus_index++;
-            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
-            // }
+            if (interface.canvas.containers.length > interface.canvas.focus_index + 1){
+                interface.canvas.focus_index++;
+                scrollToElement = interface.canvas.containers[interface.canvas.focus_index];
+                console.log('interface.canvas.containers[interface.canvas.focus_index]',interface.canvas.containers[interface.canvas.focus_index]);
+                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth'});
+            }
         }
         else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
             // handleCardFlip(e);
-            document.getElementsByClassName('main')[0].scrollTo({
-                left: 0,
-                behavior: 'smooth'
-            });
-            // if (interface.canvas.focus_index > 0){
-            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
-            //     interface.canvas.focus_index--;
-            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
-            // }  
+            // document.getElementsByClassName('main')[0].scrollTo({
+            //     left: 0,
+            //     behavior: 'smooth'
+            // });
+            if (interface.canvas.focus_index > 0){
+                interface.canvas.focus_index--;
+                scrollToElement = interface.canvas.containers[interface.canvas.focus_index];
+                console.log('interface.canvas.containers[interface.canvas.focus_index]',interface.canvas.containers[interface.canvas.focus_index]);
+                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth'});
+            }  
         }
         interface.canvas.touches = [];
         // handleCardFlip(e);
