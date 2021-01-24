@@ -104,11 +104,11 @@ html, body {
         scroll-snap-type: x mandatory;
         > canvas {
             position: fixed;
-            // top: 0;
-            // left: 0;
-            top: 154px;
-            top: var(--headerOffset);
-            background: green;
+            top: 0;
+            left: 0;
+            // top: 154px;
+            // top: var(--headerOffset);
+            background: purple;
         }
         > div:not(.controller-container) {
             padding-left: 30px;
