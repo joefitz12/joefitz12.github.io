@@ -104,7 +104,7 @@ $(document).ready(function(){
         }
     
         let startingX = e.layerX ? e.layerX : e.touches[0].clientX;
-        let startingY = e.layerY ? e.layerY : e.touches[0].clientY;
+        let startingY = e.layerY ? e.layerY : e.touches[0].clientY - window.interface.header.height;
 
         // console.log('startingX', startingX);
         // console.log('startingY', startingY);
