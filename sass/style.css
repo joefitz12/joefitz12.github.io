@@ -1423,7 +1423,9 @@ ul {
   }
   .main.container > canvas {
     position: fixed;
-    top: 176px;
+    top: 0;
+    left: 0;
+    background: blue;
   }
   .main.container > div:not(.controller-container) {
     padding-left: 30px;

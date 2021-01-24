@@ -13,7 +13,13 @@ $(document).ready(function(){
         document.querySelectorAll('.main')[0].style.setProperty('--vw', `${vw}px`);
     };
 
+    const setCanvasOffset = () => {
+        document.querySelectorAll('canvas')[0].style.setProperty('--headerOffset', `${window.interface.header.height}px`);
+    };
+
     setViewPort();
+
+    setCanvasOffset();
 
     // We listen to the resize event
     window.addEventListener('resize', () => {

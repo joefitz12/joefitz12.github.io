@@ -18,6 +18,9 @@ $(document).ready(() => {
                 'green-light_20%-light': '#b8dec6',
                 'green-light_20%-dark': '#85ab93',
             },
+            header: {
+                height: document.querySelectorAll('.header')[0].offsetHeight
+            },
             // INTERACTION
             mouseDown: 0,
             logs: {
