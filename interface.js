@@ -324,22 +324,30 @@ $(document).ready(function(){
     document.getElementById('canvas-main').addEventListener('touchend', e => {
         e.preventDefault();
         // console.log("it's over", e);
-        // if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX > interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
-        //     // handleCardFlip(e);
-        //     if (interface.canvas.containers.length > interface.canvas.focus_index - 1){
-        //         document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
-        //         interface.canvas.focus_index++;
-        //         document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
-        //     }
-        // }
-        // else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
-        //     // handleCardFlip(e);
-        //     if (interface.canvas.focus_index > 0){
-        //         document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
-        //         interface.canvas.focus_index--;
-        //         document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
-        //     }  
-        // }
+        if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX > interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
+            // handleCardFlip(e);
+            document.getElementsByClassName('main')[0].scrollTo({
+                left: 300,
+                behavior: 'smooth'
+            });
+            // if (interface.canvas.containers.length > interface.canvas.focus_index - 1){
+            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
+            //     interface.canvas.focus_index++;
+            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
+            // }
+        }
+        else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
+            // handleCardFlip(e);
+            document.getElementsByClassName('main')[0].scrollTo({
+                left: -300,
+                behavior: 'smooth'
+            });
+            // if (interface.canvas.focus_index > 0){
+            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.remove('mobile_focus');
+            //     interface.canvas.focus_index--;
+            //     document.querySelectorAll(interface.canvas.containers[interface.canvas.focus_index])[0].classList.add('mobile_focus');
+            // }  
+        }
         interface.canvas.touches = [];
         // handleCardFlip(e);
     });
