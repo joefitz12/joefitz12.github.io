@@ -103,7 +103,8 @@ html, body {
         flex-flow: row nowrap;
         scroll-snap-type: x mandatory;
         > canvas {
-            left: 15px;
+            position: fixed;
+            top: 176px;
         }
         > div:not(.controller-container) {
             padding-left: 30px;
@@ -112,9 +113,6 @@ html, body {
             > div {
                 z-index: 2;
             }
-        }
-        .draw-deck {
-            right: 20px;
         }
         .controller-container {
             position: fixed;

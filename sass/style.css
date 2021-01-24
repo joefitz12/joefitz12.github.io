@@ -461,9 +461,7 @@ ul {
   height: 230px;
   width: 136px;
   border-radius: 5px;
-  position: absolute;
-  top: 10px;
-  right: 15px;
+  position: relative;
   z-index: 10;
 }
 
@@ -506,6 +504,7 @@ ul {
   z-index: 10;
 }
 .card.flipping {
+  position: absolute;
   animation-duration: 0.6s;
   animation-name: drawCard;
 }
@@ -1423,7 +1422,8 @@ ul {
     -moz-user-select: none;
   }
   .main.container > canvas {
-    left: 15px;
+    position: fixed;
+    top: 176px;
   }
   .main.container > div:not(.controller-container) {
     padding-left: 30px;
@@ -1432,9 +1432,6 @@ ul {
   }
   .main.container > div:not(.controller-container) > div {
     z-index: 2;
-  }
-  .main.container .draw-deck {
-    right: 20px;
   }
   .main.container .controller-container {
     position: fixed;
