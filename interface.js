@@ -352,7 +352,7 @@ $(document).ready(function(){
         else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
             // handleCardFlip(e);
             document.getElementsByClassName('main')[0].scrollTo({
-                left: -1 * scrollDistance,
+                left: 0,
                 behavior: 'smooth'
             });
             // if (interface.canvas.focus_index > 0){
