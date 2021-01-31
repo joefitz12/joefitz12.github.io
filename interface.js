@@ -350,7 +350,7 @@ $(document).ready(function(){
                 console.log('scrollToElement',scrollToElement);
                 console.log('document.querySelectorAll(scrollToElement)[0]',document.querySelectorAll(scrollToElement)[0]);
                 // debugger;
-                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth', inline: 'end'});
+                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth', inline: 'end', block: 'start'});
             }
         }
         else if (interface.canvas.touches.length && interface.canvas.touches[0].touches[0].clientX < interface.canvas.touches[interface.canvas.touches.length - 1].touches[0].clientX){
@@ -365,7 +365,7 @@ $(document).ready(function(){
                 console.log('scrollToElement',scrollToElement);
                 console.log('document.querySelectorAll(scrollToElement)[0]',document.querySelectorAll(scrollToElement)[0]);
                 // debugger;
-                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth', inline: 'end'});
+                document.querySelectorAll(scrollToElement)[0].scrollIntoView({behavior: 'smooth', inline: 'end', block: 'start'});
             }  
         }
         interface.canvas.touches = [];
